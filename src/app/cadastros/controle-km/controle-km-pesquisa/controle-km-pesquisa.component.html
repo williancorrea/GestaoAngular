@@ -1,0 +1,435 @@
+<ngx-loading [show]="loading"></ngx-loading>
+<p-progressBar *ngIf="loading" mode="indeterminate" styleClass="wc-progress-bar-indeterminate"></p-progressBar>
+
+<div class="ui-g">
+   <div class="ui-g-12">
+      <div class="card card-w-title">
+
+         <div>
+            <h1>{{'app.controleKm.lista' | translate}}</h1>
+            <a pButton class="btn-add-new ui-button-secondary"
+               *ngIf="auth.hasPermission('ROLE_SALVAR_CONTROLE-KM')"
+               label="{{'app.controleKm.acoes.adicionar' | translate}}"
+               iconPos="left" icon="fa fa-plus"
+               tooltipPosition="top" pTooltip="{{'app.acoes.tooltip.novo' | translate}}"
+               (click)="adicionar()">
+            </a>
+         </div>
+
+         <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+
+            <!--GLOBAL FILTER-->
+            <div class="ui-inputgroup" ngClass="{{mostarFiltros ? 'd-none': ''}}">
+               <span class="ui-inputgroup-addon"><i class="fa fa fa-search"></i></span>
+               <input #globalFilter pInputText type="text" size="50"
+                      (input)="dataTable.filterGlobal($event.target.value, 'contains')"
+                      placeholder="{{'app.controleKm.rotulos.filtro_itinerario' | translate}}">
+               <button pButton
+                       type="button" icon="fa fa-close"
+                       class="ui-button-danger"
+                       *ngIf="globalFilter.value.length > 0"
+                       (click)="buscarTodos(globalFilter, dataTable)"></button>
+               <button pButton
+                       type="button" icon="fa fa-filter"
+                       *ngIf="globalFilter.value.length === 0"
+                       label="{{'app.comum.filtro.mais-filtros' | translate}}"
+                       class="ui-button-secondary"
+                       (click)="mostrarCamposFiltros(true)"></button>
+            </div>
+
+            <!--FILTER BY FIELDS-->
+            <div class="ui-g" ngClass="{{!mostarFiltros ? 'd-none': ''}}">
+               <div class="ui-g-12 filter-title">
+                  <h2>{{'app.comum.filtro.campos' | translate}}</h2>
+               </div>
+
+               <!-- VEICULO -->
+               <div class="ui-sm-4 ui-g-4 ui-fluid">
+                  <label>{{'app.veiculo.titulo'| translate}}</label>
+                  <p-dropdown emptyFilterMessage="{{'app.acoes.nenhum-registro-encontrado' | translate }}"
+                              [options]="veiculoList"
+                              [(ngModel)]="controleKmFiltro.veiculoId"
+                              [showClear]="true"
+                              [filter]="true" [autoWidth]="false"
+                              placeholder="{{'app.acoes.selecione2' | translate}}">
+                  </p-dropdown>
+               </div>
+
+               <!-- ITINERARIO -->
+               <div class="ui-sm-4 ui-g-4 ui-fluid">
+                  <label>{{'app.itinerario.titulo'| translate}}</label>
+                  <p-dropdown emptyFilterMessage="{{'app.acoes.nenhum-registro-encontrado' | translate }}"
+                              [options]="itinerarioList"
+                              [(ngModel)]="controleKmFiltro.itinerarioId"
+                              [showClear]="true"
+                              [filter]="true" [autoWidth]="false"
+                              placeholder="{{'app.acoes.selecione2' | translate}}">
+                  </p-dropdown>
+               </div>
+
+               <!-- MOTORISTA -->
+               <div class="ui-sm-4 ui-g-4 ui-fluid">
+                  <label>{{'app.controleKm.campos.motorista'| translate}}</label>
+                  <p-dropdown emptyFilterMessage="{{'app.acoes.nenhum-registro-encontrado' | translate }}"
+                              [options]="pessoaList"
+                              [(ngModel)]="controleKmFiltro.pessoaId"
+                              [showClear]="true"
+                              [filter]="true" [autoWidth]="false"
+                              placeholder="{{'app.acoes.selecione2' | translate}}">
+                  </p-dropdown>
+               </div>
+
+               <!--Periodo-->
+               <div class="ui-g-3 ui-fluid">
+                  <label>{{'app.controleKm.rotulos.dataSaidaMaiorQue' | translate}}</label>
+                  <div class="wc-remove-padding-margin">
+                     <div class="ui-g-5 ui-fluid wc-remove-padding-margin">
+                        <p-inputMask [(ngModel)]="controleKmFiltro.dataSaida"
+                                     mask="99/99/9999"
+                                     pattern="([0-2][0-9]|3[0-1])\/(0[0-9]|1[0-2])\/[0-9]{4}">
+                        </p-inputMask>
+                     </div>
+                     <div class="ui-g-2 ui-fluid wc-remove-padding-margin wc-centrer-text">
+                        <span>{{'app.controleKm.rotulos.ate' | translate}}</span>
+                     </div>
+                     <div class="ui-g-5 ui-fluid wc-remove-padding-margin">
+                        <p-inputMask [(ngModel)]="controleKmFiltro.dataChegada"
+                                     mask="99/99/9999"
+                                     pattern="([0-2][0-9]|3[0-1])\/(0[0-9]|1[0-2])\/[0-9]{4}">
+                        </p-inputMask>
+                     </div>
+                  </div>
+               </div>
+
+               <!--Quilometragem-->
+               <div class="ui-g-3 ui-fluid">
+                  <label>{{'app.controleKm.rotulos.quilometragem' | translate}}</label>
+
+                  <div class="wc-remove-padding-margin">
+                     <div class="ui-g-5 ui-fluid wc-remove-padding-margin">
+                        <input pInputText
+                               type="text"
+                               [(ngModel)]="controleKmFiltro.kmSaida"
+                               pKeyFilter="pnum">
+                     </div>
+                     <div class="ui-g-2 ui-fluid wc-remove-padding-margin wc-centrer-text">
+                        <span>{{'app.controleKm.rotulos.ate' | translate}}</span>
+                     </div>
+                     <div class="ui-g-5 ui-fluid wc-remove-padding-margin">
+                        <input pInputText
+                               type="text"
+                               [(ngModel)]="controleKmFiltro.kmChegada"
+                               pKeyFilter="pnum">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="ui-g-12" style="text-align: right">
+                  <button pButton
+                          type="button"
+                          label="{{'app.comum.filtro.limpar' | translate}}"
+                          class="ui-button-secondary"
+                          (click)="mostrarCamposFiltros(true); filterFields(dataTable);"></button>
+                  <button pButton
+                          type="button" icon="fa fa-minus"
+                          label="{{'app.comum.filtro.menos-filtros' | translate}}"
+                          class="ui-button-secondary"
+                          (click)="buscarTodos(globalFilter, dataTable)"></button>
+                  <button pButton
+                          type=" button" icon="fa fa-filter"
+                          (click)="filterFields(dataTable)"
+                          label="{{'app.comum.filtro.filtrar' | translate}}"></button>
+               </div>
+            </div>
+         </div>
+         <p-table #dataTable
+                  [value]="controleKmList"
+                  [(selection)]="controleKmSelecionado"
+                  selectionMode="single"
+                  dataKey="key"
+
+                  [lazy]="true"
+                  [(totalRecords)]="totalRegistros"
+                  (onLazyLoad)="loadBank($event)"
+
+                  [filterDelay]="variaveisAmbiente.dataTable.filterDelay"
+                  [paginator]="true"
+                  [rows]="variaveisAmbiente.dataTable.rows"
+                  [rowsPerPageOptions]="variaveisAmbiente.dataTable.rowsPerPageOptions"
+                  [responsive]="true"
+
+                  [columns]="COLUNAS"
+         >
+            <ng-template pTemplate="emptymessage">
+               <tr>
+                  <td colspan="9"> {{ 'app.acoes.nenhum-registro-encontrado' | translate}}</td>
+               </tr>
+            </ng-template>
+
+            <ng-template pTemplate="header" let-columns>
+               <tr>
+                  <th style="width: 40px"></th>
+                  <th class="datatable-coluna_veiculo">
+                     {{'app.controleKm.campos.veiculo'| translate}}
+                  </th>
+                  <th>
+                     {{'app.controleKm.campos.itinerario'| translate}}
+                  </th>
+
+                  <th *ngFor="let col of columns" [hidden]="col.hidden" [class]="col.class">
+                     {{col.header}}
+                  </th>
+               </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-rowData let-columns="columns" let-obj let-expanded="expanded">
+               <tr [pSelectableRow]="rowData"
+                   class="{{(rowData['kmNaoInformado'] == 0 || (controleKmSelecionado && controleKmSelecionado['key'] === rowData['key'])) ? '' : 'linha-km-nao-informado'}}">
+                  <td>
+                     <a href="#" [pRowToggler]="rowData">
+                        <i [ngClass]="expanded ? 'fa fa fa-chevron-circle-down' : 'fa fa fa-chevron-circle-right'"
+                           style="font-size: 1.25em; color: #2d353c"></i>
+                     </a>
+                  </td>
+                  <td class="datatable-coluna_veiculo">
+                     {{rowData['veiculo']['frota']}} - {{rowData['veiculo']['placa']}}
+                  </td>
+                  <td>
+                     {{rowData['itinerario']['nome']}}
+                  </td>
+
+                  <td *ngFor="let col of columns" [hidden]="col.hidden" [class]="col.class">
+                     {{rowData[col.field]}}
+                  </td>
+               </tr>
+            </ng-template>
+
+            <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
+               <tr class="{{rowData['kmNaoInformado'] == 0 ? '' : 'linha-km-nao-informado'}}">
+                  <td [attr.colspan]="columns.length + 2">
+                     <div class="ui-g ui-fluid">
+                        <div class="ui-g-3">
+                           <label>{{'app.controleKm.campos.origem' | translate}}</label>
+                           <span>{{rowData['origem']}}</span>
+                        </div>
+                        <div class="ui-g-3">
+                           <label>{{'app.controleKm.campos.destino' | translate}}</label>
+                           <span>{{rowData['destino']}}</span>
+                        </div>
+                        <div class="ui-g-6">
+                           <label>{{'app.controleKm.campos.motorista'| translate}}</label>
+                           <span>{{rowData['pessoa']['nome']}}</span>
+                        </div>
+                        <div class="ui-g-12" *ngIf="(rowData['obs'] && rowData['obs'].length > 0) ? true : false">
+                           <label>{{'app.controleKm.campos.obs'| translate}}</label>
+                           <span>{{rowData['obs']}}</span>
+                        </div>
+                     </div>
+                  </td>
+               </tr>
+            </ng-template>
+
+            <ng-template pTemplate="paginatorleft">
+               <a pButton icon="fa fa-refresh"
+                  (click)="buscarTodos(globalFilter, dataTable)"
+                  tooltipPosition="top" pTooltip="{{'app.acoes.atualizar' | translate}}"></a>
+            </ng-template>
+
+            <ng-template pTemplate="paginatorright" let-obj="rowData">
+               <button type="button"
+                       *ngIf="auth.hasPermission('ROLE_ATUALIZAR_CONTROLE-KM')"
+                       pButton
+                       icon="fa fa-pencil"
+                       label="{{'app.acoes.editar' | translate}}"
+                       [disabled]="controleKmSelecionado ? false :true"
+                       tooltipPosition="top" pTooltip="{{'app.acoes.tooltip.editar' | translate}}"
+                       (click)="edit()"></button>
+               <button type="button"
+                       *ngIf="auth.hasPermission('ROLE_DELETAR_CONTROLE-KM')"
+                       pButton
+                       icon="fa fa-trash"
+                       class="ui-button-danger"
+                       label="{{'app.acoes.excluir' | translate}}"
+                       [disabled]="controleKmSelecionado ? false :true"
+                       tooltipPosition="top" pTooltip="{{'app.acoes.tooltip.excluir' | translate}}"
+                       (click)="confirmarExclusao(obj)"></button>
+            </ng-template>
+         </p-table>
+
+      </div>
+   </div>
+</div>
+
+
+<p-dialog [(visible)]="mostrarJanelaEdicao"
+          [resizable]="false"
+          [modal]="true"
+          [focusOnShow]="false"
+          width="800">
+
+   <p-header>
+      {{(form.get('key').value?.length > 0 ? 'app.controleKm.acoes.editar' : 'app.controleKm.acoes.adicionar') | translate}}
+   </p-header>
+
+   <form #f="ngForm" novalidate autocomplete="off" [formGroup]="form" (submit)="salvar()">
+
+
+      <p-messages [(value)]="msgs"></p-messages>
+
+      <div class="ui-g">
+         <input pInputText
+                type="text"
+                [hidden]="true"
+                name="key"
+                formControlName="key">
+
+         <!-- VEICULO -->
+         <div class="ui-sm-4 ui-g-4 ui-fluid" formGroupName="veiculo">
+            <label class="required">{{'app.veiculo.titulo'| translate}}</label>
+            <p-dropdown emptyFilterMessage="{{'app.acoes.nenhum-registro-encontrado' | translate }}"
+                        [options]="veiculoList"
+                        formControlName="key"
+                        [showClear]="true"
+                        [filter]="true" [autoWidth]="false"
+                        placeholder="{{'app.acoes.selecione2' | translate}}"
+                        (onBlur)="carregarKmSaidaMinimo(); carregarKmChegadaMaximo();">
+            </p-dropdown>
+            <app-message [form]="f" [control]="form.get('veiculo').get('key')"></app-message>
+         </div>
+
+         <!-- ITINERARIO -->
+         <div class="ui-sm-4 ui-g-4 ui-fluid" formGroupName="itinerario">
+            <label class="required">{{'app.itinerario.titulo'| translate}}</label>
+            <p-dropdown emptyFilterMessage="{{'app.acoes.nenhum-registro-encontrado' | translate }}"
+                        [options]="itinerarioList"
+                        formControlName="key"
+                        [showClear]="true"
+                        [filter]="true" [autoWidth]="false"
+                        placeholder="{{'app.acoes.selecione2' | translate}}">
+            </p-dropdown>
+            <app-message [form]="f" [control]="form.get('itinerario').get('key')"></app-message>
+         </div>
+
+         <!-- MOTORISTA -->
+         <div class="ui-sm-4 ui-g-4 ui-fluid" formGroupName="pessoa">
+            <label class="required">{{'app.controleKm.campos.motorista'| translate}}</label>
+            <p-dropdown emptyFilterMessage="{{'app.acoes.nenhum-registro-encontrado' | translate }}"
+                        [options]="pessoaList"
+                        formControlName="key"
+                        [showClear]="true"
+                        [filter]="true" [autoWidth]="false"
+                        placeholder="{{'app.acoes.selecione2' | translate}}">
+            </p-dropdown>
+            <app-message [form]="f" [control]="form.get('pessoa').get('key')"></app-message>
+         </div>
+
+         <div class="ui-sm-12 ui-g-3 ui-fluid">
+            <label class="required">{{'app.controleKm.campos.dataHoraSaida' | translate}}</label>
+            <div class="ui-inputgroup ">
+               <span class="ui-inputgroup-addon"><i class="fa fa fa-calendar"></i></span>
+               <p-inputMask formControlName="dataHoraSaida"
+                            mask="99/99/9999 99:99"
+                            class="ui-fluid"
+                            pattern="([0-2][0-9]|3[0-1])\/(0[0-9]|1[0-2])\/[0-9]{4} ([0-1][0-9]|2[0-3]):[0-5][0-9]"
+                            (onBlur)="carregarKmSaidaMinimo()">
+               </p-inputMask>
+            </div>
+            <app-message [form]="f" [control]="form.get('dataHoraSaida')"></app-message>
+         </div>
+
+         <div class="ui-sm-4 ui-g-3 ui-fluid">
+            <label class="required">{{'app.controleKm.campos.kmSaida' | translate}}</label>
+            <span class="wc-label-km-opcao">{{kmSaidaMinimo}}</span>
+            <div class="ui-inputgroup">
+               <input pInputText
+                      type="text"
+                      name="kmSaida"
+                      class="wc-align-right"
+                      formControlName="kmSaida"
+                      [disabled]="form.get('dataHoraSaida').invalid ? form.get('kmSaida').disable() :form.get('kmSaida').enable()"
+                      pKeyFilter="pnum">
+               <span class="ui-inputgroup-addon">km</span>
+            </div>
+            <app-message [form]="f" [control]="form.get('kmSaida')"></app-message>
+         </div>
+
+         <div class="ui-sm-6 ui-g-6 ui-fluid">
+            <label class="required">{{'app.controleKm.campos.origem' | translate}}</label>
+            <textarea [rows]="1"
+                      [cols]="30"
+                      pInputTextarea
+                      name="origem"
+                      formControlName="origem"
+                      autoResize></textarea>
+            <app-message [form]="f" [control]="form.get('origem')"></app-message>
+         </div>
+
+
+         <div class="ui-sm-12 ui-g-3 ui-fluid">
+            <label class="required">{{'app.controleKm.campos.dataHoraChegada' | translate}}</label>
+            <div class="ui-inputgroup">
+               <span class="ui-inputgroup-addon"><i class="fa fa fa-calendar"></i></span>
+               <p-inputMask formControlName="dataHoraChegada"
+                            mask="99/99/9999 99:99"
+                            pattern="([0-2][0-9]|3[0-1])\/(0[0-9]|1[0-2])\/[0-9]{4} ([0-1][0-9]|2[0-3]):[0-5][0-9]"
+                            (onBlur)="carregarKmChegadaMaximo()">
+               </p-inputMask>
+            </div>
+            <app-message [form]="f" [control]="form.get('dataHoraChegada')"></app-message>
+         </div>
+
+         <div class="ui-sm-4 ui-g-3 ui-fluid">
+            <label class="required">{{'app.controleKm.campos.kmChegada' | translate}}</label>
+            <span class="wc-label-km-opcao">{{kmChegadaMaximo}}</span>
+            <div class="ui-inputgroup">
+               <input pInputText
+                      type="text"
+                      name="kmChegada"
+                      class="wc-align-right"
+                      [disabled]="form.get('dataHoraChegada').invalid ? form.get('kmChegada').disable() :form.get('kmChegada').enable()"
+                      formControlName="kmChegada"
+                      pKeyFilter="pnum">
+               <span class="ui-inputgroup-addon">km</span>
+            </div>
+            <app-message [form]="f" [control]="form.get('kmChegada')"></app-message>
+         </div>
+
+
+         <div class="ui-sm-6 ui-g-6 ui-fluid">
+            <label class="required">{{'app.controleKm.campos.destino' | translate}}</label>
+            <textarea id="txtDestino" [rows]="1"
+                      [cols]="30"
+                      pInputTextarea
+                      name="destino"
+                      formControlName="destino"
+                      autoResize></textarea>
+            <app-message [form]="f" [control]="form.get('destino')"></app-message>
+         </div>
+
+         <div class="ui-sm-12 ui-g-12 ui-fluid">
+            <label>{{'app.controleKm.campos.obs' | translate}}</label>
+            <textarea [rows]="5"
+                      [cols]="30"
+                      pInputTextarea
+                      name="obs"
+                      formControlName="obs"
+                      autoResize></textarea>
+            <app-message [form]="f" [control]="form.get('obs')"></app-message>
+         </div>
+
+         <div class="ui-sm-12 ui-g-12 wc-align-right">
+            <button pButton type="button"
+                    label="{{'app.acoes.cancelar' | translate}}"
+                    class="ui-button-danger"
+                    tooltipPosition="top" pTooltip="{{'app.acoes.tooltip.cancelar' | translate}}"
+                    (click)="cancel()"></button>
+            <button pButton type="submit"
+                    *ngIf="form.get('key').value ? auth.hasPermission('ROLE_ATUALIZAR_ITINERARIO') : auth.hasPermission('ROLE_SALVAR_ITINERARIO')"
+                    label="{{(form.get('key').value ? 'app.acoes.atualizar' : 'app.acoes.salvar') | translate}}"
+                    tooltipPosition="top" pTooltip="{{'app.acoes.tooltip.salvar' | translate}}"
+                    class="ui-button-success"></button>
+         </div>
+
+      </div>
+   </form>
+</p-dialog>

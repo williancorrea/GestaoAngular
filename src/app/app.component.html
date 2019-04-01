@@ -1,0 +1,27 @@
+<div class="layout-wrapper" [ngClass]="{'layout-wrapper-menu-active':sidebarActive, 'layout-overlay-menu':overlay}">
+
+    <app-topbar *ngIf="showMenus()"></app-topbar>
+    <app-sidebar *ngIf="showMenus()"></app-sidebar>
+
+    <div class="layout-main">
+        <div class="layout-main-content">
+            <router-outlet></router-outlet>
+
+            <p-toast></p-toast>
+        </div>
+        <app-footer *ngIf="showMenus()" class="footer-fixed"></app-footer>
+    </div>
+</div>
+
+<!--<div *ngIf="!showPage" class="validando-sessao">-->
+<!--<span>{{'app.sistema.validando-sessao' | translate}}</span>-->
+<!--</div>-->
+
+<p-confirmDialog header="{{'app.acoes.confirmar' | translate}}" icon="fa fa-question-circle" #confirm [width]="400">
+    <p-footer>
+        <button type="button" pButton icon="fa fa-check" label="{{'app.acoes.sim' | translate}}"
+                (click)="confirm.accept()"></button>
+        <button type="button" pButton icon="fa fa-times" label="{{'app.acoes.nao' | translate}}"
+                (click)="confirm.reject()"></button>
+    </p-footer>
+</p-confirmDialog>

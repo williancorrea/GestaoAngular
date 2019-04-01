@@ -1,0 +1,94 @@
+<ngx-loading [show]="loading"></ngx-loading>
+<p-progressBar *ngIf="loading" mode="indeterminate" styleClass="wc-progress-bar-indeterminate"></p-progressBar>
+
+<div class="ui-g">
+    <div class="ui-g-12">
+        <div class="card card-w-title">
+            <div>
+
+                <h1 *ngIf="loading === true">{{('app.comum.carregando') | translate}}</h1>
+                <h1 *ngIf="loading === false">{{(form.get('key')?.value?.length > 0 ? 'app.itinerario.acoes.editar' : 'app.itinerario.acoes.adicionar') |
+                    translate}}</h1>
+            </div>
+
+            <form #f="ngForm" novalidate (submit)="save()" autocomplete="off" [formGroup]="form">
+
+                <div class="ui-g">
+                    <input pInputText
+                           type="text"
+                           [hidden]="true"
+                           name="key"
+                           formControlName="key">
+
+                    <div class="ui-g-3 ui-fluid">
+                        <label for="codigo">{{'app.itinerario.campos.codigo' | translate}}</label>
+                        <input pInputText
+                               id="codigo"
+                               type="text"
+                               formControlName="codigo">
+                        <app-message [form]="f" [control]="form.get('codigo')"></app-message>
+                    </div>
+                    <div class="ui-g-9"></div>
+
+
+                    <div class="ui-sm-12 ui-g-6 ui-fluid">
+                        <label for="nome" class="required">{{'app.itinerario.campos.nome' | translate}}</label>
+                        <input pInputText
+                               id="nome"
+                               type="text"
+                               formControlName="nome">
+                        <app-message [form]="f" [control]="form.get('nome')"></app-message>
+                    </div>
+
+                    <div class="ui-sm-3 ui-g-3 ui-fluid">
+                        <label class="required">{{'app.itinerario.campos.validoAte' | translate}}</label>
+                        <!--TODO: TRADUZIR O COMPONENTE CALENDAR-->
+                        <!--TODO: ADICIONAR NAVEGAÇÃO POR ANO NO COMPONENTE CALENDAR-->
+                        <!--TODO: ADICIONAR MASCARA AO CAMPO-->
+                        <p-calendar formControlName="validoAte"
+                                    dateFormat="dd/mm/yy"
+                                    [readonlyInput]="false"
+                                    [showIcon]="true"
+                                    [monthNavigator]="true">
+                        </p-calendar>
+                        <app-message [form]="f" [control]="form.get('validoAte')"></app-message>
+                    </div>
+
+                    <div class="ui-sm-12 ui-g-12 ui-fluid">
+                        <label for="descricao">{{'app.itinerario.campos.descricao' | translate}}</label>
+                        <textarea [rows]="5"
+                                  [cols]="30"
+                                  id="descricao"
+                                  pInputTextarea
+                                  name="descricao"
+                                  formControlName="descricao"
+                                  autoResize></textarea>
+                        <app-message [form]="f" [control]="form.get('descricao')"></app-message>
+                    </div>
+
+                    <div class="ui-sm-12 ui-g-6 ui-fluid">
+                        <p-checkbox id="chkInativo" [formControl]="form.controls['inativo']"
+                                    binary="true"
+                                    label="{{'app.itinerario.campos.inativo' | translate}}"></p-checkbox>
+                    </div>
+
+                    <div class="ui-sm-12 ui-g-12">
+                        <button pButton type="button"
+                                label="{{'app.acoes.cancelar' | translate}}"
+                                class="ui-button-danger"
+                                tooltipPosition="top" pTooltip="{{'app.acoes.tooltip.cancelar' | translate}}"
+                                (click)="cancel()"></button>
+                        <button pButton type="submit"
+                                *ngIf="form.get('key').value ? auth.hasPermission('ROLE_ATUALIZAR_ITINERARIO') : auth.hasPermission('ROLE_SALVAR_ITINERARIO')"
+                                label="{{(form.get('key').value ? 'app.acoes.atualizar' : 'app.acoes.salvar') | translate}}"
+                                tooltipPosition="top" pTooltip="{{'app.acoes.tooltip.salvar' | translate}}"
+                                class="ui-button-success"></button>
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>

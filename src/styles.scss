@@ -1,0 +1,141 @@
+
+//SPLASH SCREEN
+.splash-screen { background: #f1f3f6 !important; }
+.splash-screen .splash-loader { background-color: #f1f3f6 !important; border: 10px solid #f1f3f6 !important; }
+.splash-screen .splash-loader img { width: 100px; margin-top: 35px; }
+
+
+
+//BORDAS DESTACADAS
+body .ui-inputtext.ng-dirty.ng-invalid, body p-dropdown.ng-dirty.ng-invalid > .ui-dropdown, body p-autocomplete.ng-dirty.ng-invalid > .ui-autocomplete > .ui-inputtext, body p-calendar.ng-dirty.ng-invalid > .ui-calendar > .ui-inputtext, body p-chips.ng-dirty.ng-invalid > .ui-inputtext, body p-inputmask.ng-dirty.ng-invalid > .ui-inputtext, body p-checkbox.ng-dirty.ng-invalid .ui-chkbox-box, body p-radiobutton.ng-dirty.ng-invalid .ui-radiobutton-box, body p-inputswitch.ng-dirty.ng-invalid .ui-inputswitch, body p-listbox.ng-dirty.ng-invalid .ui-inputtext, body p-multiselect.ng-dirty.ng-invalid > .ui-multiselect, body p-spinner.ng-dirty.ng-invalid > .ui-inputtext, body p-selectbutton.ng-dirty.ng-invalid .ui-button, body p-togglebutton.ng-dirty.ng-invalid .ui-button {
+    border-color: #dc3545;
+    border-top-color: rgb(220, 53, 69);
+    border-right-color: rgb(220, 53, 69);
+    border-bottom-color: rgb(220, 53, 69);
+    border-left-color: rgb(220, 53, 69);
+}
+body .ui-inputtext.ng-dirty.ng-invalid:focus, body p-dropdown.ng-dirty.ng-invalid > .ui-dropdown:focus, body p-autocomplete.ng-dirty.ng-invalid > .ui-autocomplete > .ui-inputtext:focus, body p-calendar.ng-dirty.ng-invalid > .ui-calendar > .ui-inputtext:focus, body p-chips.ng-dirty.ng-invalid > .ui-inputtext:focus, body p-inputmask.ng-dirty.ng-invalid > .ui-inputtext:focus, body p-checkbox.ng-dirty.ng-invalid .ui-chkbox-box:focus, body p-radiobutton.ng-dirty.ng-invalid .ui-radiobutton-box:focus, body p-inputswitch.ng-dirty.ng-invalid .ui-inputswitch:focus, body p-listbox.ng-dirty.ng-invalid .ui-inputtext:focus, body p-multiselect.ng-dirty.ng-invalid > .ui-multiselect:focus, body p-spinner.ng-dirty.ng-invalid > .ui-inputtext:focus, body p-selectbutton.ng-dirty.ng-invalid .ui-button:focus, body p-togglebutton.ng-dirty.ng-invalid .ui-button:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220,53,69,.25);
+}
+body .ui-inputtext.ng-pristine:focus, body p-dropdown.ng-pristine > .ui-dropdown:focus, body p-autocomplete.ng-pristine > .ui-autocomplete > .ui-inputtext:focus, body p-calendar.ng-pristine > .ui-calendar > .ui-inputtext:focus, body p-chips.ng-pristine > .ui-inputtext:focus, body p-inputmask.ng-pristine > .ui-inputtext:focus, body p-checkbox.ng-pristine .ui-chkbox-box:focus, body p-radiobutton.ng-pristine .ui-radiobutton-box:focus, body p-inputswitch.ng-pristine .ui-inputswitch:focus, body p-listbox.ng-pristine .ui-inputtext:focus, body p-multiselect.ng-pristine > .ui-multiselect:focus, body p-spinner.ng-pristine > .ui-inputtext:focus, body p-selectbutton.ng-pristine .ui-button:focus, body p-togglebutton.ng-pristine .ui-button:focus {
+    border-color: #3192e1;
+    box-shadow: 0 0 0 0.2rem rgba(49,156,255,.25);
+}
+
+
+//MENU TOPO
+.layout-wrapper .topbar .topbar-menu > li > a .topbar-icon:hover { color: #1582dc; }
+.layout-wrapper .topbar .logo { background-color: #dee0e3; }
+.layout-wrapper .topbar .logo img { margin-top: 10px; }
+
+
+//INPUT
+.ui-inputgroup .ui-inputtext:not(:last-child) {
+    border-right: 1px;
+}
+
+textarea { resize: none; }
+label { font-weight: bold; }
+body .ui-state-disabled *, body .ui-widget:disabled * {
+    cursor: not-allowed !important;
+}
+
+
+.layout-main-content{
+    max-width: 1024px;
+    min-width: 754px;
+    margin: 0px auto;
+}
+.btn-add-new {
+    float: right;
+    margin-top: -50px;
+}
+
+.requiredLabel {
+    color: #da3d3d;
+    font-size: smaller;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+
+label.required:after { content: " *"; color: #da3d3d; font-weight: 300; }
+body .ui-state-disabled, body .ui-widget:disabled {
+    opacity: 0.75;
+    cursor: not-allowed !important;
+}
+
+
+
+body .ui-button.ui-button-icon-only .fa {
+    margin-left: -0.5em;
+}
+
+.exception-body { background-color: #f7f7f7; padding-top: 50px; }
+.exception-body .exception-panel { border-bottom: 0px; }
+
+.d-none {
+    display: none !important;
+}
+
+
+
+
+
+
+
+.uppercase{}
+.lowercase{}
+
+.filter-title h2 {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 17px;
+    color: #5f5f5f;
+    font-weight: 400;
+}
+
+.txt-upercase {
+    text-transform: uppercase;
+}
+
+.ui-dropdown-item-empty, .ui-dropdown-label-empty {
+    text-indent: 0px;
+}
+
+.wc-app-name {
+    color: white;
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.wc-app-cnpj {
+    color: white;
+    margin-left: 10px;
+    font-size: 10px;
+    font-weight: bold;
+    top: 35px;
+    position: absolute;
+    left: 65px;
+}
+
+.wc-remove-padding-margin {
+    margin: 0px;
+    padding: 0px;
+}
+.wc-centrer-text{
+    text-align: center !important;
+}
+.wc-align-right{
+    text-align: right;
+}
+.wc-align-left{
+    text-align: left;
+}
+
+.wc-progress-bar-indeterminate{
+    margin: 0px 7px;
+    height: 6px;
+}

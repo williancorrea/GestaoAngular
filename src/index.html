@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Aguarde...</title>
+    <base href="/">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script src="assets/js/jquery.mask.min.js"></script>
+    <script src="assets/js/jquery.maskMoney.min.js"></script>
+
+
+    <!-- Layout CSS -->
+    <link id="theme-css" rel="stylesheet" type="text/css" href="assets/theme/theme-blue.css">
+    <link id="layout-css" rel="stylesheet" type="text/css" href="assets/layout/css/layout-dark.css">
+
+</head>
+<body>
+    <app-root>
+        <div class="splash-screen" style="background: #f1f3f6 !important;">
+            <div class="splash-loader" style="background: #f1f3f6 !important; border: 10px solid #f1f3f6 !important;">
+                <img src="assets/layout/images/logo.png" style="width: 100px; margin-top: 35px;">
+            </div>
+        </div>
+    </app-root>
+
+    <script>
+
+        // Funcao que faz o texto ficar em uppercase
+        function upperText(obj) {
+            // Para tratar o colar
+            jQuery(obj).bind('paste', function (e) {
+                var el = jQuery(this);
+                setTimeout(function () {
+                    var text = jQuery(el).val();
+                    el.val(text.toUpperCase());
+                }, 100);
+            });
+            // Para tratar quando é digitado
+            jQuery(obj).keypress(function () {
+                var el = jQuery(this);
+                setTimeout(function () {
+                    var text = jQuery(el).val();
+                    el.val(text.toUpperCase());
+                }, 100);
+            });
+        }
+
+        // Funcao que faz o texto ficar em uppercase
+        function lowerText(obj) {
+            // Para tratar o colar
+            jQuery(obj).bind('paste', function (e) {
+                var el = jQuery(this);
+                setTimeout(function () {
+                    var text = jQuery(el).val();
+                    el.val(text.toLowerCase());
+                }, 100);
+            });
+            // Para tratar quando é digitado
+            jQuery(obj).keypress(function () {
+                var el = jQuery(this);
+                setTimeout(function () {
+                    var text = jQuery(el).val();
+                    el.val(text.toLowerCase());
+                }, 100);
+            });
+        }
+
+        function configurarMoeda() {
+            $(".moeda").maskMoney({prefix: "R$ ", decimal: ",", thousands: ".", allowZero: true});
+        }
+
+
+        //  https://igorescobar.github.io/jQuery-Mask-Plugin/docs.html
+        $(document).ready(function () {
+            $('.rg_mask').mask('00.000.000-A', {reverse: false});
+            $('.cpf').mask('000.000.000-00', {reverse: true});
+            $('.date').mask('00/00/0000');
+            $('.veiculo_placa').mask('SSS-0000',
+                {
+                    translation: {
+                        S: {pattern: /[A-Za-z]/}
+                    },
+                    placeholder: "___-____"
+                }
+            );
+
+            configurarMoeda();
+            upperText(".uppercase");
+
+            // upperText("input");
+
+            upperText("textarea");
+            upperText("[type='text']");
+
+            lowerText("[type='email']");
+            lowerText(".lowercase");
+        });
+    </script>
+</body>
+</html>

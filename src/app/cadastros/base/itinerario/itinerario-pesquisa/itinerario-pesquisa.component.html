@@ -1,0 +1,153 @@
+<ngx-loading [show]="loading"></ngx-loading>
+<p-progressBar *ngIf="loading" mode="indeterminate" styleClass="wc-progress-bar-indeterminate"></p-progressBar>
+
+<div class="ui-g">
+    <div class="ui-g-12">
+        <div class="card card-w-title">
+
+            <div>
+                <h1>{{'app.itinerario.lista' | translate}}</h1>
+                <a pButton class="btn-add-new ui-button-secondary"
+                   *ngIf="auth.hasPermission('ROLE_SALVAR_ITINERARIO')"
+                   label="{{'app.itinerario.acoes.adicionar' | translate}}"
+                   iconPos="left" icon="fa fa-plus"
+                   tooltipPosition="top" pTooltip="{{'app.acoes.tooltip.novo' | translate}}"
+                   routerLink="{{'app.itinerario.link-pagina' | translate}}/novo">
+                </a>
+            </div>
+
+            <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+
+                <!--GLOBAL FILTER-->
+                <div class="ui-inputgroup" ngClass="{{mostrarFiltros ? 'd-none': ''}}">
+                    <span class="ui-inputgroup-addon"><i class="fa fa-search"></i></span>
+                    <input #globalFilter pInputText type="text" size="50"
+                           (input)="dataTable.filterGlobal($event.target.value, 'contains')"
+                           placeholder="{{'app.acoes.filtro-global' | translate}}">
+                    <button pButton
+                            type="button" icon="fa fa-close"
+                            class="ui-button-danger"
+                            *ngIf="globalFilter.value.length > 0"
+                            (click)="findAll(globalFilter, dataTable)"></button>
+                    <button pButton
+                            type="button" icon="fa fa-filter"
+                            *ngIf="globalFilter.value.length === 0"
+                            label="{{'app.comum.filtro.mais-filtros' | translate}}"
+                            class="ui-button-secondary"
+                            (click)="showFilterFields(true)"></button>
+                </div>
+
+                <!--FILTER BY FIELDS-->
+                <div class="ui-g" ngClass="{{!mostrarFiltros ? 'd-none': ''}}">
+                    <div class="ui-g-12 filter-title">
+                        <h2>{{'app.comum.filtro.campos' | translate}}</h2>
+                    </div>
+                    <div class="ui-g-4 ui-fluid">
+                        <label for="codigo">{{'app.itinerario.campos.codigo' | translate}}</label>
+                        <input id="codigo" pInputText
+                               type="text"
+                               [(ngModel)]="itinerarioFiltro.codigo"
+                               maxlength="30"
+                        >
+                    </div>
+                    <div class="ui-g-4 ui-fluid">
+                        <label for="nome">{{'app.itinerario.campos.nome' | translate}}</label>
+                        <input id="nome" pInputText
+                               type="text"
+                               [(ngModel)]="itinerarioFiltro.nome"
+                               maxlength="30"
+                        >
+                    </div>
+                    <!--<div class="ui-g-4 ui-fluid">-->
+                        <!--<label for="url">{{'app.itinerario.campos.descricao' | translate}}</label>-->
+                        <!--<input id="url" pInputText-->
+                               <!--type="text"-->
+                               <!--[(ngModel)]="itinerarioFiltro.descricao"-->
+                               <!--maxlength="30"-->
+                        <!--&gt;-->
+                    <!--</div>-->
+                    <div class="ui-g-12" style="text-align: right">
+                        <button pButton
+                                type="button" icon="fa fa-minus"
+                                label="{{'app.comum.filtro.menos-filtros' | translate}}"
+                                class="ui-button-secondary"
+                                (click)="findAll(globalFilter, dataTable)"></button>
+                        <button pButton
+                                type="button" icon="fa fa-filter"
+                                (click)="filterFields(dataTable)"
+                                label="{{'app.comum.filtro.filtrar' | translate}}"></button>
+                    </div>
+                </div>
+            </div>
+            <p-table #dataTable
+                     [value]="itinerarios"
+                     [(selection)]="objSelecionado"
+                     selectionMode="single"
+                     dataKey="key"
+
+                     [lazy]="true"
+                     [(totalRecords)]="totalRecords"
+                     (onLazyLoad)="loadBank($event)"
+
+                     [filterDelay]="env.dataTable.filterDelay"
+                     [paginator]="true"
+                     [rows]="env.dataTable.rows"
+                     [rowsPerPageOptions]="env.dataTable.rowsPerPageOptions"
+                     [responsive]="true"
+
+                     [columns]="COLUNAS"
+            >
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="3"> {{ 'app.acoes.nenhum-registro-encontrado' | translate}}</td>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th *ngFor="let col of columns" [pSortableColumn]="col.field" [hidden]="col.hidden" [class]="col.class">
+                            {{col.header}}
+                            <p-sortIcon [field]="col.field"></p-sortIcon>
+                        </th>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-rowData let-columns="columns" let-obj>
+                    <tr [pSelectableRow]="rowData">
+                        <td *ngFor="let col of columns" [hidden]="col.hidden" [class]="col.class">
+                            <span *ngIf="col.field=='inativo'">{{(rowData[col.field] ? 'app.acoes.sim' : 'app.acoes.nao') | translate}} </span>
+                            <span *ngIf="col.field!='inativo'">{{rowData[col.field]}} </span>
+                        </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="paginatorleft">
+                    <a pButton icon="fa fa-refresh"
+                       (click)="findAll(globalFilter, dataTable)"
+                       tooltipPosition="top" pTooltip="{{'app.acoes.atualizar' | translate}}"></a>
+                </ng-template>
+
+                <ng-template pTemplate="paginatorright" let-obj="rowData">
+                    <button type="button"
+                            *ngIf="auth.hasPermission('ROLE_ATUALIZAR_ITINERARIO')"
+                            pButton
+                            icon="fa fa-pencil"
+                            label="{{'app.acoes.editar' | translate}}"
+                            [disabled]="!objSelecionado"
+                            tooltipPosition="top" pTooltip="{{'app.acoes.tooltip.editar' | translate}}"
+                            (click)="editar()"></button>
+                    <button type="button"
+                            *ngIf="auth.hasPermission('ROLE_DELETAR_ITINERARIO')"
+                            pButton
+                            icon="fa fa-trash"
+                            class="ui-button-danger"
+                            label="{{'app.acoes.excluir' | translate}}"
+                            [disabled]="!objSelecionado"
+                            tooltipPosition="top" pTooltip="{{'app.acoes.tooltip.excluir' | translate}}"
+                            (click)="confirmarExclusao(obj)"></button>
+                </ng-template>
+            </p-table>
+
+        </div>
+    </div>
+</div>

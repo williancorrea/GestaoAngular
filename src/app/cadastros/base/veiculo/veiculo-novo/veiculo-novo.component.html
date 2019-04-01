@@ -1,0 +1,72 @@
+<ngx-loading [show]="loading"></ngx-loading>
+<p-progressBar *ngIf="loading" mode="indeterminate" styleClass="wc-progress-bar-indeterminate"></p-progressBar>
+
+<div class="ui-g">
+    <div class="ui-g-12">
+        <div class="card card-w-title">
+            <div>
+
+                <h1 *ngIf="loading === true">{{('app.comum.carregando') | translate}}</h1>
+                <h1 *ngIf="loading === false">{{(form.get('key')?.value?.length > 0 ? 'app.veiculo.acoes.editar' : 'app.veiculo.acoes.adicionar') |
+                    translate}}</h1>
+            </div>
+
+            <form #f="ngForm" novalidate (submit)="save()" autocomplete="off" [formGroup]="form">
+
+                <div class="ui-g">
+                    <div class="ui-g">
+                        <input pInputText
+                               type="text"
+                               [hidden]="true"
+                               name="key"
+                               formControlName="key">
+
+                        <div class="ui-sm-4 ui-g-4 ui-fluid">
+                            <label class="required">{{'app.veiculo.campos.placa' | translate}}</label>
+                            <p-inputMask
+                                name="placa"
+                                mask="aaa-9999"
+                                formControlName="placa"></p-inputMask>
+                            <app-message [form]="f" [control]="form.get('placa')"></app-message>
+                        </div>
+
+                        <div class="ui-sm-4 ui-g-4 ui-fluid">
+                            <label>{{'app.veiculo.campos.frota' | translate}}</label>
+                            <input pInputText
+                                   type="text"
+                                   name="frota"
+                                   class="uppercase txt-upercase"
+                                   formControlName="frota">
+                            <app-message [form]="f" [control]="form.get('frota')"></app-message>
+                        </div>
+
+                        <div class="ui-sm-4 ui-g-4 ui-fluid">
+                            <label>{{'app.veiculo.campos.odometroInicial' | translate}}</label>
+                            <input pInputText
+                                   type="number"
+                                   name="frota"
+                                   formControlName="odometroInicial">
+                            <app-message [form]="f" [control]="form.get('odometroInicial')"></app-message>
+                        </div>
+
+                    </div>
+                    <div class="ui-sm-12 ui-g-12">
+                        <button pButton type="button"
+                                label="{{'app.acoes.cancelar' | translate}}"
+                                class="ui-button-danger"
+                                tooltipPosition="top" pTooltip="{{'app.acoes.tooltip.cancelar' | translate}}"
+                                (click)="cancel()"></button>
+                        <button pButton type="submit"
+                                *ngIf="form.get('key').value ? auth.hasPermission('ROLE_ATUALIZAR_VEICULO') : auth.hasPermission('ROLE_SALVAR_VEICULO')"
+                                label="{{(form.get('key').value ? 'app.acoes.atualizar' : 'app.acoes.salvar') | translate}}"
+                                tooltipPosition="top" pTooltip="{{'app.acoes.tooltip.salvar' | translate}}"
+                                class="ui-button-success"></button>
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,205 @@
+{
+    "app": {
+        "sistema": {
+            "titulo": "Rosinha Transportes",
+            "validando-sessao": "Aguarde, validando sessão!"
+        },
+        "menu": {
+            "cadastros": "Cadastros",
+            "tela-cheia": "Tela Cheia",
+            "idioma": {
+                "pt-br": "Português (Brasil)",
+                "en": "Inglês"
+            }
+        },
+        "acoes": {
+            "tooltip": {
+                "editar": "Editar item selecionado",
+                "excluir": "Excluir item selecionado",
+                "salvar": "Salvar dados",
+                "cancelar": "Retornar para a lista",
+                "novo": "Adicionar item"
+            },
+            "editar": "Editar",
+            "atualizar": "Atualizar",
+            "recarregar": "Recarregar",
+            "salvar": "Salvar",
+            "adicionar": "Adicionar",
+            "cancelar": "Cancelar",
+            "excluir": "Excluir",
+            "excluido": "Deletado",
+            "removido": "Removido",
+            "selecione": "Selecione",
+            "selecione2": "Selecione ...",
+            "filtro-global": "Filtro global - min 3 caracteres",
+            "nenhum-registro-encontrado": "Nenhum registro encontrado",
+            "requerido": "Obrigatório",
+            "confirmar": "Confirmação",
+            "confirmar-exclusao": "Tem certeza que deseja excluir o item selecionado?",
+            "buscar-por-tipo": "Buscar por tipo",
+            "sucesso": "Sucesso",
+            "erro": "Erro",
+            "informacao": "Informação",
+            "sim": "Sim",
+            "nao": "Não",
+            "ativo": "Habilitado",
+            "desativado": "Desativado"
+        },
+        "comum": {
+            "idioma": "Idioma",
+            "carregando": "Aguarde, carregando ...",
+            "dashboard": "Página Inicial",
+            "pagina": {
+                "nao-encontrada": "Página não encontrada",
+                "nao-encontrada-descricao": "A página que você solicitou não pode ser encontrada.",
+                "acesso-negado": "Acesso Negado.",
+                "acesso-negado-descricao": "Você não tem permissão para acessar este recurso",
+                "erro": "Erro",
+                "erro-descricao": "Um erro ocorreu, tente novamente mais tarde."
+            },
+            "filtro": {
+                "filtrar": "Filtrar",
+                "limpar": "Limpar",
+                "mais-filtros": "Mais Filtros",
+                "menos-filtros": "Menos Filtros",
+                "campos": "Filtrar campos contendo qualquer parte do(s) conteúdo(s) abaixo"
+            }
+        },
+        "validacao": {
+            "requerido": "O campo é obrigatório.",
+            "requerido-label": "[obrigatório]",
+            "minlength": "Mínimo de ",
+            "maxlength": "Máximo de ",
+            "character": "Caracter(es).",
+            "pattern": "Conteúdo inválido.",
+            "form_invalido": "Formulário com campos inválidos, verifique ..."
+        },
+        "login": {
+            "logue-com-sua-conta": "Faça login na sua conta",
+            "bem-vindo-a": "Bem vindo a Rosinha Turismo",
+            "entrar": "Entrar",
+            "email": "E-mail",
+            "senha": "Senha",
+            "esqueci-minha-senha": "Esqueceu a senha"
+        },
+        "erros": {
+            "sessao-expirada": "Sua sessão expirou",
+            "processando-requisicao": "Ocorreu um erro ao processar a sua solicitação",
+            "acesso-negado": "Você não tem permissão para executar esta ação",
+            "erro-no-servico": "Erro ao processar serviço remoto. Tente novamente."
+        },
+        "configuracoes": {
+            "link-pagina": "/cadastros/configuracoes/permissoes-de-acesso"
+        },
+        "banco": {
+            "campos": {
+                "codigo" : "Código",
+                "nome": "Nome",
+                "url": "URL",
+                "inativo": "Inativo"
+            },
+            "link-pagina": "/cadastros/base/banco",
+            "titulo": "Banco",
+            "lista": "Lista de Bancos",
+            "acoes": {
+                "adicionar": "Adicionar novo banco",
+                "adicionado": "Banco adicionado com sucesso.",
+                "editar": "Editar Banco",
+                "excluir": "Banco removido com sucesso!",
+                "atualizar": "Banco atualizado com sucesso."
+            }
+        },
+        "permissoes-de-acesso": {
+            "rotulos": {
+                "seguranca": "Segurança",
+                "selecione-uma-classe-despesa": "Selecione uma permissão"
+            },
+            "link-pagina" : "/cadastros/configuracoes/permissoes-de-acesso",
+            "titulo": "Permissões de Acesso",
+            "lista": "Lista das Permissões de Acesso",
+            "acoes": {
+                "adicionar": "Adicionar nova permissão",
+                "editar": "Editar permissão",
+                "deletar_sucesso": "Permissão removida com sucesso!",
+                "adicionar_sucesso": "Permissão adicionada com sucesso.",
+                "atualizar_sucesso": "Permissão atualizada com sucesso."
+            }
+        },
+        "controleKm": {
+            "campos": {
+                "motorista": "Motorista",
+                "itinerario": "Itinerário",
+                "veiculo": "Veículo",
+                "dataHoraSaida": "Saída",
+                "dataHoraChegada": "Chegada",
+                "origem": "Origem",
+                "destino": "Destino",
+                "obs": "Observações",
+                "kmSaida": "Km de Saída",
+                "kmChegada": "Km de Chegada",
+                "kmNaoInformado": "Km não informado",
+                "kmNaoInformado2": "Km ?",
+                "kmTotal": "Total"
+            },
+            "rotulos": {
+                "selecione-um-estado-civil": "Selecione um apontamento",
+                "dataSaidaMaiorQue": "Período",
+                "quilometragem": "Quilometragem",
+                "ate": "Até",
+                "filtro_itinerario": "Filtrar por itinerário (min 3 caracteres)"
+            },
+            "titulo": "Controle de Km",
+            "lista": "Lista dos Apontamentos de Quilometragem",
+            "link-pagina" : "/cadastros/controle-km",
+            "acoes": {
+                "adicionar": "Adicionar novo apontamento",
+                "editar": "Editar apontamento",
+                "deletar_sucesso": "Apontamento removido com sucesso!",
+                "adicionar_sucesso": "Apontamento adicionado com sucesso.",
+                "atualizar_sucesso": "Apontamento atualizado com sucesso."
+            }
+        },
+        "veiculo": {
+            "campos": {
+                "placa": "Placa",
+                "frota": "Frota",
+                "odometroInicial": "Odômetro Inicial"
+            },
+            "rotulos": {
+                "selecione-um-estado-civil": "Selecione um veículo"
+            },
+            "titulo": "Veículo",
+            "lista": "Lista de Veículos",
+            "link-pagina": "/cadastros/base/veiculo",
+            "acoes": {
+                "adicionar": "Adicionar novo veículo",
+                "adicionado": "Veículo adicionado com sucesso.",
+                "editar": "Editar veículo",
+                "excluir": "Veículo removido com sucesso!",
+                "atualizar": "Veículo atualizado com sucesso."
+            }
+        },
+        "itinerario": {
+            "campos": {
+                "codigo": "Código",
+                "nome": "Nome",
+                "descricao": "Descrição",
+                "validoAte": "Válido até",
+                "inativo": "Inativo"
+            },
+            "rotulos": {
+                "selecione-um-estado-civil": "Selecione um itinerário"
+            },
+            "titulo": "Itinerário",
+            "lista": "Lista de Itinerários",
+            "link-pagina": "/cadastros/base/itinerario",
+            "acoes": {
+                "adicionar": "Adicionar novo itinerário",
+                "adicionado": "Itinerário adicionado com sucesso.",
+                "editar": "Editar itinerário",
+                "excluir": "Itinerário removido com sucesso!",
+                "atualizar": "Itinerário atualizado com sucesso."
+            }
+        }
+    }
+}

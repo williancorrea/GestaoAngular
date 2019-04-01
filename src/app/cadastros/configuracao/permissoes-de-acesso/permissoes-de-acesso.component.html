@@ -1,0 +1,90 @@
+<ngx-loading [show]="loading"></ngx-loading>
+<p-progressBar *ngIf="loading" mode="indeterminate" styleClass="wc-progress-bar-indeterminate"></p-progressBar>
+
+<div class="ui-g">
+   <div class="ui-g-12">
+      <div class="card card-w-title">
+         <div>
+
+            <h1 *ngIf="loading === true">{{('commons.loading') | translate}}</h1>
+            <h1 *ngIf="loading === false">{{'app.permissoes-de-acesso.titulo'| translate}}</h1>
+         </div>
+
+         <p-tabView orientation="left">
+
+            <p-tabPanel id="tabPanelPermissaoAcesso"
+                        header="{{'app.permissoes-de-acesso.rotulos.seguranca' | translate}}">
+               <div class="ui-g">
+                  <div class="ui-g-12" ngClass="linha-divisoria-grid">
+                     <div class="ui-g-7"><b>Descrição</b></div>
+                     <div class="ui-g-1" ngClass="centralizar"><b>Listar</b></div>
+                     <div class="ui-g-1" ngClass="centralizar"><b>Salvar</b></div>
+                     <div class="ui-g-1" ngClass="centralizar"><b>Atualizar</b></div>
+                     <div class="ui-g-1" ngClass="centralizar"><b>Excluir</b></div>
+                  </div>
+
+                  <!--BANCO-->
+                  <div class="ui-g-12" ngClass="destacar">
+                     <div class="ui-g-7">{{'app.banco.titulo' | translate}}</div>
+                     <div class="ui-g-1" ngClass="centralizar">
+                        <input type="checkbox" checked="{{ permissoes.get('ROLE_LISTAR_BANCO') ? 'checked' : ''}}" (change)="manipuladorMudanca($event, 'ROLE_LISTAR_BANCO')">
+                     </div>
+                     <div class="ui-g-1" ngClass="centralizar">
+                        <input type="checkbox" checked="{{ permissoes.get('ROLE_SALVAR_BANCO') ? 'checked' : ''}}" (change)="manipuladorMudanca($event, 'ROLE_SALVAR_BANCO')">
+                     </div>
+                     <div class="ui-g-1" ngClass="centralizar">
+                        <input type="checkbox" checked="{{ permissoes.get('ROLE_ATUALIZAR_BANCO') ? 'checked' : ''}}" (change)="manipuladorMudanca($event, 'ROLE_ATUALIZAR_BANCO')">
+                     </div>
+                     <div class="ui-g-1" ngClass="centralizar">
+                        <input type="checkbox" checked="{{ permissoes.get('ROLE_DELETAR_BANCO') ? 'checked' : ''}}" (change)="manipuladorMudanca($event, 'ROLE_DELETAR_BANCO')">
+                     </div>
+                  </div>
+
+                  <!--CLASSE DE DESPESA-->
+                  <!--<div class="ui-g-12" ngClass="destacar">-->
+                     <!--<div class="ui-g-7">{{'app.classe-despesa.titulo' | translate}}</div>-->
+                     <!--<div class="ui-g-1" ngClass="centralizar">-->
+                        <!--<input type="checkbox" checked="{{ permissoes.get('ROLE_ACESSAR_URI_CLASSE-DESPESA') ? 'checked' : ''}}" (change)="manipuladorMudanca($event, 'ROLE_ACESSAR_URI_CLASSE-DESPESA')">-->
+                     <!--</div>-->
+                     <!--<div class="ui-g-1" ngClass="centralizar">-->
+                        <!--<input type="checkbox" checked="{{ permissoes.get('ROLE_LISTAR_CLASSE-DESPESA') ? 'checked' : ''}}" (change)="manipuladorMudanca($event, 'ROLE_LISTAR_CLASSE-DESPESA')">-->
+                     <!--</div>-->
+                     <!--<div class="ui-g-1" ngClass="centralizar">-->
+                        <!--<input type="checkbox" checked="{{ permissoes.get('ROLE_SALVAR_CLASSE-DESPESA') ? 'checked' : ''}}" (change)="manipuladorMudanca($event, 'ROLE_SALVAR_CLASSE-DESPESA')">-->
+                     <!--</div>-->
+                     <!--<div class="ui-g-1" ngClass="centralizar">-->
+                        <!--<input type="checkbox" checked="{{ permissoes.get('ROLE_ATUALIZAR_CLASSE-DESPESA') ? 'checked' : ''}}" (change)="manipuladorMudanca($event, 'ROLE_ATUALIZAR_CLASSE-DESPESA')">-->
+                     <!--</div>-->
+                     <!--<div class="ui-g-1" ngClass="centralizar">-->
+                        <!--<input type="checkbox" checked="{{ permissoes.get('ROLE_DELETAR_CLASSE-DESPESA') ? 'checked' : ''}}" (change)="manipuladorMudanca($event, 'ROLE_DELETAR_CLASSE-DESPESA')">-->
+                     <!--</div>-->
+                  <!--</div>-->
+
+                  <!--<div class="ui-g-12" ngclass="destacar-vid">-->
+                  <!--<div class="ui-g-6">Descricao teste</div>-->
+                  <!--<div class="ui-g-2" ngClass="centralizar">-->
+                  <!--<p-inputSwitch onLabel="Sim" offLabel="Não"></p-inputSwitch>-->
+                  <!--</div>-->
+                  <!--<div class="ui-g-2" ngClass="centralizar">-->
+                  <!--<p-inputSwitch onLabel="Sim" offLabel="Não"></p-inputSwitch>-->
+                  <!--</div>-->
+                  <!--<div class="ui-g-2" ngClass="centralizar">-->
+                  <!--<p-inputSwitch onLabel="Sim" offLabel="Não"></p-inputSwitch>-->
+                  <!--</div>-->
+                  <!--</div>-->
+               </div>
+
+            </p-tabPanel>
+            <p-tabPanel header="Header 3">
+               Content 3
+            </p-tabPanel>
+
+            <p-tabPanel header="Header 1">
+               Content 1
+            </p-tabPanel>
+         </p-tabView>
+
+
+      </div>
+   </div>
+</div>
