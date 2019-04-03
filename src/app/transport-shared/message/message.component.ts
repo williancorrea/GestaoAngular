@@ -1,5 +1,5 @@
 import {FormControl} from '@angular/forms';
-import {Component, Input} from '@angular/core';
+import {AfterContentChecked, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, Input} from '@angular/core';
 
 @Component({
     selector: 'app-message',
@@ -32,15 +32,17 @@ import {Component, Input} from '@angular/core';
     `]
 })
 
-export class MessageComponent {
+export class MessageComponent implements AfterViewChecked, AfterContentChecked, AfterViewInit {
 
     @Input() control: FormControl;
     @Input() form: any;
     @Input() label: string;
 
+    constructor(private cdr: ChangeDetectorRef) {
+    }
+
     temErro(): boolean {
         // return this.control.errors !== null && this.control.enabled && (this.form.submitted || (this.control.updateOn !== 'blur') || this.control.dirty || this.control.touched);
-
 
 
         if ((this.control.invalid && this.control.enabled && (this.control.dirty || this.control.touched)) || this.form.submitted) {
@@ -50,5 +52,17 @@ export class MessageComponent {
 
         // return this.control.invalid && this.control.enabled && (this.control.dirty || this.form.submitted);
         return this.control.invalid && this.control.enabled && (this.control.dirty || this.control.touched || this.form.submitted);
+    }
+
+    ngAfterViewInit(): void {
+        this.cdr.detectChanges();
+    }
+
+    ngAfterViewChecked(): void {
+        // this.cdr.detectChanges();
+    }
+
+    ngAfterContentChecked(): void {
+        // this.cdr.detectChanges();
     }
 }
