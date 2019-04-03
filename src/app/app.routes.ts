@@ -27,6 +27,8 @@ import {VeiculoPesquisaComponent} from './cadastros/base/veiculo/veiculo-pesquis
 import {VeiculoNovoComponent} from './cadastros/base/veiculo/veiculo-novo/veiculo-novo.component';
 import {ItinerarioPesquisaComponent} from './cadastros/base/itinerario/itinerario-pesquisa/itinerario-pesquisa.component';
 import {ItinerarioNovoComponent} from './cadastros/base/itinerario/itinerario-novo/itinerario-novo.component';
+import {CombustivelPesquisaComponent} from './cadastros/base/combustivel/combustivel-pesquisa/combustivel-pesquisa.component';
+import {CombustivelNovoComponent} from './cadastros/base/combustivel/combustivel-novo/combustivel-novo.component';
 
 export const routes: Routes = [
     {path: 'sample', component: SampleDemoComponent},
@@ -62,6 +64,10 @@ export const routes: Routes = [
     {path: 'cadastros/base/itinerario', component: ItinerarioPesquisaComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_LISTAR_ITINERARIO']}},
     {path: 'cadastros/base/itinerario/novo', component: ItinerarioNovoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_SALVAR_ITINERARIO']}},
     {path: 'cadastros/base/itinerario/:key', component: ItinerarioNovoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_ATUALIZAR_ITINERARIO']}},
+
+    {path: 'cadastros/base/combustivel', component: CombustivelPesquisaComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_LISTAR_COMBUSTIVEL']}},
+    {path: 'cadastros/base/combustivel/novo', component: CombustivelNovoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_SALVAR_COMBUSTIVEL']}},
+    {path: 'cadastros/base/combustivel/:key', component: CombustivelNovoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_ATUALIZAR_COMBUSTIVEL']}},
 
 
     // {path: 'product-units', component: ProductUnitSearchComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_LIST_PRODUCT-UNIT']}},
