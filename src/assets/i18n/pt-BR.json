@@ -200,6 +200,22 @@
                 "excluir": "Itinerário removido com sucesso!",
                 "atualizar": "Itinerário atualizado com sucesso."
             }
+        },
+        "combustivel": {
+            "campos": {
+                "nome": "Nome",
+                "inativo": "Inativo"
+            },
+            "link-pagina": "/cadastros/base/combustivel",
+            "titulo": "Combustível",
+            "lista": "Lista de combustíveis",
+            "acoes": {
+                "adicionar": "Adicionar novo combustivel",
+                "adicionado": "Combustivel adicionado com sucesso.",
+                "editar": "Editar combustível",
+                "excluir": "Combustível removido com sucesso!",
+                "atualizar": "Combustível atualizado com sucesso."
+            }
         }
     }
 }

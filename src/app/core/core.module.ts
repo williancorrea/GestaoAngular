@@ -28,6 +28,7 @@ import {ProductUnitService} from '../cadastros/base/product-unit/product-unit.se
 import {TipoPagamentoService} from '../cadastros/base/tipo-pagamento/tipo-pagamento.service';
 import {TypeRelationshipService} from '../cadastros/base/type-relationship/type-relationship.service';
 import {VeiculoService} from '../cadastros/base/veiculo/veiculo.service';
+import {CombustivelService} from '../cadastros/base/combustivel/combustivel.service';
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import {VeiculoService} from '../cadastros/base/veiculo/veiculo.service';
         TypeRelationshipService,
         VeiculoService,
         ControleKmService,
+        CombustivelService
     ]
 })
 export class CoreModule {

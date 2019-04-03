@@ -1,25 +1,21 @@
 import {Injectable} from '@angular/core';
-import {AuthHttp} from 'angular2-jwt';
 import {environment} from '../../../../environments/environment';
-import {TypeRelationshipFilters} from './typeRelationshipFilters';
+import {AuthHttp} from 'angular2-jwt';
+import {CombustivelFiltro} from './combustivelFiltro';
 
 @Injectable()
-export class TypeRelationshipService {
+export class CombustivelService {
 
    apiUrl: string;
 
    constructor(private http: AuthHttp) {
-      this.apiUrl = `${environment.apiUrl}/types-of-relationships`;
+      this.apiUrl = `${environment.apiUrl}/combustivel`;
    }
 
    /**
-    * List all records according to the filters passed by parameters
-    *
-    * @param filter
-    * @param {CombustivelFiltro} typeRelationshipFilters
-    * @returns {Promise<any>}
+    * Lista todos registro de acordo com os filtros passados por parametro
     */
-   findAll(grid: any, typeRelationshipFilters: TypeRelationshipFilters): Promise<any> {
+   findAll(grid: any, filtro: CombustivelFiltro): Promise<any> {
       /*
          in a real application, make a remote request to load data using state metadata from event
          event.first = First row offset
@@ -39,16 +35,8 @@ export class TypeRelationshipService {
       if (grid.globalFilter && grid.globalFilter.length > 0) {
          config.params['filtroGlobal'] = grid.globalFilter;
       }
-
-
-      if (typeRelationshipFilters.code && typeRelationshipFilters.code.length > 0) {
-         config.params['code'] = typeRelationshipFilters.code;
-      }
-      if (typeRelationshipFilters.name && typeRelationshipFilters.name.length > 0) {
-         config.params['name'] = typeRelationshipFilters.name;
-      }
-      if (typeRelationshipFilters.description && typeRelationshipFilters.description.length > 0) {
-         config.params['description'] = typeRelationshipFilters.description;
+      if (filtro.nome && filtro.nome.length > 0) {
+         config.params['nome'] = filtro.nome;
       }
 
       return this.http.get(`${this.apiUrl}`, config)
@@ -59,10 +47,7 @@ export class TypeRelationshipService {
    }
 
    /**
-    * Search for the record according to the key passed by parameter
-    *
-    * @param key
-    * @returns {Promise<any>}
+    * Busca por um registro especifico de acordo com a Key passada por paramentro
     */
    findOne(key): Promise<any> {
       return this.http.get(`${this.apiUrl}/${key}`)
@@ -73,10 +58,7 @@ export class TypeRelationshipService {
    }
 
    /**
-    * Delete the record according to the key passed by parameter
-    *
-    * @param {String} key
-    * @returns {Promise<any>}
+    * Exclui um registro de acordo com a Key passafa por parametro
     */
    delete(key: String): Promise<any> {
       return this.http.delete(`${this.apiUrl}/${key}`)
@@ -85,14 +67,12 @@ export class TypeRelationshipService {
    }
 
    /**
-    * Save the record
-    *
-    * @returns {Promise<any>}
+    * Salva um registro
     */
-   save(obj): Promise<any> {
+   save(obj: any): Promise<any> {
       const clone = JSON.parse(JSON.stringify(obj));
       delete clone['key'];
-      delete clone['properties'];
+      delete clone['controle'];
 
       return this.http.post(this.apiUrl,
          JSON.stringify(clone))
@@ -103,17 +83,14 @@ export class TypeRelationshipService {
    }
 
    /**
-    * Updates the registry
-    *
-    * @param  obj
-    * @returns {Promise<any>}
+    * Atualiza o registro
     */
-   update(obj): Promise<any> {
+   update(obj: any): Promise<any> {
       const key = obj.key;
 
       const clone = JSON.parse(JSON.stringify(obj));
       delete clone['key'];
-      delete clone['properties'];
+      delete clone['controle'];
 
       return this.http.put(`${this.apiUrl}/${key}`,
          JSON.stringify(clone))
