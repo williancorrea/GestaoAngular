@@ -216,6 +216,22 @@
                 "excluir": "Combustível removido com sucesso!",
                 "atualizar": "Combustível atualizado com sucesso."
             }
+        },
+        "tanque-combustivel": {
+            "campos": {
+                "nome": "Nome",
+                "inativo": "Inativo"
+            },
+            "link-pagina": "/cadastros/base/tanque-combustivel",
+            "titulo": "Tanque de Combustível",
+            "lista": "Lista de Tanques de combustíveis",
+            "acoes": {
+                "adicionar": "Adicionar novo tanque de combustivel",
+                "adicionado": "Tanque de combustivel adicionado com sucesso.",
+                "editar": "Editar tanque de combustível",
+                "excluir": "Tanque de combustível removido com sucesso!",
+                "atualizar": "Tanque de combustível atualizado com sucesso."
+            }
         }
     }
 }

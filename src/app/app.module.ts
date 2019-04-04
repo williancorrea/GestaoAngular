@@ -110,6 +110,7 @@ import {ControleKmModule} from './cadastros/controle-km/controle-km.module';
 import {VeiculoModule} from './cadastros/base/veiculo/veiculo.module';
 import {ItinerarioModule} from './cadastros/base/itinerario/itinerario.module';
 import {CombustivelModule} from './cadastros/base/combustivel/combustivel.module';
+import {TanqueCombustivelModule} from './cadastros/base/tanque-combustivel/tanque-combustivel.module';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -225,7 +226,8 @@ export function createTranslateLoader(http: HttpClient) {
         ControleKmModule,
         VeiculoModule,
         ItinerarioModule,
-        CombustivelModule
+        CombustivelModule,
+        TanqueCombustivelModule
     ],
     declarations: [
         AppComponent,

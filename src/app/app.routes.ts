@@ -29,6 +29,8 @@ import {ItinerarioPesquisaComponent} from './cadastros/base/itinerario/itinerari
 import {ItinerarioNovoComponent} from './cadastros/base/itinerario/itinerario-novo/itinerario-novo.component';
 import {CombustivelPesquisaComponent} from './cadastros/base/combustivel/combustivel-pesquisa/combustivel-pesquisa.component';
 import {CombustivelNovoComponent} from './cadastros/base/combustivel/combustivel-novo/combustivel-novo.component';
+import {TanqueCombustivelPesquisaComponent} from './cadastros/base/tanque-combustivel/tanque-combustivel-pesquisa/tanque-combustivel-pesquisa.component';
+import {TanqueCombustivelNovoComponent} from './cadastros/base/tanque-combustivel/tanque-combustivel-novo/tanque-combustivel-novo.component';
 
 export const routes: Routes = [
     {path: 'sample', component: SampleDemoComponent},
@@ -68,6 +70,10 @@ export const routes: Routes = [
     {path: 'cadastros/base/combustivel', component: CombustivelPesquisaComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_LISTAR_COMBUSTIVEL']}},
     {path: 'cadastros/base/combustivel/novo', component: CombustivelNovoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_SALVAR_COMBUSTIVEL']}},
     {path: 'cadastros/base/combustivel/:key', component: CombustivelNovoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_ATUALIZAR_COMBUSTIVEL']}},
+
+    {path: 'cadastros/base/tanque-combustivel', component: TanqueCombustivelPesquisaComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_LISTAR_TANQUE-COMBUSTIVEL']}},
+    {path: 'cadastros/base/tanque-combustivel/novo', component: TanqueCombustivelNovoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_SALVAR_TANQUE-COMBUSTIVEL']}},
+    {path: 'cadastros/base/tanque-combustivel/:key', component: TanqueCombustivelNovoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_ATUALIZAR_TANQUE-COMBUSTIVEL']}},
 
 
     // {path: 'product-units', component: ProductUnitSearchComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_LIST_PRODUCT-UNIT']}},

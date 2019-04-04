@@ -37,11 +37,13 @@ export class LevelOfEducationService {
         }
 
 
-        if (levelOfEducationFilters.name && levelOfEducationFilters.name.length > 0) {
-            config.params['name'] = levelOfEducationFilters.name;
-        }
-        if (levelOfEducationFilters.description && levelOfEducationFilters.description.length > 0) {
-            config.params['description'] = levelOfEducationFilters.description;
+        if (levelOfEducationFilters) {
+            if (levelOfEducationFilters.name && levelOfEducationFilters.name.length > 0) {
+                config.params['name'] = levelOfEducationFilters.name;
+            }
+            if (levelOfEducationFilters.description && levelOfEducationFilters.description.length > 0) {
+                config.params['description'] = levelOfEducationFilters.description;
+            }
         }
 
         return this.http.get(`${this.apiUrl}`, config)

@@ -36,12 +36,13 @@ export class ProductUnitService {
             config.params['filtroGlobal'] = grid.globalFilter;
         }
 
-
-        if (productUnitFilters.name && productUnitFilters.name.length > 0) {
-            config.params['name'] = productUnitFilters.name;
-        }
-        if (productUnitFilters.initials && productUnitFilters.initials.length > 0) {
-            config.params['initials'] = productUnitFilters.initials;
+        if (productUnitFilters) {
+            if (productUnitFilters.name && productUnitFilters.name.length > 0) {
+                config.params['name'] = productUnitFilters.name;
+            }
+            if (productUnitFilters.initials && productUnitFilters.initials.length > 0) {
+                config.params['initials'] = productUnitFilters.initials;
+            }
         }
 
         return this.http.get(`${this.apiUrl}`, config)
