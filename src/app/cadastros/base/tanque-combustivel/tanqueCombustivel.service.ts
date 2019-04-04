@@ -1,21 +1,21 @@
 import {Injectable} from '@angular/core';
-import {AuthHttp} from 'angular2-jwt';
 import {environment} from '../../../../environments/environment';
-import {ClasseDespesaFiltro} from './ClasseDespesaFiltro';
+import {AuthHttp} from 'angular2-jwt';
+import {TanqueCombustivelFiltro} from './tanqueCombustivelFiltro';
 
 @Injectable()
-export class ClasseDespesaService {
+export class TanqueCombustivelService {
 
     apiUrl: string;
 
     constructor(private http: AuthHttp) {
-        this.apiUrl = `${environment.apiUrl}/classes_despesas`;
+        this.apiUrl = `${environment.apiUrl}/tanque-combustivel`;
     }
 
     /**
-     * List all records according to the filters passed by parameter
+     * Lista todos registro de acordo com os filtros passados por parametro
      */
-    findAll(grid: any, classeDespesaFiltro: ClasseDespesaFiltro): Promise<any> {
+    findAll(grid: any, filtro: TanqueCombustivelFiltro): Promise<any> {
         /*
            in a real application, make a remote request to load data using state metadata from event
            event.first = First row offset
@@ -36,9 +36,9 @@ export class ClasseDespesaService {
             config.params['filtroGlobal'] = grid.globalFilter;
         }
 
-        if (classeDespesaFiltro) {
-            if (classeDespesaFiltro.descricao && classeDespesaFiltro.descricao.length > 0) {
-                config.params['descricao'] = classeDespesaFiltro.descricao;
+        if (filtro) {
+            if (filtro.nome && filtro.nome.length > 0) {
+                config.params['nome'] = filtro.nome;
             }
         }
 
@@ -50,7 +50,7 @@ export class ClasseDespesaService {
     }
 
     /**
-     * Search for the record according to the key passed by parameter
+     * Busca por um registro especifico de acordo com a Key passada por paramentro
      */
     findOne(key): Promise<any> {
         return this.http.get(`${this.apiUrl}/${key}`)
@@ -61,7 +61,7 @@ export class ClasseDespesaService {
     }
 
     /**
-     * Delete the record according to the key passed by parameter
+     * Exclui um registro de acordo com a Key passafa por parametro
      */
     delete(key: String): Promise<any> {
         return this.http.delete(`${this.apiUrl}/${key}`)
@@ -70,10 +70,10 @@ export class ClasseDespesaService {
     }
 
     /**
-     * Save the record
+     * Salva um registro
      */
-    save(classeDespesa: any): Promise<any> {
-        const clone = JSON.parse(JSON.stringify(classeDespesa));
+    save(obj: any): Promise<any> {
+        const clone = JSON.parse(JSON.stringify(obj));
         delete clone['key'];
         delete clone['controle'];
 
@@ -86,12 +86,12 @@ export class ClasseDespesaService {
     }
 
     /**
-     * Updates
+     * Atualiza o registro
      */
-    update(classeDespesa: any): Promise<any> {
-        const key = classeDespesa.key;
+    update(obj: any): Promise<any> {
+        const key = obj.key;
 
-        const clone = JSON.parse(JSON.stringify(classeDespesa));
+        const clone = JSON.parse(JSON.stringify(obj));
         delete clone['key'];
         delete clone['controle'];
 

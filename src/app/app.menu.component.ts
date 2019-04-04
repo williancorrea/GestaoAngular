@@ -41,6 +41,7 @@ export class AppMenuComponent implements OnInit {
                         // {label:  m['menu']['persons'], icon: 'fa fa-fw fa-address-book-o', routerLink: ['/persons'], visible: this.auth.hasPermission('ROLE_LIST_PERSON')},
                         {label:  m['itinerario']['titulo'], icon: 'fa fa-fw fa-truck', routerLink: [this.traduzir['itinerario']['link-pagina']], visible: this.auth.hasPermission('ROLE_LISTAR_ITINERARIO')},
                         {label:  m['combustivel']['titulo'], icon: 'fa fa-fw fa-thermometer-full', routerLink: [this.traduzir['combustivel']['link-pagina']], visible: this.auth.hasPermission('ROLE_LISTAR_COMBUSTIVEL')},
+                        {label:  m['tanque-combustivel']['titulo'], icon: 'fa fa-fw fa-circle-o-notch', routerLink: [this.traduzir['tanque-combustivel']['link-pagina']], visible: this.auth.hasPermission('ROLE_LISTAR_TANQUE-COMBUSTIVEL')},
                         // {label:  m['classe-despesa']['menu'], icon: 'fa fa-fw fa-list', routerLink: [m['classe-despesa']['link-pagina']], visible: this.auth.hasPermission('ROLE_LISTAR_CLASSE-DESPESA')},
                         // {label:  m['menu']['centro-de-custo'], icon: 'fa fa-fw fa-list', routerLink: ['/centroDeCusto'], visible: this.auth.hasPermission('ROLE_LISTAR_CENTRO-DE-CUSTO')},
                         // {label:  m['menu']['tipo-pagamento'], icon: 'fa fa-fw fa-money', routerLink: ['/tipoPagamento'], visible: this.auth.hasPermission('ROLE_LISTAR_TIPO-PAGAMENTO')}

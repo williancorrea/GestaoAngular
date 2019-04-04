@@ -37,8 +37,10 @@ export class TipoPagamentoService {
         }
 
 
-        if (tipoPagamentoFiltro && tipoPagamentoFiltro.descricao && tipoPagamentoFiltro.descricao.length > 0) {
-            config.params['descricao'] = tipoPagamentoFiltro.descricao;
+        if (tipoPagamentoFiltro) {
+            if (tipoPagamentoFiltro.descricao && tipoPagamentoFiltro.descricao.length > 0) {
+                config.params['descricao'] = tipoPagamentoFiltro.descricao;
+            }
         }
 
         return this.http.get(`${this.apiUrl}`, config)

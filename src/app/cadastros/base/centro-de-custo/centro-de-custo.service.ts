@@ -36,8 +36,10 @@ export class CentroDeCustoService {
             config.params['filtroGlobal'] = grid.globalFilter;
         }
 
-        if (centroDeCustoFiltro && centroDeCustoFiltro.descricao && centroDeCustoFiltro.descricao.length > 0) {
-            config.params['descricao'] = centroDeCustoFiltro.descricao;
+        if (centroDeCustoFiltro) {
+            if (centroDeCustoFiltro.descricao && centroDeCustoFiltro.descricao.length > 0) {
+                config.params['descricao'] = centroDeCustoFiltro.descricao;
+            }
         }
 
         return this.http.get(`${this.apiUrl}`, config)
