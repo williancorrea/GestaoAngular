@@ -66,7 +66,6 @@ export class TanqueCombustivelNovoComponent extends BaseFormComponent implements
     carregarCombustivel() {
         this.combustivelService.findAll({'rows': 1000, 'first': 0, 'sortOrder': 1, 'sortField': 'nome'}, null)
             .then(lista => {
-                console.log(lista);
                 this.combustivelList = lista.content.map(p => ({
                     label: p.nome,
                     value: p.key
@@ -87,7 +86,10 @@ export class TanqueCombustivelNovoComponent extends BaseFormComponent implements
                     Validators.maxLength(150)
                 ]
             ],
-            quantidadeLts: [0.0],
+            quantidadeLts: [0, [
+                Validators.required,
+                Validators.min(0)
+            ]],
             combustivel: this.formBuild.group({
                 key: [null, Validators.required]
             }),
@@ -96,30 +98,31 @@ export class TanqueCombustivelNovoComponent extends BaseFormComponent implements
     }
 
     save() {
-        if (this.form.valid) {
-            this.mostrarModalCarregando(true);
-            if (this.form.get('key').value) {
-                this.tanqueCombustivelService.update(this.form.value).then(response => {
-                    this.toasty.add({severity: 'success', detail: this.traduzir['tanque-combustivel']['acoes']['atualizar']});
-                    this.mostrarModalCarregando(false);
-                    this.router.navigateByUrl(this.traduzir['tanque-combustivel']['link-pagina']);
-                }).catch(error => {
-                    this.errorHandler.handle(error);
-                    this.mostrarModalCarregando(false);
-                });
-            } else {
-                this.tanqueCombustivelService.save(this.form.value).then(response => {
-
-                    this.toasty.add({severity: 'success', detail: this.traduzir['tanque-combustivel']['acoes']['adicionado']});
-                    this.mostrarModalCarregando(false);
-                    this.router.navigateByUrl(this.traduzir['tanque-combustivel']['link-pagina']);
-                }).catch(erro => {
-                    this.errorHandler.handle(erro);
-                    this.mostrarModalCarregando(false);
-                });
-            }
-        } else {
+        if (this.form.invalid) {
             this.toasty.add({severity: 'warn', detail: this.traduzir['validacao']['form_invalido']});
+            return;
+        }
+
+        this.mostrarModalCarregando(true);
+        if (this.form.get('key').value) {
+            this.tanqueCombustivelService.update(this.form.value).then(response => {
+                this.toasty.add({severity: 'success', detail: this.traduzir['tanque-combustivel']['acoes']['atualizar']});
+                this.mostrarModalCarregando(false);
+                this.router.navigateByUrl(this.traduzir['tanque-combustivel']['link-pagina']);
+            }).catch(error => {
+                this.errorHandler.handle(error);
+                this.mostrarModalCarregando(false);
+            });
+        } else {
+            this.tanqueCombustivelService.save(this.form.value).then(response => {
+
+                this.toasty.add({severity: 'success', detail: this.traduzir['tanque-combustivel']['acoes']['adicionado']});
+                this.mostrarModalCarregando(false);
+                this.router.navigateByUrl(this.traduzir['tanque-combustivel']['link-pagina']);
+            }).catch(erro => {
+                this.errorHandler.handle(erro);
+                this.mostrarModalCarregando(false);
+            });
         }
     }
 

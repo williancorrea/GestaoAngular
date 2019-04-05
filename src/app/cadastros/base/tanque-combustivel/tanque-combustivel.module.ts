@@ -5,7 +5,7 @@ import {TanqueCombustivelNovoComponent} from './tanque-combustivel-novo/tanque-c
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import {MessageModule} from 'primeng/message';
-import {CheckboxModule, DataTableModule, DropdownModule, InputTextModule, ProgressBarModule, TooltipModule} from 'primeng/primeng';
+import {CheckboxModule, DataTableModule, DropdownModule, InputTextModule, KeyFilterModule, ProgressBarModule, TooltipModule} from 'primeng/primeng';
 import {SharedModule} from 'primeng/shared';
 import {PanelModule} from 'primeng/panel';
 import {TransportSharedModule} from '../../../transport-shared/transport-share.module';
@@ -60,7 +60,8 @@ import {RouterModule} from '@angular/router';
         TooltipModule,
         ProgressBarModule,
         CheckboxModule,
-        DropdownModule
+        DropdownModule,
+        KeyFilterModule
 
     ],
     declarations: [

@@ -2,69 +2,79 @@
 <p-progressBar *ngIf="loading" mode="indeterminate" styleClass="wc-progress-bar-indeterminate"></p-progressBar>
 
 <div class="ui-g">
-   <div class="ui-g-12">
-      <div class="card card-w-title">
-         <div>
+    <div class="ui-g-12">
+        <div class="card card-w-title">
+            <div>
 
-            <h1 *ngIf="loading === true">{{('app.comum.carregando') | translate}}</h1>
-            <h1 *ngIf="loading === false">{{(form.get('key')?.value?.length > 0 ? 'app.tanque-combustivel.acoes.editar' : 'app.tanque-combustivel.acoes.adicionar') |
-               translate}}</h1>
-         </div>
-
-         <form #f="ngForm" novalidate (submit)="save()" autocomplete="off" [formGroup]="form">
-
-            <div class="ui-g">
-               <input pInputText
-                      type="text"
-                      [hidden]="true"
-                      name="key"
-                      formControlName="key">
-
-               <div class="ui-sm-12 ui-g-6 ui-fluid">
-                  <label for="nome" class="required">{{'app.tanque-combustivel.campos.nome' | translate}}</label>
-                  <input pInputText
-                         id="nome"
-                         type="text"
-                         formControlName="nome">
-                  <app-message [form]="f" [control]="form.get('nome')"></app-message>
-               </div>
-
-                <!-- CLASSE -->
-                <div class="ui-sm-12 ui-g-6 ui-fluid" formGroupName="combustivel">
-                    <label class="required">{{'app.combustivel.titulo'| translate}}</label>
-                    <p-dropdown emptyFilterMessage="{{'app.acoes.nenhum-registro-encontrado' | translate }}"
-                                [options]="combustivelList"
-                                formControlName="key"
-                                [showClear]="true"
-                                [filter]="true" [autoWidth]="false"
-                                placeholder="{{'app.acoes.selecione2' | translate}}">
-                    </p-dropdown>
-                    <app-message [form]="f" [control]="form.get('combustivel').get('key')"></app-message>
-                </div>
-
-               <div class="ui-sm-12 ui-g-6 ui-fluid">
-                  <p-checkbox id="chkInativo" [formControl]="form.controls['inativo']"
-                              binary="true"
-                              label="{{'app.tanque-combustivel.campos.inativo' | translate}}"></p-checkbox>
-               </div>
-
-               <div class="ui-sm-12 ui-g-12">
-                  <button pButton type="button"
-                          label="{{'app.acoes.cancelar' | translate}}"
-                          class="ui-button-danger"
-                          tooltipPosition="top" pTooltip="{{'app.acoes.tooltip.cancelar' | translate}}"
-                          (click)="cancel()"></button>
-                  <button pButton type="submit"
-                          *ngIf="form.get('key').value ? auth.hasPermission('ROLE_ATUALIZAR_TANQUE-COMBUSTIVEL') : auth.hasPermission('ROLE_SALVAR_TANQUE-COMBUSTIVEL')"
-                          label="{{(form.get('key').value ? 'app.acoes.atualizar' : 'app.acoes.salvar') | translate}}"
-                          tooltipPosition="top" pTooltip="{{'app.acoes.tooltip.salvar' | translate}}"
-                          class="ui-button-success"></button>
-               </div>
-
+                <h1 *ngIf="loading === true">{{('app.comum.carregando') | translate}}</h1>
+                <h1 *ngIf="loading === false">{{(form.get('key')?.value?.length > 0 ? 'app.tanque-combustivel.acoes.editar' : 'app.tanque-combustivel.acoes.adicionar') |
+                    translate}}</h1>
             </div>
 
-         </form>
+            <form #f="ngForm" novalidate (submit)="save()" autocomplete="off" [formGroup]="form">
 
-      </div>
-   </div>
+                <div class="ui-g">
+                    <input pInputText
+                           type="text"
+                           [hidden]="true"
+                           name="key"
+                           formControlName="key">
+
+                    <div class="ui-sm-12 ui-g-6 ui-fluid">
+                        <label for="nome" class="required">{{'app.tanque-combustivel.campos.nome' | translate}}</label>
+                        <input pInputText
+                               id="nome"
+                               type="text"
+                               formControlName="nome">
+                        <app-message [form]="f" [control]="form.get('nome')"></app-message>
+                    </div>
+
+                    <!-- CLASSE -->
+                    <div class="ui-sm-12 ui-g-6 ui-fluid" formGroupName="combustivel">
+                        <label class="required">{{'app.combustivel.titulo'| translate}}</label>
+                        <p-dropdown emptyFilterMessage="{{'app.acoes.nenhum-registro-encontrado' | translate }}"
+                                    [options]="combustivelList"
+                                    formControlName="key"
+                                    [showClear]="true"
+                                    [filter]="true" [autoWidth]="false"
+                                    placeholder="{{'app.acoes.selecione2' | translate}}">
+                        </p-dropdown>
+                        <app-message [form]="f" [control]="form.get('combustivel').get('key')"></app-message>
+                    </div>
+
+                    <div class="ui-sm-3 ui-g-3 ui-fluid">
+                        <label for="quantidadeLts" class="required">{{'app.tanque-combustivel.campos.quantidadeLts' | translate}}</label>
+                        <input pInputText
+                               pKeyFilter="pint"
+                               id="quantidadeLts"
+                               type="number"
+                               formControlName="quantidadeLts" class="num">
+                        <app-message [form]="f" [control]="form.get('quantidadeLts')"></app-message>
+                    </div>
+
+                    <div class="ui-sm-12 ui-g-12 ui-fluid">
+                        <p-checkbox id="chkInativo" [formControl]="form.controls['inativo']"
+                                    binary="true"
+                                    label="{{'app.tanque-combustivel.campos.inativo' | translate}}"></p-checkbox>
+                    </div>
+
+                    <div class="ui-sm-12 ui-g-12">
+                        <button pButton type="button"
+                                label="{{'app.acoes.cancelar' | translate}}"
+                                class="ui-button-danger"
+                                tooltipPosition="top" pTooltip="{{'app.acoes.tooltip.cancelar' | translate}}"
+                                (click)="cancel()"></button>
+                        <button pButton type="submit"
+                                *ngIf="form.get('key').value ? auth.hasPermission('ROLE_ATUALIZAR_TANQUE-COMBUSTIVEL') : auth.hasPermission('ROLE_SALVAR_TANQUE-COMBUSTIVEL')"
+                                label="{{(form.get('key').value ? 'app.acoes.atualizar' : 'app.acoes.salvar') | translate}}"
+                                tooltipPosition="top" pTooltip="{{'app.acoes.tooltip.salvar' | translate}}"
+                                class="ui-button-success"></button>
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
 </div>

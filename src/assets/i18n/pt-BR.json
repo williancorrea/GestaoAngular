@@ -69,7 +69,9 @@
             "requerido": "O campo é obrigatório.",
             "requerido-label": "[obrigatório]",
             "minlength": "Mínimo de ",
-            "maxlength": "Máximo de ",
+            "min": "Valor mínimo de deve ser maior ou igual a ",
+            "maxlength": "Valor máximo deve ser menor igual a ",
+            "max": "Máximo de ",
             "character": "Caracter(es).",
             "pattern": "Conteúdo inválido.",
             "form_invalido": "Formulário com campos inválidos, verifique ..."
@@ -93,7 +95,7 @@
         },
         "banco": {
             "campos": {
-                "codigo" : "Código",
+                "codigo": "Código",
                 "nome": "Nome",
                 "url": "URL",
                 "inativo": "Inativo"
@@ -114,7 +116,7 @@
                 "seguranca": "Segurança",
                 "selecione-uma-classe-despesa": "Selecione uma permissão"
             },
-            "link-pagina" : "/cadastros/configuracoes/permissoes-de-acesso",
+            "link-pagina": "/cadastros/configuracoes/permissoes-de-acesso",
             "titulo": "Permissões de Acesso",
             "lista": "Lista das Permissões de Acesso",
             "acoes": {
@@ -150,7 +152,7 @@
             },
             "titulo": "Controle de Km",
             "lista": "Lista dos Apontamentos de Quilometragem",
-            "link-pagina" : "/cadastros/controle-km",
+            "link-pagina": "/cadastros/controle-km",
             "acoes": {
                 "adicionar": "Adicionar novo apontamento",
                 "editar": "Editar apontamento",
@@ -220,7 +222,11 @@
         "tanque-combustivel": {
             "campos": {
                 "nome": "Nome",
-                "inativo": "Inativo"
+                "inativo": "Inativo",
+                "quantidadeLts": "Capacidade Lts"
+            },
+            "rotulos": {
+                "menu": "Tanque Com."
             },
             "link-pagina": "/cadastros/base/tanque-combustivel",
             "titulo": "Tanque de Combustível",

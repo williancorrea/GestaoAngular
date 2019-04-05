@@ -11,6 +11,9 @@ import {AfterContentChecked, AfterViewChecked, AfterViewInit, ChangeDetectorRef,
             <p *ngIf="control.hasError('maxlength')">{{'app.validacao.maxlength' | translate}}
                 {{control.errors['maxlength']['requiredLength']}} {{'app.validacao.character' | translate}}</p>
             <p *ngIf="control.hasError('pattern')">{{'app.validacao.pattern' | translate}}</p>
+
+            <p *ngIf="control.hasError('min')">{{'app.validacao.min' | translate}} {{control.errors['min']['min']}}</p>
+            <p *ngIf="control.hasError('max')">{{'app.validacao.max' | translate}} {{control.errors['max']['max']}}</p>
         </div>
     `,
     styles: [`
@@ -42,15 +45,14 @@ export class MessageComponent implements AfterViewChecked, AfterContentChecked, 
     }
 
     temErro(): boolean {
-        // return this.control.errors !== null && this.control.enabled && (this.form.submitted || (this.control.updateOn !== 'blur') || this.control.dirty || this.control.touched);
-
-
         if ((this.control.invalid && this.control.enabled && (this.control.dirty || this.control.touched)) || this.form.submitted) {
             this.control.markAsDirty();
             this.control.markAsTouched();
+            this.control.updateValueAndValidity();
         }
 
-        // return this.control.invalid && this.control.enabled && (this.control.dirty || this.form.submitted);
+        // console.log(this.control.errors);
+
         return this.control.invalid && this.control.enabled && (this.control.dirty || this.control.touched || this.form.submitted);
     }
 
@@ -59,10 +61,10 @@ export class MessageComponent implements AfterViewChecked, AfterContentChecked, 
     }
 
     ngAfterViewChecked(): void {
-        // this.cdr.detectChanges();
+        this.cdr.detectChanges();
     }
 
     ngAfterContentChecked(): void {
-        // this.cdr.detectChanges();
+        this.cdr.detectChanges();
     }
 }

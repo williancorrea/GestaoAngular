@@ -76,7 +76,13 @@ export class TanqueCombustivelPesquisaComponent implements OnInit {
                     header: this.traduzir['tanque-combustivel']['campos']['inativo'],
                     hidden: false,
                     class: 'datatable-coluna-campo-codigo'
-                }
+                },
+                {
+                    field: 'quantidadeLts',
+                    header: this.traduzir['tanque-combustivel']['campos']['quantidadeLts'],
+                    hidden: false,
+                    class: 'datatable-coluna-campo-codigo'
+                },
             ];
         });
     }

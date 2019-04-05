@@ -74,30 +74,31 @@ export class BancoNovoComponent extends BaseFormComponent implements OnInit {
     }
 
     save() {
-        if (this.form.valid) {
-            this.mostrarModalCarregando(true);
-            if (this.form.get('key').value) {
-                this.bankService.update(this.form.value).then(response => {
-                    this.toasty.add({severity: 'success', detail: this.traduzir['banco']['acoes']['atualizar']});
-                    this.mostrarModalCarregando(false);
-                    this.router.navigateByUrl(this.traduzir['banco']['link-pagina']);
-                }).catch(error => {
-                    this.errorHandler.handle(error);
-                    this.mostrarModalCarregando(false);
-                });
-            } else {
-                this.bankService.save(this.form.value).then(response => {
-
-                    this.toasty.add({severity: 'success', detail: this.traduzir['banco']['acoes']['adicionado']});
-                    this.mostrarModalCarregando(false);
-                    this.router.navigateByUrl(this.traduzir['banco']['link-pagina']);
-                }).catch(erro => {
-                    this.errorHandler.handle(erro);
-                    this.mostrarModalCarregando(false);
-                });
-            }
-        } else {
+        if (this.form.invalid) {
             this.toasty.add({severity: 'warn', detail: this.traduzir['validacao']['form_invalido']});
+            return;
+        }
+
+        this.mostrarModalCarregando(true);
+        if (this.form.get('key').value) {
+            this.bankService.update(this.form.value).then(response => {
+                this.toasty.add({severity: 'success', detail: this.traduzir['banco']['acoes']['atualizar']});
+                this.mostrarModalCarregando(false);
+                this.router.navigateByUrl(this.traduzir['banco']['link-pagina']);
+            }).catch(error => {
+                this.errorHandler.handle(error);
+                this.mostrarModalCarregando(false);
+            });
+        } else {
+            this.bankService.save(this.form.value).then(response => {
+
+                this.toasty.add({severity: 'success', detail: this.traduzir['banco']['acoes']['adicionado']});
+                this.mostrarModalCarregando(false);
+                this.router.navigateByUrl(this.traduzir['banco']['link-pagina']);
+            }).catch(erro => {
+                this.errorHandler.handle(erro);
+                this.mostrarModalCarregando(false);
+            });
         }
     }
 
