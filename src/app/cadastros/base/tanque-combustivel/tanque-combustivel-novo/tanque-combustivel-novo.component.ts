@@ -19,6 +19,7 @@ export class TanqueCombustivelNovoComponent extends BaseFormComponent implements
 
     traduzir: any;
     combustivelList: any;
+    combustivelSugestaoList: any[];
 
     constructor(private router: Router,
                 private activatedRoute: ActivatedRoute,
@@ -47,7 +48,6 @@ export class TanqueCombustivelNovoComponent extends BaseFormComponent implements
                 this.titulo.setTitle(this.traduzir['tanque-combustivel']['acoes']['editar']);
 
                 this.tanqueCombustivelService.findOne(editando).then(response => {
-                    // this.combustivel = response;
                     this.form.patchValue(response);
                     this.mostrarModalCarregando(false);
                 }).catch(error => {
@@ -64,16 +64,30 @@ export class TanqueCombustivelNovoComponent extends BaseFormComponent implements
 
     // TODO: MELHORAR O CARREGAMENTO DESTA PESQUIA
     carregarCombustivel() {
-        this.combustivelService.findAll({'rows': 1000, 'first': 0, 'sortOrder': 1, 'sortField': 'nome'}, null)
-            .then(lista => {
-                this.combustivelList = lista.content.map(p => ({
-                    label: p.nome,
-                    value: p.key
-                }));
-            })
+        this.combustivelService.findAllCmb(0, 1000).then(lista => {
+            this.combustivelList = lista.content.map(p => ({
+                label: p.combustivel.nome,
+                value: p.combustivel.key
+            }));
+        })
             .catch(error => {
                 this.errorHandler.handle(error);
             });
+    }
+
+    filtraCombustivel(event) {
+        const query = event.query;
+
+        console.log(query);
+
+        this.combustivelService.findAllCmb(0, 30).then(lista => {
+            this.combustivelSugestaoList = lista.content.map(p => ({
+                label: p.combustivel.nome,
+                value: p.combustivel.key
+            }));
+        }).catch(error => {
+            this.errorHandler.handle(error);
+        });
     }
 
     configurarForm() {

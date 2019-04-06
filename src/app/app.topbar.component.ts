@@ -1,5 +1,9 @@
 import {Component} from '@angular/core';
 import {AppComponent} from './app.component';
+import {AuthService} from './security/auth.service';
+import {LogoutService} from './security/logout.service';
+import {ErroManipuladorService} from './core/erro-manipulador.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-topbar',
@@ -25,8 +29,8 @@ import {AppComponent} from './app.component';
                             <img src="assets/layout/images/profile-image.png">
                         </div>
                         <div class="profile-info">
-                            <span class="topbar-item-name profile-name">Claire White</span>
-                            <span class="topbar-item-name profile-role">System Admin</span>
+                            <span class="topbar-item-name profile-name">{{auth.jwtPayload?.nome}}</span>
+                            <!--<span class="topbar-item-name profile-role">System Admin</span>-->
                         </div>
                     </a>
 
@@ -52,7 +56,7 @@ import {AppComponent} from './app.component';
                             </a>
                         </li>
                         <li role="menuitem">
-                            <a href="#" (click)="app.onTopbarSubItemClick($event)">
+                            <a href="#" (click)="logout()">
                                 <i class="fa fa-fw fa-sign-out"></i>
                                 <span>Logout</span>
                             </a>
@@ -209,7 +213,19 @@ import {AppComponent} from './app.component';
 })
 export class AppTopbarComponent {
 
-    constructor(public app: AppComponent) {
+    constructor(public app: AppComponent,
+                public auth: AuthService,
+                private logoutService: LogoutService,
+                private errorHandler: ErroManipuladorService,
+                private router: Router) {
+    }
+
+    logout() {
+        this.logoutService.logout()
+            .then(() => {
+                this.router.navigate(['/login']);
+            })
+            .catch(error => this.errorHandler.handle(error));
     }
 
 }

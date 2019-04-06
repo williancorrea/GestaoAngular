@@ -48,6 +48,21 @@ export class CombustivelService {
             });
     }
 
+    findAllCmb(pagina: number, quantidadePorPagina: number): Promise<any> {
+        const config = {
+            params: {
+                'size': quantidadePorPagina,
+                'page': pagina,
+                'ordemClassificacao': 'ASC',
+                'campoOrdenacao': 'nome'
+            }
+        };
+        return this.http.get(`${this.apiUrl}/cmb`, config).toPromise().then(response => {
+            return response.json();
+        });
+    }
+
+
     /**
      * Busca por um registro especifico de acordo com a Key passada por paramentro
      */
