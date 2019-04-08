@@ -118,7 +118,7 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
         data: {
             roles: [
-                'ROLE_LISTAR_BANCO'
+                'ROLE_CMB-PADRAO'
             ]
         }
     },

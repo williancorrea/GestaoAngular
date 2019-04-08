@@ -18,6 +18,21 @@ body .ui-inputtext.ng-dirty.ng-invalid:focus, body p-dropdown.ng-dirty.ng-invali
     border-color: #dc3545;
     box-shadow: 0 0 0 0.2rem rgba(220,53,69,.25);
 }
+body .ui-inputtext.ng-dirty.ng-invalid, body p-autocomplete.ng-dirty.ng-invalid > .ui-autocomplete > .ui-inputtext, body p-calendar.ng-dirty.ng-invalid > .ui-calendar > .ui-inputtext, body p-chips.ng-dirty.ng-invalid > .ui-inputtext, body p-inputmask.ng-dirty.ng-invalid > .ui-inputtext,   body p-listbox.ng-dirty.ng-invalid .ui-inputtext, body p-multiselect.ng-dirty.ng-invalid > .ui-multiselect, body p-spinner.ng-dirty.ng-invalid > .ui-inputtext{
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%23F34235' d='M4.4 5.324h-.8v-2.46h.8zm0 1.42h-.8V5.89h.8zM3.76.63L.04 7.075c-.115.2.016.425.26.426h7.397c.242 0 .372-.226.258-.426C6.726 4.924 5.47 2.79 4.253.63c-.113-.174-.39-.174-.494 0z'/%3E%3C/svg%3E");
+    padding-right: 2.25rem;
+    background-repeat: no-repeat;
+    background-position: center right .625rem;
+    background-size: 1rem 1rem;
+}
+body body p-dropdown.ng-dirty.ng-invalid > .ui-dropdown {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%23F34235' d='M4.4 5.324h-.8v-2.46h.8zm0 1.42h-.8V5.89h.8zM3.76.63L.04 7.075c-.115.2.016.425.26.426h7.397c.242 0 .372-.226.258-.426C6.726 4.924 5.47 2.79 4.253.63c-.113-.174-.39-.174-.494 0z'/%3E%3C/svg%3E");
+    padding-right: 2.25rem;
+    background-repeat: no-repeat;
+    background-position: center right .625rem;
+    background-size: 1rem 1rem;
+}
+
 body .ui-inputtext.ng-pristine:focus, body p-dropdown.ng-pristine > .ui-dropdown:focus, body p-autocomplete.ng-pristine > .ui-autocomplete > .ui-inputtext:focus, body p-calendar.ng-pristine > .ui-calendar > .ui-inputtext:focus, body p-chips.ng-pristine > .ui-inputtext:focus, body p-inputmask.ng-pristine > .ui-inputtext:focus, body p-checkbox.ng-pristine .ui-chkbox-box:focus, body p-radiobutton.ng-pristine .ui-radiobutton-box:focus, body p-inputswitch.ng-pristine .ui-inputswitch:focus, body p-listbox.ng-pristine .ui-inputtext:focus, body p-multiselect.ng-pristine > .ui-multiselect:focus, body p-spinner.ng-pristine > .ui-inputtext:focus, body p-selectbutton.ng-pristine .ui-button:focus, body p-togglebutton.ng-pristine .ui-button:focus {
     border-color: #3192e1;
     box-shadow: 0 0 0 0.2rem rgba(49,156,255,.25);
