@@ -117,6 +117,13 @@ export class TanqueCombustivelNovoComponent extends BaseFormComponent implements
             return;
         }
 
+        //TODO REMOVER
+        this.form.value['combustivel']['key'] =  this.form.value['combustivel']['key']['value'];
+        console.log(this.form.value);
+
+
+
+
         this.mostrarModalCarregando(true);
         if (this.form.get('key').value) {
             this.tanqueCombustivelService.update(this.form.value).then(response => {

@@ -49,13 +49,18 @@
                                         (completeMethod)="filtraCombustivel($event)"
                                         [dropdown]="true"
                                         formControlName="key"
+                                        dataKey="value"
+                                        field="label"
                                         [size]="30"
                                         [minLength]="1"
+                                        [forceSelection]="true"
+                                        emptyMessage="{{ 'app.acoes.nenhum-registro-encontrado' | translate}}"
                                         placeholder="{{'app.acoes.selecione2' | translate}}">
 
                             <ng-template let-item pTemplate="item">
                                 {{item.label}}
                             </ng-template>
+
                         </p-autoComplete>
                         <app-message [form]="f" [control]="form.get('combustivel').get('key')"></app-message>
                     </div>
