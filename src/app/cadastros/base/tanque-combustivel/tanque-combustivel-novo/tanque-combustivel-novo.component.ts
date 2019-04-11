@@ -9,6 +9,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {MessageService} from 'primeng/api';
 import {TanqueCombustivelService} from '../tanqueCombustivel.service';
 import {CombustivelService} from '../../combustivel/combustivel.service';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
     selector: 'app-combustivel-new',
@@ -17,9 +18,10 @@ import {CombustivelService} from '../../combustivel/combustivel.service';
 })
 export class TanqueCombustivelNovoComponent extends BaseFormComponent implements OnInit {
 
+    env: any;
     traduzir: any;
-    combustivelList: any;
-    combustivelSugestaoList: any[];
+    combustivelSelecionado: any;
+    combustivelList: any[];
 
     constructor(private router: Router,
                 private activatedRoute: ActivatedRoute,
@@ -37,12 +39,15 @@ export class TanqueCombustivelNovoComponent extends BaseFormComponent implements
     ngOnInit() {
         this.configurarForm();
         this.mostrarModalCarregando(true);
+        this.env = environment;
+
         this.translateService.get('app').subscribe(s => {
             this.traduzir = s;
 
             const editando = this.activatedRoute.snapshot.params['key'];
 
-            this.carregarCombustivel();
+            // CARREGAR COMBUSTIVEL
+            // this.carregarCombustivel();
 
             if (editando) {
                 this.titulo.setTitle(this.traduzir['tanque-combustivel']['acoes']['editar']);
@@ -62,26 +67,9 @@ export class TanqueCombustivelNovoComponent extends BaseFormComponent implements
         });
     }
 
-    // TODO: MELHORAR O CARREGAMENTO DESTA PESQUIA
-    carregarCombustivel() {
-        this.combustivelService.findAllCmb(0, 1000).then(lista => {
-            this.combustivelList = lista.content.map(p => ({
-                label: p.combustivel.nome,
-                value: p.combustivel.key
-            }));
-        })
-            .catch(error => {
-                this.errorHandler.handle(error);
-            });
-    }
-
     filtraCombustivel(event) {
-        const query = event.query;
-
-        console.log(query);
-
-        this.combustivelService.findAllCmb(0, 30).then(lista => {
-            this.combustivelSugestaoList = lista.content.map(p => ({
+        this.combustivelService.findAllCmb(event.query).then(lista => {
+            this.combustivelList = lista.map(p => ({
                 label: p.combustivel.nome,
                 value: p.combustivel.key
             }));
@@ -117,11 +105,10 @@ export class TanqueCombustivelNovoComponent extends BaseFormComponent implements
             return;
         }
 
-        //TODO REMOVER
-        this.form.value['combustivel']['key'] =  this.form.value['combustivel']['key']['value'];
-        console.log(this.form.value);
-
-
+        //TODO: REMOVER
+        console.log( this.form.value);
+        // this.form.value['combustivel']['key'] = this.combustivelSelecionado['value'];
+        return;
 
 
         this.mostrarModalCarregando(true);
