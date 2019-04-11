@@ -48,15 +48,17 @@ export class CombustivelService {
             });
     }
 
-    findAllCmb(pagina: number, quantidadePorPagina: number): Promise<any> {
+    findAllCmb(filtro: string): Promise<any> {
         const config = {
             params: {
-                'size': quantidadePorPagina,
-                'page': pagina,
+                'size': environment.comboBox.linhas,
+                'page': 0,
                 'ordemClassificacao': 'ASC',
                 'campoOrdenacao': 'nome'
             }
         };
+
+        config.params['nome'] = filtro && filtro.trim().length > 0 ? filtro.trim() : '';
         return this.http.get(`${this.apiUrl}/cmb`, config).toPromise().then(response => {
             return response.json();
         });

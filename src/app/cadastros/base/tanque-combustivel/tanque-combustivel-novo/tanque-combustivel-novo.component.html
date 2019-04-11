@@ -29,30 +29,16 @@
                         <app-message [form]="f" [control]="form.get('nome')"></app-message>
                     </div>
 
-                    <!-- COMBUSTIVEL -->
+                  <!-- COMBUSTIVEL -->
                     <div class="ui-sm-12 ui-g-6 ui-fluid" formGroupName="combustivel">
                         <label class="required">{{'app.combustivel.titulo'| translate}}</label>
-                        <p-dropdown emptyFilterMessage="{{'app.acoes.nenhum-registro-encontrado' | translate }}"
-                                    [options]="combustivelList"
-                                    formControlName="key"
-                                    [showClear]="true"
-                                    [filter]="true" [autoWidth]="false"
-                                    placeholder="{{'app.acoes.selecione2' | translate}}">
-                        </p-dropdown>
-                        <app-message [form]="f" [control]="form.get('combustivel').get('key')"></app-message>
-                    </div>
-
-                    <!-- COMBUSTIVEL -->
-                    <div class="ui-sm-12 ui-g-6 ui-fluid" formGroupName="combustivel">
-                        <label class="required">{{'app.combustivel.titulo'| translate}}</label>
-                        <p-autoComplete [suggestions]="combustivelSugestaoList"
+                        <p-autoComplete [suggestions]="combustivelList"
                                         (completeMethod)="filtraCombustivel($event)"
                                         [dropdown]="true"
                                         formControlName="key"
-                                        dataKey="value"
                                         field="label"
                                         [size]="30"
-                                        [minLength]="1"
+                                        [minLength]="env.comboBox.minCaracterParaPesquisa"
                                         [forceSelection]="true"
                                         emptyMessage="{{ 'app.acoes.nenhum-registro-encontrado' | translate}}"
                                         placeholder="{{'app.acoes.selecione2' | translate}}">

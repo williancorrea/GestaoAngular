@@ -12,10 +12,14 @@ export const environment = {
         filterDelay: 500,
         rows: 5,
         rowsPerPageOptions: [5, 10, 20, 50, 100]
+    },
+
+    comboBox: {
+        minCaracterParaPesquisa: 1,
+        filtroDelay: 500,
+        linhas: 100
     }
 };
-
-
 
 
 // ng serve --port 4200 --host 192.168.0.110
