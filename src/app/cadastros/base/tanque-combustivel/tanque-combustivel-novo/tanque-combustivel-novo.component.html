@@ -30,13 +30,13 @@
                     </div>
 
                   <!-- COMBUSTIVEL -->
-                    <div class="ui-sm-12 ui-g-6 ui-fluid" formGroupName="combustivel">
+                    <div class="ui-sm-12 ui-g-6 ui-fluid">
                         <label class="required">{{'app.combustivel.titulo'| translate}}</label>
                         <p-autoComplete [suggestions]="combustivelList"
                                         (completeMethod)="filtraCombustivel($event)"
                                         [dropdown]="true"
-                                        formControlName="key"
-                                        field="label"
+                                        formControlName="combustivel"
+                                        field="nome"
                                         [size]="30"
                                         [minLength]="env.comboBox.minCaracterParaPesquisa"
                                         [forceSelection]="true"
@@ -44,11 +44,11 @@
                                         placeholder="{{'app.acoes.selecione2' | translate}}">
 
                             <ng-template let-item pTemplate="item">
-                                {{item.label}}
+                                {{item.nome}}
                             </ng-template>
 
                         </p-autoComplete>
-                        <app-message [form]="f" [control]="form.get('combustivel').get('key')"></app-message>
+                        <app-message [form]="f" [control]="form.get('combustivel')"></app-message>
                     </div>
 
                     <div class="ui-sm-3 ui-g-3 ui-fluid">

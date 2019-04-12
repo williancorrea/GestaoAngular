@@ -20,7 +20,6 @@ export class TanqueCombustivelNovoComponent extends BaseFormComponent implements
 
     env: any;
     traduzir: any;
-    combustivelSelecionado: any;
     combustivelList: any[];
 
     constructor(private router: Router,
@@ -45,21 +44,14 @@ export class TanqueCombustivelNovoComponent extends BaseFormComponent implements
             this.traduzir = s;
 
             const editando = this.activatedRoute.snapshot.params['key'];
-
-            // CARREGAR COMBUSTIVEL
-            // this.carregarCombustivel();
-
             if (editando) {
                 this.titulo.setTitle(this.traduzir['tanque-combustivel']['acoes']['editar']);
-
                 this.tanqueCombustivelService.findOne(editando).then(response => {
                     this.form.patchValue(response);
-                    this.mostrarModalCarregando(false);
                 }).catch(error => {
                     this.errorHandler.handle(error);
                     this.titulo.setTitle(this.traduzir['tanque-combustivel']['acoes']['adicionar']);
-                    this.mostrarModalCarregando(false);
-                });
+                }).finally(() => this.mostrarModalCarregando(false));
             } else {
                 this.titulo.setTitle(this.traduzir['tanque-combustivel']['acoes']['adicionar']);
                 this.mostrarModalCarregando(false);
@@ -70,8 +62,8 @@ export class TanqueCombustivelNovoComponent extends BaseFormComponent implements
     filtraCombustivel(event) {
         this.combustivelService.findAllCmb(event.query).then(lista => {
             this.combustivelList = lista.map(p => ({
-                label: p.combustivel.nome,
-                value: p.combustivel.key
+                nome: p.combustivel.nome,
+                key: p.combustivel.key
             }));
         }).catch(error => {
             this.errorHandler.handle(error);
@@ -92,9 +84,7 @@ export class TanqueCombustivelNovoComponent extends BaseFormComponent implements
                 Validators.required,
                 Validators.min(0)
             ]],
-            combustivel: this.formBuild.group({
-                key: [null, Validators.required]
-            }),
+            combustivel: [null, Validators.required],
             inativo: [false]
         });
     }
@@ -105,30 +95,23 @@ export class TanqueCombustivelNovoComponent extends BaseFormComponent implements
             return;
         }
 
-        //TODO: REMOVER
-        console.log( this.form.value);
-        // this.form.value['combustivel']['key'] = this.combustivelSelecionado['value'];
-        return;
-
-
         this.mostrarModalCarregando(true);
         if (this.form.get('key').value) {
             this.tanqueCombustivelService.update(this.form.value).then(response => {
                 this.toasty.add({severity: 'success', detail: this.traduzir['tanque-combustivel']['acoes']['atualizar']});
-                this.mostrarModalCarregando(false);
                 this.router.navigateByUrl(this.traduzir['tanque-combustivel']['link-pagina']);
             }).catch(error => {
                 this.errorHandler.handle(error);
+            }).finally(() => {
                 this.mostrarModalCarregando(false);
             });
         } else {
             this.tanqueCombustivelService.save(this.form.value).then(response => {
-
                 this.toasty.add({severity: 'success', detail: this.traduzir['tanque-combustivel']['acoes']['adicionado']});
-                this.mostrarModalCarregando(false);
                 this.router.navigateByUrl(this.traduzir['tanque-combustivel']['link-pagina']);
             }).catch(erro => {
                 this.errorHandler.handle(erro);
+            }).finally(() => {
                 this.mostrarModalCarregando(false);
             });
         }

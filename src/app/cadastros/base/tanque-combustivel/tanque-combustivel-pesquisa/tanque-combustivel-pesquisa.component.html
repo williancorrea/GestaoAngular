@@ -61,11 +61,6 @@
                         <th>{{'app.tanque-combustivel.campos.nome' | translate}}</th>
                         <th>{{'app.tanque-combustivel.campos.quantidadeLts' | translate}}</th>
                         <th>{{'app.tanque-combustivel.campos.inativo' | translate}}</th>
-
-                        <!--<th *ngFor="let col of columns"[pSortableColumn]="col.field" [hidden]="col.hidden" [class]="col.class">-->
-                            <!--{{col.header}}-->
-                            <!--<p-sortIcon [field]="col.field"></p-sortIcon>-->
-                        <!--</th>-->
                     </tr>
                 </ng-template>
 
@@ -73,15 +68,8 @@
                     <tr [pSelectableRow]="rowData">
                         <td><span>{{rowData['nome']}} </span></td>
                         <td><span>{{rowData['combustivel']['nome']}} </span></td>
-                        <td><span>{{rowData['quantidadeLts']}}</span></td>
-                        <td><span>{{(rowData['inativo'] ? 'app.acoes.sim' : 'app.acoes.nao') | translate}} </span></td>
-
-                        <!--<td *ngFor="let col of columns" [hidden]="col.hidden" [class]="col.class">-->
-                        <!--<span *ngIf="col.field=='inativo'">{{(rowData[col.field] ? 'app.acoes.sim' : 'app.acoes.nao') | translate}} </span>-->
-                        <!--<span *ngIf="col.field!='inativo'">{{rowData[col.field]}} </span>-->
-                        <!--</td>-->
-
-
+                        <td align="center"><span>{{rowData['quantidadeLts']}}</span></td>
+                        <td align="center"><span ngClass="{{rowData['inativo'] ? 'wc-tabela-label-inativo' : ''}}">{{(rowData['inativo'] ? 'app.acoes.sim' : 'app.acoes.nao') | translate}} </span></td>
                     </tr>
                 </ng-template>
 
