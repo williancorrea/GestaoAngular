@@ -5,7 +5,7 @@
     "scripts": {
         "ng": "ng",
         "start": "node server.js",
-        "build": "ng build",
+        "build": "ng build --prod --aot --vendor-chunk --common-chunk --delete-output-path --buildOptimizer",
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
@@ -69,6 +69,6 @@
     },
     "engines": {
         "node": "8.9.3",
-        "npm": "6.0.1"
+        "npm": "6.9.0"
     }
 }
