@@ -5,6 +5,7 @@
 
 export const environment = {
     production: false,
+    // apiUrl: 'https://gestao-api-wcorrea.herokuapp.com',
     // apiUrl: 'http://192.168.0.134:8080',
     apiUrl: 'http://localhost:8080',
 
