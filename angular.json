@@ -62,8 +62,7 @@
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "atlantis:build:production",
-                            "proxyConfig": "proxy.config.js"
+                            "browserTarget": "atlantis:build:production"
                         }
                     }
                 },

@@ -1,0 +1,7 @@
+{
+    "/api/* ": {
+        "target": "https://gestao-api-wcorrea.herokuapp.com",
+        "secure": false,
+        "changeOrigin": true
+    }
+}
