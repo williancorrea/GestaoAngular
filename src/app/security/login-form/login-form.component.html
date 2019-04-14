@@ -17,7 +17,7 @@
                            type="email" name="email" placeholder="{{'app.login.email' | translate}}"
                            [(ngModel)]="email" required [minlength]="5"
                            #emailItem="ngModel">
-                    <app-message [form]="f" [control]="emailItem"></app-message>
+                    <app-message [form]="f" [control]="emailItem.control"></app-message>
                 </div>
                 <div class="ui-g-12" style="text-align: left">
                     <label for="password" class="required">{{'app.login.senha' | translate}}</label>
@@ -28,7 +28,7 @@
                            name="password" placeholder="{{'app.login.senha' | translate}}"
                            [(ngModel)]="password" required [minlength]="5"
                            #passwordItem="ngModel">
-                    <app-message [form]="f" [control]="passwordItem"></app-message>
+                    <app-message [form]="f" [control]="passwordItem.control"></app-message>
                 </div>
                 <div class="ui-g-12 button-container margin-button-login">
                     <button pButton

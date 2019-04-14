@@ -1,3 +1,10 @@
+
+
+
+ng serve --aot --vendor-chunk --common-chunk
+
+
+
 {
     "name": "atlantis",
     "version": "7.0.0",
