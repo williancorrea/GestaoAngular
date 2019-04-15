@@ -8,6 +8,10 @@ ng serve --aot --vendor-chunk --common-chunk
 
 proxy
 
+--proxy-conf proxy.conf.json
+ng serve --proxy-config proxy.config.json
+ng serve --proxy-config proxy.config.json --aot --vendor-chunk --common-chunk
+
 
 {
     "/api/*": {
