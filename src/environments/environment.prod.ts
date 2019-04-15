@@ -8,7 +8,7 @@ export const environment = {
 
     dataTable: {
         filterDelay: 500,
-        rows: 10,
+        rows: 5,
         rowsPerPageOptions: [5, 10, 20, 50, 100]
     },
     comboBox: {
