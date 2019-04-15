@@ -24,7 +24,7 @@ import {EstadoCivilService} from '../cadastros/base/estado-civil/estado-civil.se
 import {ItinerarioService} from '../cadastros/base/itinerario/itinerario.service';
 import {LevelOfEducationService} from '../cadastros/base/level-of-education/level-of-education.service';
 import {PersonService} from '../cadastros/base/person/person.service';
-import {ProductUnitService} from '../cadastros/base/product-unit/product-unit.service';
+import {UnidadeMedidaService} from '../cadastros/base/unidade-medida/unidade-medida.service';
 import {TipoPagamentoService} from '../cadastros/base/tipo-pagamento/tipo-pagamento.service';
 import {TypeRelationshipService} from '../cadastros/base/type-relationship/type-relationship.service';
 import {VeiculoService} from '../cadastros/base/veiculo/veiculo.service';
@@ -70,7 +70,7 @@ import {TanqueCombustivelService} from '../cadastros/base/tanque-combustivel/tan
         ItinerarioService,
         LevelOfEducationService,
         PersonService,
-        ProductUnitService,
+        UnidadeMedidaService,
         TipoPagamentoService,
         TypeRelationshipService,
         VeiculoService,

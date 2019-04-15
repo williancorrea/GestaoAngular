@@ -238,6 +238,24 @@
                 "excluir": "Tanque de combustível removido com sucesso!",
                 "atualizar": "Tanque de combustível atualizado com sucesso."
             }
+        },
+        "unidade-medida": {
+            "campos": {
+                "nome": "Nome",
+                "sigla": "Sigla",
+                "pode-fracionar": "Pode Fracionar",
+                "inativo": "Inativo"
+            },
+            "link-pagina": "/cadastros/base/unidade-medida",
+            "titulo": "Unidade de Medida",
+            "lista": "Lista de Unidades de Medidas",
+            "acoes": {
+                "adicionar": "Adicionar nova unidade de medida",
+                "adicionado": "Unidade de medida adicionado com sucesso.",
+                "editar": "Editar unidade de medida",
+                "excluir": "Unidade de medida removido com sucesso!",
+                "atualizar": "Unidade de medida atualizado com sucesso."
+            }
         }
     }
 }

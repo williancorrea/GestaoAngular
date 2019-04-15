@@ -1,21 +1,20 @@
 import {Injectable} from '@angular/core';
 import {AuthHttp} from 'angular2-jwt';
 import {environment} from '../../../../environments/environment';
-import {ProductUnitFilters} from './productUnitFilters';
 
 @Injectable()
-export class ProductUnitService {
+export class UnidadeMedidaService {
 
     apiUrl: string;
 
     constructor(private http: AuthHttp) {
-        this.apiUrl = `${environment.apiUrl}/product-units`;
+        this.apiUrl = `${environment.apiUrl}/unidade-medidas`;
     }
 
     /**
      * List all records according to the filters passed by parameters
      */
-    findAll(grid: any, productUnitFilters: ProductUnitFilters): Promise<any> {
+    findAll(grid: any): Promise<any> {
         /*
            in a real application, make a remote request to load data using state metadata from event
            event.first = First row offset
@@ -34,15 +33,6 @@ export class ProductUnitService {
         };
         if (grid.globalFilter && grid.globalFilter.length > 0) {
             config.params['filtroGlobal'] = grid.globalFilter;
-        }
-
-        if (productUnitFilters) {
-            if (productUnitFilters.name && productUnitFilters.name.length > 0) {
-                config.params['name'] = productUnitFilters.name;
-            }
-            if (productUnitFilters.initials && productUnitFilters.initials.length > 0) {
-                config.params['initials'] = productUnitFilters.initials;
-            }
         }
 
         return this.http.get(`${this.apiUrl}`, config)

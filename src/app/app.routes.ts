@@ -31,6 +31,8 @@ import {CombustivelPesquisaComponent} from './cadastros/base/combustivel/combust
 import {CombustivelNovoComponent} from './cadastros/base/combustivel/combustivel-novo/combustivel-novo.component';
 import {TanqueCombustivelPesquisaComponent} from './cadastros/base/tanque-combustivel/tanque-combustivel-pesquisa/tanque-combustivel-pesquisa.component';
 import {TanqueCombustivelNovoComponent} from './cadastros/base/tanque-combustivel/tanque-combustivel-novo/tanque-combustivel-novo.component';
+import {UnidadeMedidaNovoComponent} from './cadastros/base/unidade-medida/unidade-medida-novo/unidade-medida-novo.component';
+import {UnidadeMedidaPesquisaComponent} from './cadastros/base/unidade-medida/unidade-medida-pesquisa/unidade-medida-pesquisa.component';
 
 export const routes: Routes = [
     {path: 'sample', component: SampleDemoComponent},
@@ -75,10 +77,9 @@ export const routes: Routes = [
     {path: 'cadastros/base/tanque-combustivel/novo', component: TanqueCombustivelNovoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_SALVAR_TANQUE-COMBUSTIVEL']}},
     {path: 'cadastros/base/tanque-combustivel/:key', component: TanqueCombustivelNovoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_ATUALIZAR_TANQUE-COMBUSTIVEL']}},
 
-
-    // {path: 'product-units', component: ProductUnitSearchComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_LIST_PRODUCT-UNIT']}},
-    // {path: 'product-units/new', component: ProductUnitNewComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_SAVE_PRODUCT-UNIT']}},
-    // {path: 'product-units/:key', component: ProductUnitNewComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_UPDATE_PRODUCT-UNIT']}},
+    {path: 'cadastros/base/unidade-medida', component: UnidadeMedidaPesquisaComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_LISTAR_UNIDADE-MEDIDA']}},
+    {path: 'cadastros/base/unidade-medida/new', component: UnidadeMedidaNovoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_SALVAR_UNIDADE-MEDIDA']}},
+    {path: 'cadastros/base/unidade-medida/:key', component: UnidadeMedidaNovoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_ATUALIZAR_UNIDADE-MEDIDA']}},
 
     // {path: 'cadastros/base/classe-despesa', component: ClasseDespesaPesquisarComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_LISTAR_CLASSE-DESPESA']}},
     // {path: 'cadastros/base/classe-despesa/novo', component: ClasseDespesaNovoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_SALVAR_CLASSE-DESPESA']}},

@@ -33,7 +33,7 @@ export class AppMenuComponent implements OnInit {
                     label: this.traduzir['menu']['cadastros'], icon: 'fa fa-fw fa-book',
                     items: [
                         {label:  m['banco']['titulo'], icon: 'fa fa-fw fa-building', routerLink: [this.traduzir['banco']['link-pagina']], visible: this.auth.hasPermission('ROLE_LISTAR_BANCO')},
-                        // {label:  m['menu']['product-unit'], icon: 'fa fa-fw fa-pencil-square-o', routerLink: ['/product-units'], visible: this.auth.hasPermission('ROLE_LIST_PRODUCT-UNIT')},
+                        {label:  m['unidade-medida']['titulo'], icon: 'fa fa-fw fa-pencil-square-o', routerLink: [this.traduzir['unidade-medida']['link-pagina']], visible: this.auth.hasPermission('ROLE_LISTAR_UNIDADE-MEDIDA')},
                         // {label:  m['menu']['types-of-relationships'], icon: 'fa fa-fw fa-handshake-o', routerLink: ['/types-of-relationships'], visible: this.auth.hasPermission('ROLE_LIST_TYPE-RELATIONSHIP')},
                         // {label:  m['menu']['level-of-education'], icon: 'fa fa-fw fa-lightbulb-o', routerLink: ['/levels-of-education'], visible: this.auth.hasPermission('ROLE_LIST_LEVEL-OF-EDUCATION')},
                         // {label:  m['menu']['estado-civil'], icon: 'fa fa-fw fa-heart-o', routerLink: ['/estado-civil'], visible: this.auth.hasPermission('ROLE_LISTAR_ESTADO_CIVIL')},
