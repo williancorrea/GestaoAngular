@@ -37,7 +37,6 @@ export class UnidadeMedidaNovoComponent extends BaseFormComponent implements OnI
             this.traduzir = s;
 
             const editando = this.activatedRoute.snapshot.params['key'];
-
             if (editando) {
                 this.titulo.setTitle(this.traduzir['unidade-medida']['acoes']['editar']);
 

@@ -78,7 +78,7 @@ export const routes: Routes = [
     {path: 'cadastros/base/tanque-combustivel/:key', component: TanqueCombustivelNovoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_ATUALIZAR_TANQUE-COMBUSTIVEL']}},
 
     {path: 'cadastros/base/unidade-medida', component: UnidadeMedidaPesquisaComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_LISTAR_UNIDADE-MEDIDA']}},
-    {path: 'cadastros/base/unidade-medida/new', component: UnidadeMedidaNovoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_SALVAR_UNIDADE-MEDIDA']}},
+    {path: 'cadastros/base/unidade-medida/novo', component: UnidadeMedidaNovoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_SALVAR_UNIDADE-MEDIDA']}},
     {path: 'cadastros/base/unidade-medida/:key', component: UnidadeMedidaNovoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_ATUALIZAR_UNIDADE-MEDIDA']}},
 
     // {path: 'cadastros/base/classe-despesa', component: ClasseDespesaPesquisarComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_LISTAR_CLASSE-DESPESA']}},

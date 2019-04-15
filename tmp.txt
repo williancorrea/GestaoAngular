@@ -5,6 +5,29 @@ ng serve --aot --vendor-chunk --common-chunk
 
 
 
+
+proxy
+
+
+{
+    "/api/*": {
+        "target": "https://gestao-api-wcorrea.herokuapp.com",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/api": ""
+        }
+    }
+}
+
+
+
+
+
+
+
+
 {
     "name": "atlantis",
     "version": "7.0.0",
