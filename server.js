@@ -1,6 +1,7 @@
 const compression = require('compression');
 const express = require('express');
 const app = express();
+const port = process.env.PORT || 4200;
 
 // Gzip
 app.use(compression());
@@ -13,4 +14,7 @@ app.get('/*', function (req, res) {
 
 });
 
-app.listen(process.env.PORT || 4200);
+// Start the app by listening on the default Heroku port
+app.listen(port);
+
+console.log(`Servidor esta escutando na porta ${port}`);
