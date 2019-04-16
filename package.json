@@ -5,11 +5,11 @@
     "scripts": {
         "ng": "ng",
         "start": "node server.js",
-        "build": "ng build --prod --aot --vendor-chunk --common-chunk --delete-output-path --buildOptimizer",
+        "build": "ng build --prod --aot --vendor-chunk --common-chunk --delete-output-path --buildOptimizer --sourceMap=false",
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
-        "postinstall": "ng build --prod --aot --vendor-chunk --common-chunk --delete-output-path --buildOptimizer"
+        "postinstall": "ng build --prod --aot --vendor-chunk --common-chunk --delete-output-path --buildOptimizer --sourceMap=false"
     },
     "private": true,
     "dependencies": {
