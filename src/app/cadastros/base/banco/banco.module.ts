@@ -5,7 +5,7 @@ import {BancoNovoComponent} from './banco-novo/banco-novo.component';
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import {MessageModule} from 'primeng/message';
-import {CheckboxModule, DataTableModule, InputTextModule, ProgressBarModule, TooltipModule} from 'primeng/primeng';
+import {CheckboxModule, DataTableModule, DialogModule, InputTextModule, ProgressBarModule, TooltipModule} from 'primeng/primeng';
 import {SharedModule} from 'primeng/shared';
 import {PanelModule} from 'primeng/panel';
 import {TransportSharedModule} from '../../../transport-shared/transport-share.module';
@@ -15,6 +15,7 @@ import {ToastModule} from 'primeng/toast';
 import {NgxLoadingModule} from 'ngx-loading';
 import {TranslateModule} from '@ngx-translate/core';
 import {RouterModule} from '@angular/router';
+import {ImageCropperModule} from 'ngx-image-cropper';
 
 @NgModule({
     imports: [
@@ -51,6 +52,9 @@ import {RouterModule} from '@angular/router';
         //         useDefaultLang: false
         //     }
         // ),
+
+        ImageCropperModule,
+        DialogModule,
 
         DataTableModule,
         TableModule,

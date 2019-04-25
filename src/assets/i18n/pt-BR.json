@@ -2,7 +2,8 @@
     "app": {
         "sistema": {
             "titulo": "Rosinha Transportes",
-            "validando-sessao": "Aguarde, validando sessão!"
+            "validando-sessao": "Aguarde, validando sessão!",
+            "cortar-imagem": "Ajustar Imagem"
         },
         "menu": {
             "cadastros": "Cadastros",
@@ -98,7 +99,8 @@
                 "codigo": "Código",
                 "nome": "Nome",
                 "url": "URL",
-                "inativo": "Inativo"
+                "inativo": "Inativo",
+                "logo": "Logo"
             },
             "link-pagina": "/cadastros/base/banco",
             "titulo": "Banco",

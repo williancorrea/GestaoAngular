@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Title} from '@angular/platform-browser';
 import {BancoService} from '../banco.service';
@@ -8,6 +8,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {BaseFormComponent} from '../../../../transport-shared/base-form/base-form.component';
 import {TranslateService} from '@ngx-translate/core';
 import {MessageService} from 'primeng/api';
+import {ImageCroppedEvent, ImageCropperComponent} from 'ngx-image-cropper';
 
 @Component({
     selector: 'app-bank-new',
@@ -17,6 +18,13 @@ import {MessageService} from 'primeng/api';
 export class BancoNovoComponent extends BaseFormComponent implements OnInit {
 
     traduzir: any;
+    mostrarDialogoLogo = false;
+
+
+    imageChangedEvent: any = '';
+    croppedImage: any = '';
+    showCropper = false;
+    imagemSelecionada = false;
 
     constructor(private router: Router,
                 private activatedRoute: ActivatedRoute,
@@ -69,6 +77,7 @@ export class BancoNovoComponent extends BaseFormComponent implements OnInit {
                 ]
             ],
             url: [null, Validators.maxLength(150)],
+            logo: [''],
             inativo: [false]
         });
     }
@@ -104,5 +113,73 @@ export class BancoNovoComponent extends BaseFormComponent implements OnInit {
 
     cancel() {
         this.router.navigateByUrl(this.traduzir['banco']['link-pagina']);
+    }
+
+
+    mostrarDialogCortarImagem() {
+        this.imagemSelecionada = false;
+        this.mostrarDialogoLogo = true;
+        this.croppedImage = '';
+        this.showCropper = false;
+        this.fileInput.nativeElement.value = '';
+    }
+
+    @ViewChild(ImageCropperComponent) imageCropper: ImageCropperComponent;
+
+    @ViewChild('fileInput')
+    fileInput: ElementRef;
+
+
+    fileChangeEvent(event: any): void {
+        console.log('change', event)
+
+        // VARIFICA SE FOI SELECIONADO ALGUMA IMAGEM
+        const target = event.target || event.srcElement;
+        if (target.value.length === 0) {
+            this.imagemSelecionada = false;
+            this.croppedImage = '';
+            this.showCropper = false;
+            return;
+        }
+
+        this.imageChangedEvent = event;
+        this.imagemSelecionada = true;
+        this.croppedImage = '';
+        this.showCropper = false;
+    }
+
+    imageCropped(event: ImageCroppedEvent) {
+        this.croppedImage = event.base64;
+        console.log(event);
+    }
+
+    imageLoaded() {
+        this.showCropper = true;
+        console.log('Image loaded');
+    }
+
+    cropperReady() {
+        console.log('Cropper ready');
+    }
+
+    loadImageFailed() {
+        this.imagemSelecionada = false;
+        console.log('Load failed');
+    }
+
+    rotateLeft() {
+        this.imageCropper.rotateLeft();
+    }
+
+    rotateRight() {
+        this.imageCropper.rotateRight();
+    }
+
+    flipHorizontal() {
+        this.imageCropper.flipHorizontal();
+    }
+
+    flipVertical() {
+        this.imageCropper.flipVertical();
     }
 }

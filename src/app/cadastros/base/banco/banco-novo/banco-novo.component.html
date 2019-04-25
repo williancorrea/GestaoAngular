@@ -2,76 +2,123 @@
 <p-progressBar *ngIf="loading" mode="indeterminate" styleClass="wc-progress-bar-indeterminate"></p-progressBar>
 
 <div class="ui-g">
-   <div class="ui-g-12">
-      <div class="card card-w-title">
-         <div>
+    <div class="ui-g-12">
+        <div class="card card-w-title">
+            <div>
 
-            <h1 *ngIf="loading === true">{{('app.comum.carregando') | translate}}</h1>
-            <h1 *ngIf="loading === false">{{(form.get('key')?.value?.length > 0 ? 'app.banco.acoes.editar' : 'app.banco.acoes.adicionar') |
-               translate}}</h1>
-         </div>
-
-         <form #f="ngForm" novalidate (submit)="save()" autocomplete="off" [formGroup]="form">
-
-            <div class="ui-g">
-               <input pInputText
-                      type="text"
-                      [hidden]="true"
-                      name="key"
-                      formControlName="key">
-
-               <div class="ui-g-3 ui-fluid">
-                  <label for="codigo">{{'app.banco.campos.codigo' | translate}}</label>
-                  <input pInputText
-                         id="codigo"
-                         type="text"
-                         formControlName="codigo">
-                  <app-message [form]="f" [control]="form.get('codigo')"></app-message>
-               </div>
-               <div class="ui-g-9"></div>
-
-
-               <div class="ui-sm-12 ui-g-6 ui-fluid">
-                  <label for="nome" class="required">{{'app.banco.campos.nome' | translate}}</label>
-                  <input pInputText
-                         id="nome"
-                         type="text"
-                         formControlName="nome">
-                  <app-message [form]="f" [control]="form.get('nome')"></app-message>
-               </div>
-
-               <div class="ui-sm-12 ui-g-6 ui-fluid">
-                  <label for="url">{{'app.banco.campos.url' | translate}}</label>
-                  <input pInputText
-                         id="url"
-                         type="text"
-                         formControlName="url">
-                  <app-message [form]="f" [control]="form.get('url')"></app-message>
-               </div>
-
-               <div class="ui-sm-12 ui-g-6 ui-fluid">
-                  <p-checkbox id="chkInativo" [formControl]="form.controls['inativo']"
-                              binary="true"
-                              label="{{'app.banco.campos.inativo' | translate}}"></p-checkbox>
-               </div>
-
-               <div class="ui-sm-12 ui-g-12">
-                  <button pButton type="button"
-                          label="{{'app.acoes.cancelar' | translate}}"
-                          class="ui-button-danger"
-                          tooltipPosition="top" pTooltip="{{'app.acoes.tooltip.cancelar' | translate}}"
-                          (click)="cancel()"></button>
-                  <button pButton type="submit"
-                          *ngIf="form.get('key').value ? auth.hasPermission('ROLE_ATUALIZAR_BANCO') : auth.hasPermission('ROLE_SALVAR_BANCO')"
-                          label="{{(form.get('key').value ? 'app.acoes.atualizar' : 'app.acoes.salvar') | translate}}"
-                          tooltipPosition="top" pTooltip="{{'app.acoes.tooltip.salvar' | translate}}"
-                          class="ui-button-success"></button>
-               </div>
-
+                <h1 *ngIf="loading === true">{{('app.comum.carregando') | translate}}</h1>
+                <h1 *ngIf="loading === false">{{(form.get('key')?.value?.length > 0 ? 'app.banco.acoes.editar' : 'app.banco.acoes.adicionar') |
+                    translate}}</h1>
             </div>
 
-         </form>
+            <form #f="ngForm" novalidate (submit)="save()" autocomplete="off" [formGroup]="form">
 
-      </div>
-   </div>
+                <div class="ui-g">
+                    <input pInputText
+                           type="text"
+                           [hidden]="true"
+                           name="key"
+                           formControlName="key">
+
+                    <div class="ui-g-3 ui-fluid container">
+                        <img [src]="form.get('logo').value ? form.get('logo').value : 'assets/wcorrea/img/logo-banco-indisponivel.png'">
+                        <button type="button" class="btn fa fa-camera fa-2" (click)="mostrarDialogCortarImagem()"></button>
+                    </div>
+
+                    <div class="ui-g-9"></div>
+
+                    <div class="ui-g-3 ui-fluid">
+                        <label for="codigo">{{'app.banco.campos.codigo' | translate}}</label>
+                        <input pInputText
+                               id="codigo"
+                               type="text"
+                               formControlName="codigo">
+                        <app-message [form]="f" [control]="form.get('codigo')"></app-message>
+                    </div>
+                    <div class="ui-g-9"></div>
+
+                    <div class="ui-sm-12 ui-g-6 ui-fluid">
+                        <label for="nome" class="required">{{'app.banco.campos.nome' | translate}}</label>
+                        <input pInputText
+                               id="nome"
+                               type="text"
+                               formControlName="nome">
+                        <app-message [form]="f" [control]="form.get('nome')"></app-message>
+                    </div>
+
+                    <div class="ui-sm-12 ui-g-6 ui-fluid">
+                        <label for="url">{{'app.banco.campos.url' | translate}}</label>
+                        <input pInputText
+                               id="url"
+                               type="text"
+                               formControlName="url">
+                        <app-message [form]="f" [control]="form.get('url')"></app-message>
+                    </div>
+
+                    <div class="ui-sm-12 ui-g-6 ui-fluid">
+                        <p-checkbox id="chkInativo" [formControl]="form.controls['inativo']"
+                                    binary="true"
+                                    label="{{'app.banco.campos.inativo' | translate}}"></p-checkbox>
+                    </div>
+
+                    <div class="ui-sm-12 ui-g-12">
+                        <button pButton type="button"
+                                label="{{'app.acoes.cancelar' | translate}}"
+                                class="ui-button-danger"
+                                tooltipPosition="top" pTooltip="{{'app.acoes.tooltip.cancelar' | translate}}"
+                                (click)="cancel()"></button>
+                        <button pButton type="submit"
+                                *ngIf="form.get('key').value ? auth.hasPermission('ROLE_ATUALIZAR_BANCO') : auth.hasPermission('ROLE_SALVAR_BANCO')"
+                                label="{{(form.get('key').value ? 'app.acoes.atualizar' : 'app.acoes.salvar') | translate}}"
+                                tooltipPosition="top" pTooltip="{{'app.acoes.tooltip.salvar' | translate}}"
+                                class="ui-button-success"></button>
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
 </div>
+
+
+<p-dialog header="{{'app.sistema.cortar-imagem' | translate}}"
+          [(visible)]="mostrarDialogoLogo" [contentStyle]="{'width': '700px'}">
+
+    <div style="width: 100%; text-align: center;">
+        <input #fileInput type="file" accept="image/*" (change)="fileChangeEvent($event)"/>
+        <br>
+
+        <button *ngIf="imagemSelecionada" class="btn-recortar-imagem fa fa-undo" (click)="rotateLeft()"></button>
+        <button *ngIf="imagemSelecionada" class="btn-recortar-imagem fa fa-repeat" (click)="rotateRight()"></button>
+        <button *ngIf="imagemSelecionada" class="btn-recortar-imagem fa fa-exchange" (click)="flipHorizontal()"></button>
+        <button *ngIf="imagemSelecionada" class="btn-recortar-imagem fa fa-exchange fa-rotate-90" (click)="flipVertical()"></button>
+        <br *ngIf="imagemSelecionada">
+        <hr>
+
+        <img *ngIf="!imagemSelecionada" src="assets/wcorrea/img/buscar-imagens.jpg"/>
+        <div *ngIf="imagemSelecionada" style="width: 100%; height: 400px">
+            <image-cropper
+                [imageChangedEvent]="imageChangedEvent"
+                [maintainAspectRatio]="true"
+                [aspectRatio]="4 / 1"
+                [resizeToWidth]="350"
+                [cropperMinWidth]="150"
+                [onlyScaleDown]="true"
+                [roundCropper]="false"
+                format="png"
+                outputType="base64"
+                (imageCropped)="imageCropped($event)"
+                (imageLoaded)="imageLoaded()"
+                (cropperReady)="cropperReady()"
+                (loadImageFailed)="loadImageFailed()"
+                [style.display]="showCropper ? null : 'none'"
+                style="max-height: 400px;"
+            ></image-cropper>
+        </div>
+
+        <hr *ngIf="imagemSelecionada">
+        <img *ngIf="imagemSelecionada" [src]="croppedImage"/>
+    </div>
+</p-dialog>
