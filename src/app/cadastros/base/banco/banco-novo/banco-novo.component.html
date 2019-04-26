@@ -83,7 +83,8 @@
 </div>
 
 
-<p-dialog header="{{'app.sistema.cortar-imagem' | translate}}"
+<p-dialog #dialog header="{{'app.sistema.cortar-imagem' | translate}}"
+          positionTop="100"
           [(visible)]="mostrarDialogoLogo" [contentStyle]="{'width': '700px'}">
 
     <div style="width: 100%; text-align: center;">
@@ -120,5 +121,7 @@
 
         <hr *ngIf="imagemSelecionada">
         <img *ngIf="imagemSelecionada" [src]="croppedImage"/>
+
+        <button *ngIf="imagemSelecionada" type="button" class="btn-cortar fa fa-scissors fa-2x" (click)="cortarImagem()"></button>
     </div>
 </p-dialog>

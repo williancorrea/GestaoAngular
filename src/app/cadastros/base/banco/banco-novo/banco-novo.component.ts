@@ -116,6 +116,11 @@ export class BancoNovoComponent extends BaseFormComponent implements OnInit {
     }
 
 
+    @ViewChild(ImageCropperComponent) imageCropper: ImageCropperComponent;
+
+    @ViewChild('fileInput')
+    fileInput: ElementRef;
+
     mostrarDialogCortarImagem() {
         this.imagemSelecionada = false;
         this.mostrarDialogoLogo = true;
@@ -124,14 +129,9 @@ export class BancoNovoComponent extends BaseFormComponent implements OnInit {
         this.fileInput.nativeElement.value = '';
     }
 
-    @ViewChild(ImageCropperComponent) imageCropper: ImageCropperComponent;
-
-    @ViewChild('fileInput')
-    fileInput: ElementRef;
-
 
     fileChangeEvent(event: any): void {
-        console.log('change', event)
+        // console.log('change', event);
 
         // VARIFICA SE FOI SELECIONADO ALGUMA IMAGEM
         const target = event.target || event.srcElement;
@@ -150,21 +150,21 @@ export class BancoNovoComponent extends BaseFormComponent implements OnInit {
 
     imageCropped(event: ImageCroppedEvent) {
         this.croppedImage = event.base64;
-        console.log(event);
+        // console.log(event);
     }
 
     imageLoaded() {
         this.showCropper = true;
-        console.log('Image loaded');
+        // console.log('Image loaded');
     }
 
     cropperReady() {
-        console.log('Cropper ready');
+        // console.log('Cropper ready');
     }
 
     loadImageFailed() {
         this.imagemSelecionada = false;
-        console.log('Load failed');
+        // console.log('Load failed');
     }
 
     rotateLeft() {
@@ -181,5 +181,10 @@ export class BancoNovoComponent extends BaseFormComponent implements OnInit {
 
     flipVertical() {
         this.imageCropper.flipVertical();
+    }
+
+    cortarImagem() {
+        this.form.controls['logo'].setValue(this.croppedImage);
+        this.mostrarDialogoLogo = false;
     }
 }
