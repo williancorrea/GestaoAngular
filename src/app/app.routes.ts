@@ -33,6 +33,8 @@ import {TanqueCombustivelPesquisaComponent} from './cadastros/base/tanque-combus
 import {TanqueCombustivelNovoComponent} from './cadastros/base/tanque-combustivel/tanque-combustivel-novo/tanque-combustivel-novo.component';
 import {UnidadeMedidaNovoComponent} from './cadastros/base/unidade-medida/unidade-medida-novo/unidade-medida-novo.component';
 import {UnidadeMedidaPesquisaComponent} from './cadastros/base/unidade-medida/unidade-medida-pesquisa/unidade-medida-pesquisa.component';
+import {PersonSearchComponent} from './cadastros/base/person/person-search/person-search.component';
+import {PersonNewComponent} from './cadastros/base/person/person-new/person-new.component';
 
 export const routes: Routes = [
     {path: 'sample', component: SampleDemoComponent},
@@ -99,9 +101,9 @@ export const routes: Routes = [
 
 
 
-    // {path: 'persons', component: PersonSearchComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_LIST_PERSON']}},
-    // {path: 'persons/new', component: PersonNewComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_SAVE_PERSON']}},
-    // {path: 'persons/:key', component: PersonNewComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_UPDATE_PERSON']}},
+    {path: 'cadastros/base/pessoas', component: PersonSearchComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_LIST_PERSON']}},
+    {path: 'cadastros/base/pessoas/novo', component: PersonNewComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_SAVE_PERSON']}},
+    {path: 'cadastros/base/pessoas/:key', component: PersonNewComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_UPDATE_PERSON']}},
 
 
     // {path: 'centroDeCusto', component: CentroDeCustoPesquisarComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_LISTAR_CENTRO-DE-CUSTO']}},

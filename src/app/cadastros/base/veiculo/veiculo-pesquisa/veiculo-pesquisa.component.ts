@@ -98,6 +98,7 @@ export class VeiculoPesquisaComponent implements OnInit {
     loadBank(lazyLoad: LazyLoadEvent) {
         this.setLoading(true);
         this.objSelecionado = null;
+        lazyLoad.globalFilter = this.filterGrid.nativeElement.value ? this.filterGrid.nativeElement.value : '';
         this.bankService.findAll(lazyLoad, this.veiculoFiltro).then(result => {
             this.totalRecords = result.totalElements;
             this.veiculo = result.content;

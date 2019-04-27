@@ -205,6 +205,7 @@ export class ControleKmPesquisaComponent implements OnInit {
     loadBank(lazyLoad: LazyLoadEvent) {
         this.setMostrarTelaCarregando(true);
         this.controleKmSelecionado = null;
+        lazyLoad.globalFilter = this.filtroGlobalBind.nativeElement.value ? this.filtroGlobalBind.nativeElement.value : '';
         this.controleKmService.findAll(lazyLoad, this.controleKmFiltro).then(result => {
             this.totalRegistros = result.totalElements;
             this.controleKmList = result.content;

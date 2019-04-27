@@ -121,6 +121,7 @@ export class UnidadeMedidaPesquisaComponent implements OnInit {
     loadBank(lazyLoad: LazyLoadEvent) {
         this.setLoading(true);
         this.objSelecionado = null;
+        lazyLoad.globalFilter = this.filterGrid.nativeElement.value ? this.filterGrid.nativeElement.value : '';
         this.bankService.findAll(lazyLoad).then(result => {
             this.totalRecords = result.totalElements;
             this.lista = result.content;

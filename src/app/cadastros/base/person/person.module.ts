@@ -25,6 +25,8 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {TransportSharedModule} from '../../../transport-shared/transport-share.module';
 import {CoreModule} from '../../../core/core.module';
 import {NgxLoadingModule} from 'ngx-loading';
+import {PersonNewComponent} from './person-new/person-new.component';
+import {PersonSearchComponent} from './person-search/person-search.component';
 
 @NgModule({
     imports: [
@@ -57,7 +59,10 @@ import {NgxLoadingModule} from 'ngx-loading';
         InputMaskModule,
         TabViewModule
     ],
-    declarations: [],
+    declarations: [
+        PersonNewComponent,
+        PersonSearchComponent
+    ],
     exports: [],
     providers: [
         TranslateService

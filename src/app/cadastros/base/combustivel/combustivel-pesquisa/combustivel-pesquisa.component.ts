@@ -113,6 +113,7 @@ export class CombustivelPesquisaComponent implements OnInit {
     loadBank(lazyLoad: LazyLoadEvent) {
         this.setLoading(true);
         this.objSelecionado = null;
+        lazyLoad.globalFilter = this.filterGrid.nativeElement.value ? this.filterGrid.nativeElement.value : '';
         this.combustivelService.findAll(lazyLoad, this.combustivelFiltro).then(result => {
             this.totalRecords = result.totalElements;
             this.combustiveis = result.content;
@@ -184,7 +185,7 @@ export class CombustivelPesquisaComponent implements OnInit {
             .then(() => {
                 this.grid.first = 0;
                 this.findAll(this.filterGrid.nativeElement, this.grid);
-                this.toasty.add({severity: 'success', detail: this.traduzir['combustivel']['excluir']});
+                this.toasty.add({severity: 'success', detail: this.traduzir['combustivel']['acoes']['excluir']});
                 this.loading = false;
             })
             .catch(

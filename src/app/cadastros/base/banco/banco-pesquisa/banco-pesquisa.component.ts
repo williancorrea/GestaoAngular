@@ -76,12 +76,12 @@ export class BancoPesquisaComponent implements OnInit {
                     hidden: false,
                     class: ''
                 },
-                {
-                    field: 'url',
-                    header: this.traduzir['banco']['campos']['url'],
-                    hidden: false,
-                    class: ''
-                },
+                // {
+                //     field: 'url',
+                //     header: this.traduzir['banco']['campos']['url'],
+                //     hidden: false,
+                //     class: ''
+                // },
                 {
                     field: 'inativo',
                     header: this.traduzir['banco']['campos']['inativo'],
@@ -125,6 +125,9 @@ export class BancoPesquisaComponent implements OnInit {
     loadBank(lazyLoad: LazyLoadEvent) {
         this.setLoading(true);
         this.objSelecionado = null;
+
+        lazyLoad.globalFilter = this.filterGrid.nativeElement.value ? this.filterGrid.nativeElement.value : '';
+
         this.bankService.findAll(lazyLoad, this.bancoFiltro).then(result => {
             this.totalRecords = result.totalElements;
             this.bancos = result.content;
@@ -196,7 +199,7 @@ export class BancoPesquisaComponent implements OnInit {
             .then(() => {
                 this.grid.first = 0;
                 this.findAll(this.filterGrid.nativeElement, this.grid);
-                this.toasty.add({severity: 'success', detail: this.traduzir['banco']['excluir']});
+                this.toasty.add({severity: 'success', detail: this.traduzir['banco']['acoes']['excluir']});
                 this.loading = false;
             })
             .catch(

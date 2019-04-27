@@ -127,6 +127,7 @@ export class ItinerarioPesquisaComponent implements OnInit {
     loadBank(lazyLoad: LazyLoadEvent) {
         this.setLoading(true);
         this.objSelecionado = null;
+        lazyLoad.globalFilter = this.filterGrid.nativeElement.value ? this.filterGrid.nativeElement.value : '';
         this.bankService.findAll(lazyLoad, this.itinerarioFiltro).then(result => {
             this.totalRecords = result.totalElements;
             this.itinerarios = result.content;
@@ -198,7 +199,7 @@ export class ItinerarioPesquisaComponent implements OnInit {
             .then(() => {
                 this.grid.first = 0;
                 this.findAll(this.filterGrid.nativeElement, this.grid);
-                this.toasty.add({severity: 'success', detail: this.traduzir['itinerario']['excluir']});
+                this.toasty.add({severity: 'success', detail: this.traduzir['itinerario']['acoes']['excluir']});
                 this.loading = false;
             })
             .catch(

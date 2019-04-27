@@ -105,19 +105,20 @@
 
                 <ng-template pTemplate="header" let-columns>
                     <tr>
-                        <th *ngFor="let col of columns" [pSortableColumn]="col.field" [hidden]="col.hidden" [class]="col.class">
+                        <th *ngFor="let col of columns" [hidden]="col.hidden" [class]="col.class">
                             {{col.header}}
-                            <p-sortIcon [field]="col.field"></p-sortIcon>
                         </th>
                     </tr>
                 </ng-template>
 
                 <ng-template pTemplate="body" let-rowData let-columns="columns" let-obj>
                     <tr [pSelectableRow]="rowData">
-                        <td *ngFor="let col of columns" [hidden]="col.hidden" [class]="col.class">
-                            <span *ngIf="col.field=='inativo'">{{(rowData[col.field] ? 'app.acoes.sim' : 'app.acoes.nao') | translate}} </span>
-                            <span *ngIf="col.field!='inativo'">{{rowData[col.field]}} </span>
+                        <td class="datatable-coluna-campo-codigo"><span>{{rowData['codigo']}} </span></td>
+                        <td>
+                            <img [src]="rowData['logo']" class="datatable-logo"/>
+                            <span>{{rowData['nome']}} </span>
                         </td>
+                        <td class="datatable-coluna-campo-codigo"><span>{{(rowData['inativo'] ? 'app.acoes.sim' : 'app.acoes.nao') | translate}} </span></td>
                     </tr>
                 </ng-template>
 
@@ -144,7 +145,7 @@
                             label="{{'app.acoes.excluir' | translate}}"
                             [disabled]="!objSelecionado"
                             tooltipPosition="top" pTooltip="{{'app.acoes.tooltip.excluir' | translate}}"
-                            (click)="confirmarExclusao(obj)"></button>
+                            (click)="confirmarExclusao()"></button>
                 </ng-template>
             </p-table>
 

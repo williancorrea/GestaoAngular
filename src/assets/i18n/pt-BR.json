@@ -258,6 +258,61 @@
                 "excluir": "Unidade de medida removido com sucesso!",
                 "atualizar": "Unidade de medida atualizado com sucesso."
             }
+        },
+        "pessoa": {
+            "campos": {
+                "inativo": "Inativo",
+                "nome": "Nome",
+                "estudante": "Estudante",
+                "transportadora": "Transportadora",
+                "colaborador": "Colaborador",
+                "fornecedor": "Fornecedor",
+                "cliente": "Cliente",
+                "site": "Site",
+                "email": "E-mail",
+                "cpf": "CPF",
+                "rg": "RG",
+                "orgaoRg": "Orgão Emissor",
+                "dataEmissaoRg": "Data de Expedição",
+                "dataNascimento": "Data de Nascimento",
+                "sexo": "Sexo",
+                "naturalidade": "Naturalidade",
+                "nacionalidade": "Nacionalidade",
+                "tipoSangue": "Tipo Sanqguineo",
+                "cnhNumero": "Número de Registro",
+                "cnhCategoria": "Categoria",
+                "cnhVencimento": "Vencimento",
+                "tituloEleitoralNumero": "Número",
+                "tituloEleitoralZona": "Zona",
+                "tituloEleitoralSecao": "Seção",
+                "reservistaNumero": "Número",
+                "reservistaCategoria": "Categoria",
+                "nomeMae": "Nome da Mãe",
+                "nomePai": "Nome do Pai",
+                "estadoCivil": "Estado Cívil",
+                "cnpj": "CNPJ"
+            },
+            "link-pagina": "/cadastros/base/pessoas",
+            "rotulos": {
+                "pessoa_juridica": "Pessoa Jurídica",
+                "pessoa_fisica": "Pessoa Física",
+                "razao_social": "Razão Social",
+                "reservista": "reservista",
+                "registro_geral": "Registro Geral",
+                "cnh": "Carteira Nacional de Habilitação",
+                "titulo_eleitoral": "Titulo de Eleitor",
+                "masculino": "Masculino",
+                "feminino": "Feminino"
+            },
+            "titulo": "Pessoa",
+            "lista": "Lista das Pessoas Cadastradas",
+            "acoes": {
+                "adicionar": "Adicionar",
+                "adicionado": "Pessoa adicionada com sucesso.",
+                "editsar": "Editar",
+                "excluir": "Pessoa removida com sucesso!",
+                "atualizar": "Pessoa atualizada com sucesso."
+            }
         }
     }
 }

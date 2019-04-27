@@ -112,6 +112,7 @@ import {ItinerarioModule} from './cadastros/base/itinerario/itinerario.module';
 import {CombustivelModule} from './cadastros/base/combustivel/combustivel.module';
 import {TanqueCombustivelModule} from './cadastros/base/tanque-combustivel/tanque-combustivel.module';
 import {UnidadeMedidaModule} from './cadastros/base/unidade-medida/unidade-medida.module';
+import {PersonModule} from './cadastros/base/person/person.module';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -229,7 +230,8 @@ export function createTranslateLoader(http: HttpClient) {
         ItinerarioModule,
         CombustivelModule,
         TanqueCombustivelModule,
-        UnidadeMedidaModule
+        UnidadeMedidaModule,
+        PersonModule
     ],
     declarations: [
         AppComponent,

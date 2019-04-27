@@ -38,7 +38,7 @@ export class AppMenuComponent implements OnInit {
                         // {label:  m['menu']['level-of-education'], icon: 'fa fa-fw fa-lightbulb-o', routerLink: ['/levels-of-education'], visible: this.auth.hasPermission('ROLE_LIST_LEVEL-OF-EDUCATION')},
                         // {label:  m['menu']['estado-civil'], icon: 'fa fa-fw fa-heart-o', routerLink: ['/estado-civil'], visible: this.auth.hasPermission('ROLE_LISTAR_ESTADO_CIVIL')},
                         {label:  m['veiculo']['titulo'], icon: 'fa fa-fw fa-car', routerLink: [this.traduzir['veiculo']['link-pagina']], visible: this.auth.hasPermission('ROLE_LISTAR_VEICULO')},
-                        // {label:  m['menu']['persons'], icon: 'fa fa-fw fa-address-book-o', routerLink: ['/persons'], visible: this.auth.hasPermission('ROLE_LIST_PERSON')},
+                        {label:  m['pessoa']['titulo'], icon: 'fa fa-fw fa-address-book-o', routerLink: [this.traduzir['pessoa']['link-pagina']], visible: this.auth.hasPermission('ROLE_LIST_PERSON')},
                         {label:  m['itinerario']['titulo'], icon: 'fa fa-fw fa-truck', routerLink: [this.traduzir['itinerario']['link-pagina']], visible: this.auth.hasPermission('ROLE_LISTAR_ITINERARIO')},
                         {label:  m['combustivel']['titulo'], icon: 'fa fa-fw fa-thermometer-full', routerLink: [this.traduzir['combustivel']['link-pagina']], visible: this.auth.hasPermission('ROLE_LISTAR_COMBUSTIVEL')},
                         {label:  m['tanque-combustivel']['rotulos']['menu'], icon: 'fa fa-fw fa-circle-o-notch', routerLink: [this.traduzir['tanque-combustivel']['link-pagina']], visible: this.auth.hasPermission('ROLE_LISTAR_TANQUE-COMBUSTIVEL')},
