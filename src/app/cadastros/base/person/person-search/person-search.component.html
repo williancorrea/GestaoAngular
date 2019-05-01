@@ -22,8 +22,8 @@
                 <div class="ui-inputgroup" ngClass="{{showFilter ? 'd-none': ''}}">
                     <span class="ui-inputgroup-addon"><i class="fa fa fa-search"></i></span>
                     <input #globalFilter pInputText type="text" size="50"
-                           (input)="dataTable.filterGlobal($event.target.value, 'contains')"
-                           placeholder="{{'actions.global_filter' | translate}}">
+                           (input)="dataTable.filterGlobal($event.target['value'], 'contains')"
+                           placeholder="{{'app.acoes.filtro-global' | translate}}">
                     <button pButton
                             type="button" icon="fa fa-close"
                             class="ui-button-danger"
@@ -32,18 +32,18 @@
                     <button pButton
                             type="button" icon="fa fa-filter"
                             *ngIf="globalFilter.value.length === 0"
-                            label="{{'commons.filter.more_filters' | translate}}"
+                            label="{{'app.comum.filtro.mais-filtros' | translate}}"
                             class="ui-button-secondary"
                             (click)="showFilterFields(true)"></button>
                 </div>
 
-                <!--FILTER BY FIELDS-->
+                <!-- FILTRO POR CAMPOS-->
                 <div class="ui-g" ngClass="{{!showFilter ? 'd-none': ''}}">
                     <div class="ui-g-12 filter-title">
-                        <h2>{{'commons.filter.fields' | translate}}</h2>
+                        <h2>{{'app.comum.filtro.campos' | translate}}</h2>
                     </div>
                     <div class="ui-g-4 ui-fluid">
-                        <label>{{'bank.fields.name' | translate}}</label>
+                        <label>{{'app.pessoa.campos.nome' | translate}}</label>
                         <input pInputText
                                type="text"
                                name="name"
@@ -54,13 +54,13 @@
                     <div class="ui-g-12" style="text-align: right">
                         <button pButton
                                 type="button" icon="fa fa-minus"
-                                label="{{'commons.filter.less_filters' | translate}}"
+                                label="{{'app.comum.filtro.menos-filtros' | translate}}"
                                 class="ui-button-secondary"
                                 (click)="findAll(globalFilter, dataTable)"></button>
                         <button pButton
                                 type=" button" icon="fa fa-filter"
                                 (click)="filterFields(dataTable)"
-                                label="{{'commons.filter.filter' | translate}}"></button>
+                                label="{{'app.comum.filtro.filtrar' | translate}}"></button>
                     </div>
                 </div>
             </div>
@@ -84,36 +84,31 @@
             >
                 <ng-template pTemplate="emptymessage">
                     <tr>
-                        <td colspan="3"> {{ 'actions.no_records_found' | translate}}</td>
+                        <td colspan="6"> {{ 'app.acoes.nenhum-registro-encontrado' | translate}}</td>
                     </tr>
                 </ng-template>
 
                 <ng-template pTemplate="header" let-columns>
                     <tr>
                         <th>
-                            <span>{{'person.fields.name' | translate}}</span>
+                            <span>{{'app.pessoa.campos.nome' | translate}}</span>
                             <p-sortIcon [field]="nome"></p-sortIcon>
                         </th>
 
                         <th class="datatable-collum-field-boolean">
-                            <span>{{'person.fields.client' | translate}}</span>
-                            <p-sortIcon [field]="cliente"></p-sortIcon>
+                            <span>{{'app.pessoa.campos.cliente' | translate}}</span>
                         </th>
                         <th class="datatable-collum-field-boolean">
-                            <span>{{'person.fields.student' | translate}}</span>
-                            <p-sortIcon [field]="estudante"></p-sortIcon>
+                            <span>{{'app.pessoa.campos.estudante' | translate}}</span>
                         </th>
                         <th class="datatable-collum-field-boolean">
-                            <span>{{'person.fields.provider' | translate}}</span>
-                            <p-sortIcon [field]="fornecedor"></p-sortIcon>
+                            <span>{{'app.pessoa.campos.fornecedor' | translate}}</span>
                         </th>
                         <th class="datatable-collum-field-boolean">
-                            <span>{{'person.fields.collaborator' | translate}}</span>
-                            <p-sortIcon [field]="colaborador"></p-sortIcon>
+                            <span>{{'app.pessoa.campos.colaborador' | translate}}</span>
                         </th>
                         <th class="datatable-collum-field-boolean">
-                            <span>{{'person.fields.shippingCompany' | translate}}</span>
-                            <p-sortIcon [field]="transportadora"></p-sortIcon>
+                            <span>{{'app.pessoa.campos.transportadora' | translate}}</span>
                         </th>
                     </tr>
                 </ng-template>
@@ -148,7 +143,7 @@
                 <ng-template pTemplate="paginatorleft">
                     <a pButton icon="fa fa-refresh"
                        (click)="findAll(globalFilter, dataTable)"
-                       tooltipPosition="top" pTooltip="{{'actions.refresh' | translate}}"></a>
+                       tooltipPosition="top" pTooltip="{{'app.acoes.atualizar' | translate}}"></a>
                 </ng-template>
 
                 <ng-template pTemplate="paginatorright" let-obj="rowData">
@@ -156,19 +151,19 @@
                             *ngIf="auth.hasPermission('ROLE_UPDATE_PERSON')"
                             pButton
                             icon="fa fa-pencil"
-                            label="{{'actions.edit' | translate}}"
+                            label="{{'app.acoes.editar' | translate}}"
                             [disabled]="selectedPerson ? false :true"
-                            tooltipPosition="top" pTooltip="{{'actions.tooltip.edit' | translate}}"
+                            tooltipPosition="top" pTooltip="{{'app.acoes.tooltip.editar' | translate}}"
                             (click)="edit()"></button>
                     <button type="button"
                             *ngIf="auth.hasPermission('ROLE_DELETE_PERSON')"
                             pButton
                             icon="fa fa-trash"
                             class="ui-button-danger"
-                            label="{{'actions.delete' | translate}}"
+                            label="{{'app.acoes.excluir' | translate}}"
                             [disabled]="selectedPerson ? false :true"
-                            tooltipPosition="top" pTooltip="{{'actions.tooltip.delete' | translate}}"
-                            (click)="ConfirmDeletion(obj)"></button>
+                            tooltipPosition="top" pTooltip="{{'app.acoes.tooltip.excluir' | translate}}"
+                            (click)="ConfirmDeletion()"></button>
                 </ng-template>
             </p-table>
 

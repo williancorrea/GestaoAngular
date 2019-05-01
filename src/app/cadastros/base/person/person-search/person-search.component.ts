@@ -172,13 +172,11 @@ export class PersonSearchComponent implements OnInit {
     }
 
     ConfirmDeletion() {
-        this.traduzir.get('actions').subscribe(s => {
-            this.confirmation.confirm({
-                message: s['confirm-deletion'],
-                accept: () => {
-                    this.delete();
-                }
-            });
+        this.confirmation.confirm({
+            message: this.traduzir['acoes']['confirmar-exclusao'],
+            accept: () => {
+                this.delete();
+            }
         });
     }
 

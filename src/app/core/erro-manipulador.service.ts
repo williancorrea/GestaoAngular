@@ -26,11 +26,9 @@ export class ErroManipuladorService {
 
         if (typeof errorResponse === 'string') {
             mensagemErro = errorResponse;
-
         } else if (errorResponse instanceof NotAuthenticatedError) {
             mensagemErro = this.labels['erros']['sessao-expirada'];
             this.router.navigate(['/login']);
-
         } else if (errorResponse instanceof Response
             && errorResponse.status >= 400 && errorResponse.status <= 499) {
             let errors;
@@ -50,7 +48,7 @@ export class ErroManipuladorService {
             console.error('Ocorreu um erro', errorResponse);
         } else {
             mensagemErro = this.labels['erros']['erro-no-servico'];
-            console.error('Ocorreu um erro', errorResponse);
+            console.error('Ocorreu um erro no back-end', errorResponse);
 
             // Erro no back-end
             this.router.navigate(['/erro']);
