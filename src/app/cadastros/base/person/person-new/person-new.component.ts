@@ -46,8 +46,8 @@ export class PersonNewComponent implements OnInit {
             this.traduzir = s;
 
             this.sexos = [
-                {label: this.traduzir['labels']['masculino'], value: 'M'},
-                {label: this.traduzir['labels']['feminino'], value: 'F'},
+                {label: this.traduzir['pessoa']['rotulos']['masculino'], value: 'M'},
+                {label: this.traduzir['pessoa']['rotulos']['feminino'], value: 'F'},
             ];
 
             const isEditing = this.activatedRoute.snapshot.params['key'];
@@ -56,7 +56,7 @@ export class PersonNewComponent implements OnInit {
             this.ocultarSelecaoTipoPessoa = false;
             if (isEditing) {
                 this.ocultarSelecaoTipoPessoa = true;
-                this.title.setTitle(s['actions']['edit']);
+                this.title.setTitle(this.traduzir['pessoa']['acoes']['editar']);
 
                 this.personService.findOne(isEditing)
                     .then(response => {
@@ -76,11 +76,11 @@ export class PersonNewComponent implements OnInit {
                     })
                     .catch(error => {
                         this.errorHandler.handle(error);
-                        this.title.setTitle(s['actions']['add']);
+                        this.title.setTitle(this.traduzir['pessoa']['acoes']['adicionar']);
                         this.showLoading(false);
                     });
             } else {
-                this.title.setTitle(s['actions']['add']);
+                this.title.setTitle(this.traduzir['pessoa']['acoes']['adicionar']);
                 this.showLoading(false);
             }
         });

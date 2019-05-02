@@ -41,7 +41,6 @@ export class UnidadeMedidaNovoComponent extends BaseFormComponent implements OnI
                 this.titulo.setTitle(this.traduzir['unidade-medida']['acoes']['editar']);
 
                 this.unidadeMedidaService.findOne(editando).then(response => {
-                    // this.bank = response;
                     this.form.patchValue(response);
                     this.mostrarModalCarregando(false);
                 }).catch(error => {
