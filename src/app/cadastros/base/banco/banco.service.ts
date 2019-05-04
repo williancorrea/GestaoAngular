@@ -15,9 +15,6 @@ export class BancoService {
     /**
      * Lista todos registro de acordo com os filtros passados por parametro
      *
-     * @param grid
-     * @param {BancoFiltro} bancoFiltro
-     * @returns {Promise<any>}
      */
     findAll(grid: any, bancoFiltro: BancoFiltro): Promise<any> {
         /*
@@ -60,9 +57,6 @@ export class BancoService {
 
     /**
      * Busca por um registro especifico de acordo com a Key passada por paramentro
-     *
-     * @param key
-     * @returns {Promise<any>}
      */
     findOne(key): Promise<any> {
         return this.http.get(`${this.apiUrl}/${key}`)
@@ -74,9 +68,6 @@ export class BancoService {
 
     /**
      * Exclui um registro de acordo com a Key passafa por parametro
-     *
-     * @param {String} key
-     * @returns {Promise<any>}
      */
     delete(key: String): Promise<any> {
         return this.http.delete(`${this.apiUrl}/${key}`)
@@ -86,9 +77,6 @@ export class BancoService {
 
     /**
      * Salva um registro
-     *
-     * @param {Banco} obj
-     * @returns {Promise<Banco>}
      */
     save(obj: any): Promise<any> {
         const clone = JSON.parse(JSON.stringify(obj));
@@ -105,9 +93,6 @@ export class BancoService {
 
     /**
      * Atualiza o registro
-     *
-     * @param {Banco} obj
-     * @returns {Promise<Banco>}
      */
     update(obj: any): Promise<any> {
         const key = obj.key;

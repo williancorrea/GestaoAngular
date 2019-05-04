@@ -119,7 +119,7 @@
                                  class="ui-sm-3 ui-g-3 ui-fluid"
                                  formGroupName="pessoaFisica">
                                 <div formGroupName="estadoCivil">
-                                    <label class="required">{{'app.pessoa.campos.estadoCivil'| translate}}</label>
+                                    <label>{{'app.pessoa.campos.estadoCivil'| translate}}</label>
                                     <p-dropdown emptyFilterMessage="{{'app.acoes.nenhum-registro-encontrado' | translate }}"
                                                 [options]="estadoCivilList"
                                                 formControlName="key"
@@ -150,7 +150,7 @@
                                 <!--PESSOA FISICA - DATA NASCIMENTO-->
                                 <div *ngIf="form.get('tipo').value === 'FISICA' ? true : false" class="ui-g-3 ui-fluid"
                                      formGroupName="pessoaFisica">
-                                    <label>{{'person.fields.dataNascimento'| translate}}</label>
+                                    <label>{{'app.pessoa.campos.dataNascimento'| translate}}</label>
                                     <p-calendar formControlName="dataNascimento"
                                                 dateFormat="dd/mm/yy"
                                                 [readonlyInput]="false"
@@ -165,7 +165,7 @@
                                 <div *ngIf="form.get('tipo').value === 'FISICA' ? true : false"
                                      class="ui-g-3 ui-fluid"
                                      formGroupName="pessoaFisica">
-                                    <label>{{'person.fields.orgaoRg'| translate}}</label>
+                                    <label>{{'app.pessoa.campos.orgaoRg'| translate}}</label>
                                     <p-inputMask mask="aaa/aa" slotChar="_" formControlName="orgaoRg"></p-inputMask>
                                     <app-message [form]="f" [control]="form.get('pessoaFisica').get('orgaoRg')"></app-message>
                                 </div>
@@ -174,7 +174,7 @@
                                 <div *ngIf="form.get('tipo').value === 'FISICA' ? true : false"
                                      class="ui-g-3 ui-fluid"
                                      formGroupName="pessoaFisica">
-                                    <label>{{'person.fields.dataEmissaoRg'| translate}}</label>
+                                    <label>{{'app.pessoa.campos.dataEmissaoRg'| translate}}</label>
                                     <p-calendar formControlName="dataEmissaoRg"
                                                 dateFormat="dd/mm/yy"
                                                 [readonlyInput]="true"
@@ -189,7 +189,7 @@
                                 <div *ngIf="form.get('tipo').value === 'FISICA' ? true : false"
                                      class="ui-g-6 ui-fluid"
                                      formGroupName="pessoaFisica">
-                                    <label>{{'person.fields.naturalidade'| translate}}</label>
+                                    <label>{{'app.pessoa.campos.naturalidade'| translate}}</label>
                                     <input pInputText type="text"
                                            formControlName="naturalidade">
                                     <app-message [form]="f"
@@ -200,7 +200,7 @@
                                 <div *ngIf="form.get('tipo').value === 'FISICA' ? true : false"
                                      class="ui-g-6 ui-fluid"
                                      formGroupName="pessoaFisica">
-                                    <label>{{'person.fields.nacionalidade'| translate}}</label>
+                                    <label>{{'app.pessoa.campos.nacionalidade'| translate}}</label>
                                     <input pInputText type="text"
                                            formControlName="nacionalidade">
                                     <app-message [form]="f"
@@ -211,7 +211,7 @@
                                 <div *ngIf="form.get('tipo').value === 'FISICA' ? true : false"
                                      class="ui-g-6 ui-fluid"
                                      formGroupName="pessoaFisica">
-                                    <label>{{'person.fields.nomePai'| translate}}</label>
+                                    <label>{{'app.pessoa.campos.nomePai'| translate}}</label>
                                     <input pInputText type="text"
                                            formControlName="nomePai">
                                     <app-message [form]="f"
@@ -222,7 +222,7 @@
                                 <div *ngIf="form.get('tipo').value === 'FISICA' ? true : false"
                                      class="ui-g-6 ui-fluid"
                                      formGroupName="pessoaFisica">
-                                    <label>{{'person.fields.nomeMae'| translate}}</label>
+                                    <label>{{'app.pessoa.campos.nomeMae'| translate}}</label>
                                     <input pInputText type="text"
                                            formControlName="nomeMae">
                                     <app-message [form]="f"
@@ -233,12 +233,12 @@
                             </p-tabPanel>
 
                             <!--GRUPO CNH-->
-                            <p-tabPanel header="{{'person.labels.cnh' | translate}}" class="ui-g">
+                            <p-tabPanel header="{{'app.pessoa.rotulos.cnh' | translate}}" class="ui-g">
                                 <!--PESSOA FISICA - NUMERO CNH -->
                                 <div *ngIf="form.get('tipo').value === 'FISICA' ? true : false"
                                      class="ui-g-3 ui-fluid"
                                      formGroupName="pessoaFisica">
-                                    <label>{{'person.fields.cnhNumero'| translate}}</label>
+                                    <label>{{'app.pessoa.campos.cnhNumero'| translate}}</label>
                                     <input pInputText type="text"
                                            pattern="[0-9]+$"
                                            formControlName="cnhNumero">
@@ -249,7 +249,7 @@
                                 <div *ngIf="form.get('tipo').value === 'FISICA' ? true : false"
                                      class="ui-sm-3 ui-g-3 ui-fluid"
                                      formGroupName="pessoaFisica">
-                                    <label>{{'person.fields.cnhCategoria'| translate}}</label>
+                                    <label>{{'app.pessoa.campos.cnhCategoria'| translate}}</label>
                                     <input pInputText type="text"
                                            formControlName="cnhCategoria"
                                            pattern="[A-Za-z]+$"
@@ -263,7 +263,7 @@
                                 <div *ngIf="form.get('tipo').value === 'FISICA' ? true : false"
                                      class="ui-sm-3 ui-g-3 ui-fluid"
                                      formGroupName="pessoaFisica">
-                                    <label>{{'person.fields.cnhVencimento'| translate}}</label>
+                                    <label>{{'app.pessoa.campos.cnhVencimento'| translate}}</label>
                                     <p-calendar formGroupName="cnhVencimento"
                                                 dateFormat="dd/mm/yy"
                                                 [readonlyInput]="true"
@@ -276,12 +276,12 @@
                             </p-tabPanel>
 
                             <!--GRUPO TITULO DE ELEITOR -->
-                            <p-tabPanel header="{{'person.labels.tituloEleitoral' | translate}}" class="ui-g">
+                            <p-tabPanel header="{{'app.pessoa.rotulos.titulo_eleitoral' | translate}}" class="ui-g">
                                 <!--PESSOA FISICA - TITULO ELEITORAL NUMERO -->
                                 <div *ngIf="form.get('tipo').value === 'FISICA' ? true : false"
                                      class="ui-sm-3 ui-g-3 ui-fluid"
                                      formGroupName="pessoaFisica">
-                                    <label>{{'person.fields.tituloEleitoralNumero'| translate}}</label>
+                                    <label>{{'app.pessoa.campos.tituloEleitoralNumero'| translate}}</label>
                                     <input pInputText type="text"
                                            formControlName="tituloEleitoralNumero">
                                     <app-message [form]="f"
@@ -292,7 +292,7 @@
                                 <div *ngIf="form.get('tipo').value === 'FISICA' ? true : false"
                                      class="ui-sm-3 ui-g-3 ui-fluid"
                                      formGroupName="pessoaFisica">
-                                    <label>{{'person.fields.tituloEleitoralZona'| translate}}</label>
+                                    <label>{{'app.pessoa.campos.tituloEleitoralZona'| translate}}</label>
                                     <input pInputText type="text"
                                            formControlName="tituloEleitoralZona">
                                     <app-message [form]="f"
@@ -303,7 +303,7 @@
                                 <div *ngIf="form.get('tipo').value === 'FISICA' ? true : false"
                                      class="ui-sm-3 ui-g-3 ui-fluid"
                                      formGroupName="pessoaFisica">
-                                    <label>{{'person.fields.tituloEleitoralSecao'| translate}}</label>
+                                    <label>{{'app.pessoa.campos.tituloEleitoralSecao'| translate}}</label>
                                     <span class="requiredLabel"></span>
                                     <input pInputText type="text"
                                            formControlName="tituloEleitoralSecao">
@@ -313,12 +313,12 @@
                             </p-tabPanel>
 
                             <!--GRUPO RESERVISTA-->
-                            <p-tabPanel header="{{'person.labels.reservista' | translate}}" class="ui-g">
+                            <p-tabPanel header="{{'app.pessoa.rotulos.reservista' | translate}}" class="ui-g">
                                 <!--PESSOA FISICA - TIPO SANGUINEO -->
                                 <div *ngIf="form.get('tipo').value === 'FISICA' ? true : false"
                                      class="ui-g-3 ui-fluid"
                                      formGroupName="pessoaFisica">
-                                    <label>{{'person.fields.tipoSangue'| translate}}</label>
+                                    <label>{{'app.pessoa.campos.tipoSangue'| translate}}</label>
                                     <input pInputText type="text"
                                            formControlName="tipoSangue">
                                     <app-message [form]="f"
@@ -329,7 +329,7 @@
                                 <div *ngIf="form.get('tipo').value === 'FISICA' ? true : false"
                                      class="ui-sm-3 ui-g-3 ui-fluid"
                                      formGroupName="pessoaFisica">
-                                    <label>{{'person.fields.reservistaNumero'| translate}}</label>
+                                    <label>{{'app.pessoa.campos.reservistaNumero'| translate}}</label>
                                     <input pInputText type="text"
                                            formControlName="reservistaNumero">
                                     <app-message [form]="f"
@@ -340,7 +340,7 @@
                                 <div *ngIf="form.get('tipo').value === 'FISICA' ? true : false"
                                      class="ui-sm-3 ui-g-3 ui-fluid"
                                      formGroupName="pessoaFisica">
-                                    <label>{{'person.fields.reservistaCategoria'| translate}}</label>
+                                    <label>{{'app.pessoa.campos.reservistaCategoria'| translate}}</label>
                                     <input pInputText type="text"
                                            formControlName="reservistaCategoria">
                                     <app-message [form]="f"
@@ -353,14 +353,14 @@
 
                     <div class="ui-sm-12 ui-g-12">
                         <button pButton type="button"
-                                label="{{'actions.cancel' | translate}}"
+                                label="{{'app.acoes.cancelar' | translate}}"
                                 class="ui-button-danger"
-                                tooltipPosition="top" pTooltip="{{'actions.tooltip.cancel' | translate}}"
+                                tooltipPosition="top" pTooltip="{{'app.acoes.tooltip.cancelar' | translate}}"
                                 (click)="cancel()"></button>
                         <button pButton type="submit"
                                 *ngIf="form.get('key').value ? auth.hasPermission('ROLE_UPDATE_PERSON') : auth.hasPermission('ROLE_SAVE_PERSON')"
-                                label="{{(form.get('key').value ? 'actions.update' : 'actions.save') | translate}}"
-                                tooltipPosition="top" pTooltip="{{'actions.tooltip.save' | translate}}"
+                                label="{{(form.get('key').value ? 'app.acoes.atualizar' : 'app.acoes.salvar') | translate}}"
+                                tooltipPosition="top" pTooltip="{{'app.acoes.tooltip.salvar' | translate}}"
                                 class="ui-button-success"></button>
                     </div>
 

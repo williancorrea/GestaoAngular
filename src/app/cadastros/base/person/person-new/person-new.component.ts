@@ -348,8 +348,6 @@ export class PersonNewComponent implements OnInit {
     }
 
     save() {
-        console.log(this.form);
-
         this.ocultarSelecaoTipoPessoa = true;
         if (this.form.get('tipo').value === 'FISICA') {
             this.form.removeControl('pessoaJuridica');
@@ -357,13 +355,12 @@ export class PersonNewComponent implements OnInit {
             this.form.removeControl('pessoaFisica');
         }
 
+        if (this.form.invalid) {
+            this.toasty.add({severity: 'warn', detail: this.traduzir['validacao']['form_invalido']});
+            return;
+        }
+
         if (this.form.valid) {
-
-            if (this.form.invalid) {
-                this.toasty.add({severity: 'warn', detail: this.traduzir['validacao']['form_invalido']});
-                return;
-            }
-
             this.showLoading(true);
             if (this.form.get('key').value) {
                 this.personService.update(this.form.value)
@@ -371,7 +368,7 @@ export class PersonNewComponent implements OnInit {
                         response => {
                             this.toasty.add({severity: 'success', detail: this.traduzir['pessoa']['acoes']['atualizar']});
                             this.showLoading(false);
-                            this.router.navigateByUrl(this.translate['pessoa'['link-pagina']]);
+                            this.router.navigateByUrl(this.traduzir['pessoa']['link-pagina']);
                         }
                     ).catch(error => {
                     this.errorHandler.handle(error);
@@ -383,7 +380,7 @@ export class PersonNewComponent implements OnInit {
                         response => {
                             this.toasty.add({severity: 'success', detail: this.traduzir['pessoa']['acoes']['adicionado']});
                             this.showLoading(false);
-                            this.router.navigateByUrl(this.translate['pessoa'['link-pagina']]);
+                            this.router.navigateByUrl(this.traduzir['pessoa']['link-pagina']);
                         }
                     ).catch(erro => {
                     this.errorHandler.handle(erro);
@@ -394,7 +391,7 @@ export class PersonNewComponent implements OnInit {
     }
 
     cancel() {
-        this.router.navigateByUrl('/persons');
+        this.router.navigateByUrl(this.traduzir['pessoa']['link-pagina']);
     }
 }
 

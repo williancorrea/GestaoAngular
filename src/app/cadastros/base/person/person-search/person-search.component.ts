@@ -168,7 +168,7 @@ export class PersonSearchComponent implements OnInit {
     }
 
     edit() {
-        this.router.navigateByUrl(`${this.translate['pessoa'['link-pagina']]}/${this.selectedPerson.key}`);
+        this.router.navigateByUrl(`${this.traduzir['pessoa']['link-pagina']}/${this.selectedPerson.key}`);
     }
 
     ConfirmDeletion() {
