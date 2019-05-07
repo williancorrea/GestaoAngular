@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {
+    AutoCompleteModule,
     CalendarModule,
     CheckboxModule,
     DataTableModule,
@@ -57,7 +58,8 @@ import {PersonSearchComponent} from './person-search/person-search.component';
         KeyFilterModule,
         FieldsetModule,
         InputMaskModule,
-        TabViewModule
+        TabViewModule,
+        AutoCompleteModule
     ],
     declarations: [
         PersonNewComponent,

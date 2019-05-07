@@ -8,6 +8,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {MessageService} from 'primeng/api';
 import {AuthService} from '../../../../security/auth.service';
 import {ErroManipuladorService} from '../../../../core/erro-manipulador.service';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
     selector: 'app-person-new',
@@ -16,11 +17,12 @@ import {ErroManipuladorService} from '../../../../core/erro-manipulador.service'
 })
 export class PersonNewComponent implements OnInit {
 
+    env: any;
     form: FormGroup;
     traduzir: any;
     loading: boolean;
     dataAtual: any;
-    estadoCivilList;
+    estadoCivilList: any;
     sexos: any;
 
     ocultarSelecaoTipoPessoa: boolean;
@@ -39,6 +41,7 @@ export class PersonNewComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.env = environment;
         this.dataAtual = new Date();
         this.configForm();
         this.showLoading(true);
@@ -52,7 +55,6 @@ export class PersonNewComponent implements OnInit {
 
             const isEditing = this.activatedRoute.snapshot.params['key'];
 
-            this.carregarEstadosCivis();
             this.ocultarSelecaoTipoPessoa = false;
             if (isEditing) {
                 this.ocultarSelecaoTipoPessoa = true;
@@ -223,9 +225,7 @@ export class PersonNewComponent implements OnInit {
                         Validators.maxLength(250)
                     ]
                 ],
-                estadoCivil: this.formBuild.group({
-                    key: [null]
-                })
+                estadoCivil: [null]
             }),
             // listaPessoaEndereco: this.formBuild.array([this.createPessoaEndereco()]),
             listaPessoaEndereco: [[]],
@@ -334,14 +334,15 @@ export class PersonNewComponent implements OnInit {
         });
     }
 
-    carregarEstadosCivis() {
-        this.estadoCivilService.findAll({'rows': 100, 'first': 0, 'sortOrder': 1, 'sortField': 'nome'}, null)
-            .then(estadoCivilList => {
-                this.estadoCivilList = estadoCivilList.content.map(p => ({label: p.nome, value: p.key}));
-            })
-            .catch(error => {
-                this.errorHandler.handle(error);
-            });
+    filtrarEstadoCivil(event) {
+        this.estadoCivilService.findAllCmb(event.query).then(lista => {
+            this.estadoCivilList = lista.map(p => ({
+                nome: p.estadoCivil.nome,
+                key: p.estadoCivil.key
+            }));
+        }).catch(error => {
+            this.errorHandler.handle(error);
+        });
     }
 
     showLoading(value: boolean) {

@@ -37,19 +37,19 @@ import {PersonSearchComponent} from './cadastros/base/person/person-search/perso
 import {PersonNewComponent} from './cadastros/base/person/person-new/person-new.component';
 
 export const routes: Routes = [
-    {path: 'sample', component: SampleDemoComponent},
-    {path: 'forms', component: FormsDemoComponent},
-    {path: 'data', component: DataDemoComponent},
-    {path: 'panels', component: PanelsDemoComponent},
-    {path: 'overlays', component: OverlaysDemoComponent},
-    {path: 'menus', component: MenusDemoComponent},
-    {path: 'messages', component: MessagesDemoComponent},
-    {path: 'misc', component: MiscDemoComponent},
-    {path: 'empty', component: EmptyDemoComponent},
-    {path: 'charts', component: ChartsDemoComponent},
-    {path: 'file', component: FileDemoComponent},
-    {path: 'utils', component: UtilsDemoComponent},
-    {path: 'documentation', component: DocumentationComponent},
+    {path: 'sample', component: SampleDemoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_DESENVOLVIMENTO']}},
+    {path: 'forms', component: FormsDemoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_DESENVOLVIMENTO']}},
+    {path: 'data', component: DataDemoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_DESENVOLVIMENTO']}},
+    {path: 'panels', component: PanelsDemoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_DESENVOLVIMENTO']}},
+    {path: 'overlays', component: OverlaysDemoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_DESENVOLVIMENTO']}},
+    {path: 'menus', component: MenusDemoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_DESENVOLVIMENTO']}},
+    {path: 'messages', component: MessagesDemoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_DESENVOLVIMENTO']}},
+    {path: 'misc', component: MiscDemoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_DESENVOLVIMENTO']}},
+    {path: 'empty', component: EmptyDemoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_DESENVOLVIMENTO']}},
+    {path: 'charts', component: ChartsDemoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_DESENVOLVIMENTO']}},
+    {path: 'file', component: FileDemoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_DESENVOLVIMENTO']}},
+    {path: 'utils', component: UtilsDemoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_DESENVOLVIMENTO']}},
+    {path: 'documentation', component: DocumentationComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_DESENVOLVIMENTO']}},
 
 
     // {path: 'cadastros/base/banco', loadChildren: './cadastros/base/banco/banco.module#BancoModule'},

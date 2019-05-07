@@ -15,7 +15,7 @@ import {Router} from '@angular/router';
                 </a>
             </div>
 
-            <img src="assets/layout/images/appname.svg" class="app-name"/>
+            <span style="margin-left: 20px; font-size: 20px; color: white; font-weight: inherit;">Rosinha Transportes e Turismo Ltda</span>
 
             <a id="topbar-menu-button" href="#" (click)="app.onTopbarMenuButtonClick($event)">
                 <i class="fa fa-bars"></i>

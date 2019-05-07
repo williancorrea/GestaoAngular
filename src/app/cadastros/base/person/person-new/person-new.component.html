@@ -115,20 +115,45 @@
                             </div>
 
                             <!--PESSOA FISICA - ESTADO CIVIL -->
+<!--                            <div *ngIf="form.get('tipo').value === 'FISICA' ? true : false"-->
+<!--                                 class="ui-sm-3 ui-g-3 ui-fluid"-->
+<!--                                 formGroupName="pessoaFisica">-->
+<!--                                <div formGroupName="estadoCivil">-->
+<!--                                    <label>{{'app.pessoa.campos.estadoCivil'| translate}}</label>-->
+<!--                                    <p-dropdown emptyFilterMessage="{{'app.acoes.nenhum-registro-encontrado' | translate }}"-->
+<!--                                                [options]="estadoCivilList"-->
+<!--                                                formControlName="key"-->
+<!--                                                [filter]="true" [autoWidth]="false"-->
+<!--                                                placeholder="{{'app.acoes.selecione2' | translate}}">-->
+<!--                                    </p-dropdown>-->
+<!--                                    <app-message [form]="f" [control]="form.get('pessoaFisica').get('estadoCivil').get('key')"></app-message>-->
+<!--                                </div>-->
+<!--                            </div>-->
+
                             <div *ngIf="form.get('tipo').value === 'FISICA' ? true : false"
                                  class="ui-sm-3 ui-g-3 ui-fluid"
                                  formGroupName="pessoaFisica">
-                                <div formGroupName="estadoCivil">
-                                    <label>{{'app.pessoa.campos.estadoCivil'| translate}}</label>
-                                    <p-dropdown emptyFilterMessage="{{'app.acoes.nenhum-registro-encontrado' | translate }}"
-                                                [options]="estadoCivilList"
-                                                formControlName="key"
-                                                [filter]="true" [autoWidth]="false"
+                                <label>{{'app.pessoa.campos.estadoCivil'| translate}}</label>
+                                <p-autoComplete [suggestions]="estadoCivilList"
+                                                (completeMethod)="filtrarEstadoCivil($event)"
+                                                [dropdown]="true"
+                                                formControlName="estadoCivil"
+                                                field="nome"
+                                                [size]="30"
+                                                [minLength]="env.comboBox.minCaracterParaPesquisa"
+                                                [forceSelection]="true"
+                                                emptyMessage="{{ 'app.acoes.nenhum-registro-encontrado' | translate}}"
                                                 placeholder="{{'app.acoes.selecione2' | translate}}">
-                                    </p-dropdown>
-                                    <app-message [form]="f" [control]="form.get('pessoaFisica').get('estadoCivil').get('key')"></app-message>
-                                </div>
+
+                                    <ng-template let-item pTemplate="item">
+                                        {{item.nome}}
+                                    </ng-template>
+
+                                </p-autoComplete>
+                                <app-message [form]="f" [control]="form.get('pessoaFisica').get('estadoCivil')"></app-message>
                             </div>
+
+
                         </div>
                     </div>
 

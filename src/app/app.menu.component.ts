@@ -28,7 +28,7 @@ export class AppMenuComponent implements OnInit {
         this.translate.get('app').subscribe(m => {
             this.traduzir = m;
             this.model = [
-                {label: 'Dashboard', icon: 'fa fa-fw fa-home', routerLink: ['/']},
+                {label: m['menu']['pagina_inicial'], icon: 'fa fa-fw fa-home', routerLink: ['/']},
                 {
                     label: this.traduzir['menu']['cadastros'], icon: 'fa fa-fw fa-book',
                     items: [
@@ -51,6 +51,7 @@ export class AppMenuComponent implements OnInit {
                 {label:  m['permissoes-de-acesso']['titulo'], icon: 'fa fa-fw fa-map-signs', routerLink: [m['permissoes-de-acesso']['link-pagina']], visible: this.auth.hasPermission('ROLE_ALTERAR_PERMISSOES_ACESSO')},
                 {
                     label: 'Themes', icon: 'fa fa-fw fa-paint-brush', badge: '5',
+                    visible: this.auth.hasPermission('ROLE_DESENVOLVIMENTO'),
                     items: [
                         {label: 'Blue', icon: 'fa fa-fw fa-paint-brush', command: (event) => {this.changeTheme('blue'); }},
                         {label: 'Pink', icon: 'fa fa-fw fa-paint-brush', command: (event) => {this.changeTheme('pink'); }},
@@ -64,6 +65,7 @@ export class AppMenuComponent implements OnInit {
                 },
                 {
                     label: 'Layout Colors', icon: 'fa fa-fw fa-paint-brush',
+                    visible: this.auth.hasPermission('ROLE_DESENVOLVIMENTO'),
                     items: [
                         {label: 'Dark', icon: 'fa fa-fw fa-paint-brush', command: (event) => {this.changeLayout('dark'); }},
                         {label: 'Blue', icon: 'fa fa-fw fa-paint-brush', command: (event) => {this.changeLayout('blue'); }},
@@ -78,6 +80,7 @@ export class AppMenuComponent implements OnInit {
                 },
                 {
                     label: 'Menu Modes', icon: 'fa fa-fw fa-bars',
+                    visible: this.auth.hasPermission('ROLE_DESENVOLVIMENTO'),
                     items: [
                         {label: 'Static Menu', icon: 'fa fa-fw fa-bars', command: () => this.app.changeToStaticMenu()},
                         {label: 'Overlay Menu', icon: 'fa fa-fw fa-bars', command: () => this.app.changeToOverlayMenu()},
@@ -87,6 +90,7 @@ export class AppMenuComponent implements OnInit {
                 },
                 {
                     label: 'Components', icon: 'fa fa-fw fa-sitemap', badge: '2', badgeStyleClass: 'orange-badge',
+                    visible: this.auth.hasPermission('ROLE_DESENVOLVIMENTO'),
                     items: [
                         {label: 'Sample Page', icon: 'fa fa-fw fa-columns', routerLink: ['/sample']},
                         {label: 'Forms', icon: 'fa fa-fw fa-code', routerLink: ['/forms']},
@@ -100,9 +104,10 @@ export class AppMenuComponent implements OnInit {
                         {label: 'Misc', icon: 'fa fa-fw fa-user-secret', routerLink: ['/misc']}
                     ]
                 },
-                {label: 'Landing Page', icon: 'fa fa-fw fa-certificate', url: 'assets/pages/landing.html', target: '_blank'},
+                {label: 'Landing Page', icon: 'fa fa-fw fa-certificate', url: 'assets/pages/landing.html', target: '_blank', visible: this.auth.hasPermission('ROLE_DESENVOLVIMENTO'),},
                 {
                     label: 'Template Pages', icon: 'fa fa-fw fa-life-saver',
+                    visible: this.auth.hasPermission('ROLE_DESENVOLVIMENTO'),
                     items: [
                         {label: 'Empty Page', icon: 'fa fa-fw fa-square-o', routerLink: ['/empty']},
                         {label: 'Login Page', icon: 'fa fa-fw fa-sign-in', url: 'assets/pages/login.html', target: '_blank'},
@@ -113,6 +118,7 @@ export class AppMenuComponent implements OnInit {
                 },
                 {
                     label: 'Menu Hierarchy', icon: 'fa fa-fw fa-gg',
+                    visible: this.auth.hasPermission('ROLE_DESENVOLVIMENTO'),
                     items: [
                         {
                             label: 'Submenu 1', icon: 'fa fa-fw fa-sign-in',
@@ -156,7 +162,7 @@ export class AppMenuComponent implements OnInit {
                         }
                     ]
                 },
-                {label: 'Documentation', icon: 'fa fa-fw fa-book', routerLink: ['/documentation']}
+                {label: 'Documentation', icon: 'fa fa-fw fa-book', routerLink: ['/documentation'], visible: this.auth.hasPermission('ROLE_DESENVOLVIMENTO'),}
             ];
         });
     }

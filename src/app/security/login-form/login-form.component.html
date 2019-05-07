@@ -26,7 +26,7 @@
                            autocomplete="off"
                            class="ui-inputtext ui-corner-all ui-state-default ui-widget"
                            name="password" placeholder="{{'app.login.senha' | translate}}"
-                           [(ngModel)]="password" required [minlength]="5"
+                           [(ngModel)]="password" required [minlength]="4"
                            #passwordItem="ngModel">
                     <app-message [form]="f" [control]="passwordItem.control"></app-message>
                 </div>
