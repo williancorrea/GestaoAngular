@@ -47,9 +47,9 @@
                                     name="client" binary="true"
                                     label="{{'app.pessoa.campos.colaborador' | translate}}"></p-checkbox>
 
-                        <p-checkbox [formControl]="form.controls['transportadora']"
-                                    name="client" binary="true"
-                                    label="{{'app.pessoa.campos.transportadora' | translate}}"></p-checkbox>
+<!--                        <p-checkbox [formControl]="form.controls['transportadora']"-->
+<!--                                    name="client" binary="true"-->
+<!--                                    label="{{'app.pessoa.campos.transportadora' | translate}}"></p-checkbox>-->
                     </div>
 
                     <!--GRUPO DADOS GERAIS -->
@@ -77,10 +77,18 @@
                             </div>
 
                             <!--PESSOA - NOME-->
-                            <div class="ui-sm-9 ui-g-9 ui-fluid">
+                            <div class="ui-fluid" [ngClass]="form.get('tipo').value === 'JURIDICA' ? 'ui-sm-9 ui-g-9' : 'ui-sm-7 ui-g-7'">
                                 <label class="required">{{(form.get('tipo').value === 'FISICA' ? 'app.pessoa.campos.nome' : 'app.pessoa.rotulos.razao_social') | translate}}</label>
                                 <input pInputText type="text" formControlName="nome" class="txt-upercase">
                                 <app-message [form]="f" [control]="form.get('nome')"></app-message>
+                            </div>
+
+                            <div *ngIf="form.get('tipo').value === 'FISICA' ? true : false"
+                                 class="ui-sm-2 ui-g-2 ui-fluid"
+                                 formGroupName="pessoaFisica">
+                                <label>{{'app.pessoa.campos.apelido'| translate}}</label>
+                                <input pInputText type="text" formControlName="apelido">
+                                <app-message [form]="f" [control]="form.get('pessoaFisica').get('apelido')"></app-message>
                             </div>
 
                             <!--PESSOA - EMAIL-->

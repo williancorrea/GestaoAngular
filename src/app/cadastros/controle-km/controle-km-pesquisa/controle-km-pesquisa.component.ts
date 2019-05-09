@@ -162,7 +162,7 @@ export class ControleKmPesquisaComponent implements OnInit {
     carregarMotoristas() {
         this.pessoaService.findAll({'rows': 100, 'first': 0, 'sortOrder': 1, 'sortField': 'nome'}, null)
             .then(veiculoList => {
-                this.pessoaList = veiculoList.content.map(p => ({label: p.nome, value: p.key}));
+                this.pessoaList = veiculoList.content.map(p => ({label: p.pessoaFisica.apelido ? p.nome + ' (' + p.pessoaFisica.apelido + ')' : p.nome, value: p.key}));
             })
             .catch(error => {
                 this.manipuladorErros.handle(error);

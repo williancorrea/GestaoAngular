@@ -264,6 +264,7 @@
             "campos": {
                 "inativo": "Inativo",
                 "nome": "Nome",
+                "apelido": "Apelido",
                 "estudante": "Estudante",
                 "transportadora": "Transportadora",
                 "colaborador": "Colaborador",

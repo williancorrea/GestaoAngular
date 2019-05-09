@@ -150,6 +150,7 @@ export class PersonNewComponent implements OnInit {
                         Validators.maxLength(14)
                     ]
                 ],
+                apelido: [null, [Validators.maxLength(100)]],
                 rg: [
                     null, [
                         Validators.minLength(5),
