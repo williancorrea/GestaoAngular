@@ -1,0 +1,176 @@
+<ngx-loading [show]="loading"></ngx-loading>
+<p-progressBar *ngIf="loading" mode="indeterminate" styleClass="wc-progress-bar-indeterminate"></p-progressBar>
+
+<div class="ui-g">
+    <div class="ui-g-12">
+        <div class="card card-w-title">
+            <div>
+
+                <h1 *ngIf="loading === true">{{('commons.loading') | translate}}</h1>
+                <h1 *ngIf="loading === false">{{(form.get('key').value?.length > 0 ? 'app.controleKm.acoes.editar' :
+                    'app.controleKm.acoes.adicionar') | translate}}</h1>
+            </div>
+
+            <p-messages [(value)]="msgs"></p-messages>
+
+            <form #f="ngForm" novalidate (submit)="save(f)" autocomplete="off" [formGroup]="form">
+
+                <div class="ui-g">
+                    <input pInputText
+                           type="text"
+                           [hidden]="true"
+                           name="key"
+                           formControlName="key">
+
+                    <!-- VEICULO -->
+                    <div class="ui-sm-4 ui-g-4 ui-fluid" formGroupName="veiculo">
+                        <label class="required">{{'app.veiculo.titulo'| translate}}</label>
+                        <p-dropdown emptyFilterMessage="{{'app.acoes.nenhum-registro-encontrado' | translate }}"
+                                    [options]="veiculoList"
+                                    formControlName="key"
+                                    [showClear]="true"
+                                    [filter]="true" [autoWidth]="false"
+                                    placeholder="{{'app.acoes.selecione2' | translate}}"
+                                    (onBlur)="carregarKmSaidaMinimo(); carregarKmChegadaMaximo();">
+                        </p-dropdown>
+                        <app-message [form]="f" [control]="form.get('veiculo').get('key')"></app-message>
+                    </div>
+
+                    <!-- MOTORISTA -->
+                    <div class="ui-sm-4 ui-g-4 ui-fluid" formGroupName="pessoa">
+                        <label class="required">{{'app.controleKm.campos.motorista'| translate}}</label>
+                        <p-dropdown emptyFilterMessage="{{'app.acoes.nenhum-registro-encontrado' | translate }}"
+                                    [options]="pessoaList"
+                                    formControlName="key"
+                                    [showClear]="true"
+                                    [filter]="true" [autoWidth]="false"
+                                    placeholder="{{'app.acoes.selecione2' | translate}}">
+                        </p-dropdown>
+                        <app-message [form]="f" [control]="form.get('pessoa').get('key')"></app-message>
+                    </div>
+
+                    <!-- ITINERARIO -->
+                    <div class="ui-sm-4 ui-g-4 ui-fluid" formGroupName="itinerario">
+                        <label class="required">{{'app.itinerario.titulo'| translate}}</label>
+                        <p-dropdown emptyFilterMessage="{{'app.acoes.nenhum-registro-encontrado' | translate }}"
+                                    [options]="itinerarioList"
+                                    formControlName="key"
+                                    [showClear]="true"
+                                    [filter]="true" [autoWidth]="false"
+                                    placeholder="{{'app.acoes.selecione2' | translate}}">
+                        </p-dropdown>
+                        <app-message [form]="f" [control]="form.get('itinerario').get('key')"></app-message>
+                    </div>
+
+                    <div class="ui-sm-12 ui-g-3 ui-fluid">
+                        <label class="required">{{'app.controleKm.campos.dataHoraSaida' | translate}}</label>
+                        <div class="ui-inputgroup ">
+                            <span class="ui-inputgroup-addon"><i class="fa fa fa-calendar"></i></span>
+                            <p-inputMask formControlName="dataHoraSaida"
+                                         mask="99/99/9999 99:99"
+                                         class="ui-fluid"
+                                         pattern="([0-2][0-9]|3[0-1])\/(0[0-9]|1[0-2])\/[0-9]{4} ([0-1][0-9]|2[0-3]):[0-5][0-9]"
+                                         (onBlur)="carregarKmSaidaMinimo()">
+                            </p-inputMask>
+                        </div>
+                        <app-message [form]="f" [control]="form.get('dataHoraSaida')"></app-message>
+                    </div>
+
+                    <div class="ui-sm-4 ui-g-3 ui-fluid">
+                        <label class="required">{{'app.controleKm.campos.kmSaida' | translate}}</label>
+                        <span class="wc-label-km-opcao">{{kmSaidaMinimo}}</span>
+                        <div class="ui-inputgroup">
+                            <input pInputText
+                                   type="text"
+                                   name="kmSaida"
+                                   class="wc-align-right"
+                                   formControlName="kmSaida"
+                                   [disabled]="form.get('dataHoraSaida').invalid ? form.get('kmSaida').disable() :form.get('kmSaida').enable()"
+                                   pKeyFilter="pnum">
+                            <span class="ui-inputgroup-addon">km</span>
+                        </div>
+                        <app-message [form]="f" [control]="form.get('kmSaida')"></app-message>
+                    </div>
+
+                    <div class="ui-sm-6 ui-g-6 ui-fluid">
+                        <label class="required">{{'app.controleKm.campos.origem' | translate}}</label>
+                        <textarea [rows]="1"
+                                  [cols]="30"
+                                  pInputTextarea
+                                  name="origem"
+                                  formControlName="origem"
+                                  autoResize></textarea>
+                        <app-message [form]="f" [control]="form.get('origem')"></app-message>
+                    </div>
+
+
+                    <div class="ui-sm-12 ui-g-3 ui-fluid">
+                        <label class="required">{{'app.controleKm.campos.dataHoraChegada' | translate}}</label>
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="fa fa fa-calendar"></i></span>
+                            <p-inputMask formControlName="dataHoraChegada"
+                                         mask="99/99/9999 99:99"
+                                         pattern="([0-2][0-9]|3[0-1])\/(0[0-9]|1[0-2])\/[0-9]{4} ([0-1][0-9]|2[0-3]):[0-5][0-9]"
+                                         (onBlur)="carregarKmChegadaMaximo()">
+                            </p-inputMask>
+                        </div>
+                        <app-message [form]="f" [control]="form.get('dataHoraChegada')"></app-message>
+                    </div>
+
+                    <div class="ui-sm-4 ui-g-3 ui-fluid">
+                        <label class="required">{{'app.controleKm.campos.kmChegada' | translate}}</label>
+                        <span class="wc-label-km-opcao">{{kmChegadaMaximo}}</span>
+                        <div class="ui-inputgroup">
+                            <input pInputText
+                                   type="text"
+                                   name="kmChegada"
+                                   class="wc-align-right"
+                                   [disabled]="form.get('dataHoraChegada').invalid ? form.get('kmChegada').disable() :form.get('kmChegada').enable()"
+                                   formControlName="kmChegada"
+                                   pKeyFilter="pnum">
+                            <span class="ui-inputgroup-addon">km</span>
+                        </div>
+                        <app-message [form]="f" [control]="form.get('kmChegada')"></app-message>
+                    </div>
+
+
+                    <div class="ui-sm-6 ui-g-6 ui-fluid">
+                        <label class="required">{{'app.controleKm.campos.destino' | translate}}</label>
+                        <textarea id="txtDestino" [rows]="1"
+                                  [cols]="30"
+                                  pInputTextarea
+                                  name="destino"
+                                  formControlName="destino"
+                                  autoResize></textarea>
+                        <app-message [form]="f" [control]="form.get('destino')"></app-message>
+                    </div>
+
+                    <div class="ui-sm-12 ui-g-12 ui-fluid">
+                        <label>{{'app.controleKm.campos.obs' | translate}}</label>
+                        <textarea [rows]="5"
+                                  [cols]="30"
+                                  pInputTextarea
+                                  name="obs"
+                                  formControlName="obs"
+                                  autoResize></textarea>
+                        <app-message [form]="f" [control]="form.get('obs')"></app-message>
+                    </div>
+
+                    <div class="ui-sm-12 ui-g-12">
+                        <button pButton type="button"
+                                label="{{'app.acoes.cancelar' | translate}}"
+                                class="ui-button-danger"
+                                tooltipPosition="top" pTooltip="{{'app.acoes.tooltip.cancelar' | translate}}"
+                                (click)="cancel()"></button>
+                        <button pButton type="submit"
+                                *ngIf="form.get('key').value ? auth.hasPermission('ROLE_ATUALIZAR_ITINERARIO') : auth.hasPermission('ROLE_SALVAR_ITINERARIO')"
+                                label="{{(form.get('key').value ? 'app.acoes.atualizar' : 'app.acoes.salvar') | translate}}"
+                                tooltipPosition="top" pTooltip="{{'app.acoes.tooltip.salvar' | translate}}"
+                                class="ui-button-success"></button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

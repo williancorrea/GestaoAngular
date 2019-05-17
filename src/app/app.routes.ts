@@ -35,6 +35,7 @@ import {UnidadeMedidaNovoComponent} from './cadastros/base/unidade-medida/unidad
 import {UnidadeMedidaPesquisaComponent} from './cadastros/base/unidade-medida/unidade-medida-pesquisa/unidade-medida-pesquisa.component';
 import {PersonSearchComponent} from './cadastros/base/person/person-search/person-search.component';
 import {PersonNewComponent} from './cadastros/base/person/person-new/person-new.component';
+import {ControleKmNovoComponent} from './cadastros/controle-km/controle-km-novo/controle-km-novo.component';
 
 export const routes: Routes = [
     {path: 'sample', component: SampleDemoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_DESENVOLVIMENTO']}},
@@ -61,7 +62,8 @@ export const routes: Routes = [
     {path: 'cadastros/configuracoes/permissoes-de-acesso', component: PermissoesDeAcessoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_ALTERAR_PERMISSOES_ACESSO']}},
 
     {path: 'cadastros/controle-km', component: ControleKmPesquisaComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_LISTAR_CONTROLE-KM']}},
-
+    {path: 'cadastros/controle-km/novo', component: ControleKmNovoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_SALVAR_CONTROLE-KM']}},
+    {path: 'cadastros/controle-km/:key', component: ControleKmNovoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_ATUALIZAR_CONTROLE-KM']}},
 
     {path: 'cadastros/base/veiculo', component: VeiculoPesquisaComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_LISTAR_VEICULO']}},
     {path: 'cadastros/base/veiculo/novo', component: VeiculoNovoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_SALVAR_VEICULO']}},

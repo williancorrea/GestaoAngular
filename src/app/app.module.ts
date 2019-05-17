@@ -113,6 +113,7 @@ import {CombustivelModule} from './cadastros/base/combustivel/combustivel.module
 import {TanqueCombustivelModule} from './cadastros/base/tanque-combustivel/tanque-combustivel.module';
 import {UnidadeMedidaModule} from './cadastros/base/unidade-medida/unidade-medida.module';
 import {PersonModule} from './cadastros/base/person/person.module';
+import { ControleKmNovoComponent } from './cadastros/controle-km/controle-km-novo/controle-km-novo.component';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -255,9 +256,7 @@ export function createTranslateLoader(http: HttpClient) {
         EmptyDemoComponent,
         FileDemoComponent,
         UtilsDemoComponent,
-        DocumentationComponent,
-
-
+        DocumentationComponent
     ],
     providers: [
         // TODO: REMOVER

@@ -13,6 +13,7 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {TransportSharedModule} from '../../transport-shared/transport-share.module';
 import {CoreModule} from '../../core/core.module';
 import {NgxLoadingModule} from 'ngx-loading';
+import {ControleKmNovoComponent} from './controle-km-novo/controle-km-novo.component';
 
 @NgModule({
     imports: [
@@ -45,7 +46,7 @@ import {NgxLoadingModule} from 'ngx-loading';
         InputMaskModule,
         DialogModule
     ],
-    declarations: [ControleKmPesquisaComponent],
+    declarations: [ControleKmPesquisaComponent, ControleKmNovoComponent],
     providers: [
         TranslateService
     ]

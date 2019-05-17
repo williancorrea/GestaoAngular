@@ -12,6 +12,7 @@ export class ControleKmService {
 
     constructor(private http: AuthHttp) {
         this.apiUrl = `${environment.apiUrl}/controle-km`;
+        moment.locale('pt-br');
     }
 
     /**
@@ -71,9 +72,11 @@ export class ControleKmService {
                 for (let i = 0; i < lista.content.length; i++) {
                     if (lista.content[i]['dataHoraChegada']) {
                         lista.content[i]['dataHoraChegada'] = moment(lista.content[i]['dataHoraChegada'], 'YYYY-MM-DD HH:mm:ss').format('DD/MM/YYYY HH:mm').toString();
+                        lista.content[i]['dataHoraChegadaDiaSemana'] = moment(lista.content[i]['dataHoraChegada'], 'YYYY-MM-DD HH:mm:ss').day(-3).format('dddd').toString();
                     }
                     if (lista.content[i]['dataHoraSaida']) {
                         lista.content[i]['dataHoraSaida'] = moment(lista.content[i]['dataHoraSaida'], 'YYYY-MM-DD HH:mm:ss').format('DD/MM/YYYY HH:mm').toString();
+                        lista.content[i]['dataHoraSaidaDiaSemana'] = moment(lista.content[i]['dataHoraSaida'], 'YYYY-MM-DD HH:mm:ss').day(-3).format('dddd').toString();
                     }
                 }
                 return lista;
