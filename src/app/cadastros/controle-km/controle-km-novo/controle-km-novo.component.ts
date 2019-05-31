@@ -55,6 +55,7 @@ export class ControleKmNovoComponent implements OnInit {
         this.setMostrarTelaCarregando(true);
         this.translate.get('app').subscribe(s => {
             this.traduzir = s;
+            this.msgs = null;
 
             this.configForm();
 
@@ -149,54 +150,10 @@ export class ControleKmNovoComponent implements OnInit {
                 ]
             ]
         });
-
-
-        // this.form = new FormGroup({
-        //    key: new FormControl(null),
-        //    pessoa: new FormGroup({
-        //       key: new FormControl([null, Validators.required])
-        //    }),
-        //    veiculo: new FormGroup({
-        //       key: new FormControl([null, Validators.required])
-        //    }),
-        //    itinerario: new FormGroup({
-        //       key: new FormControl([null, Validators.required])
-        //    }),
-        //    dataHoraSaida: new FormControl([null, Validators.required]),
-        //    dataHoraChegada: new FormControl([null, Validators.required]),
-        //    origem: new FormControl([
-        //       null, [
-        //          Validators.required,
-        //          Validators.minLength(3),
-        //          Validators.maxLength(150)
-        //       ], {updateOn: 'blur'}
-        //    ]),
-        //    destino: new FormControl([
-        //       null, [
-        //          Validators.required,
-        //          Validators.minLength(3),
-        //          Validators.maxLength(150)
-        //       ]
-        //    ]),
-        //    obs: new FormControl([null, Validators.maxLength(512)]),
-        //    kmSaida: new FormControl([
-        //       null, [
-        //          Validators.required,
-        //          Validators.minLength(1),
-        //          Validators.maxLength(30)
-        //       ]
-        //    ]),
-        //    kmChegada: new FormControl([
-        //       null, [
-        //          Validators.required,
-        //          Validators.minLength(1),
-        //          Validators.maxLength(30)
-        //       ]
-        //    ])
-        // }, {updateOn: 'blur'});
     }
 
     carregarKmSaidaMinimo() {
+        this.msgs = null;
         this.kmSaidaMinimo = '';
         if (moment(this.form.get('dataHoraSaida').value, 'DD/MM/YYYY HH:mm').isValid() && this.form.get('veiculo').get('key').status === 'VALID') {
             this.controleKmService.buscarKmMinimoASerInformado(this.form.get('dataHoraSaida').value, this.form.get('veiculo').get('key').value)
@@ -210,6 +167,7 @@ export class ControleKmNovoComponent implements OnInit {
     }
 
     carregarKmChegadaMaximo() {
+        this.msgs = null;
         this.kmChegadaMaximo = '';
         if (moment(this.form.get('dataHoraChegada').value, 'DD/MM/YYYY HH:mm').isValid() && this.form.get('veiculo').get('key').status === 'VALID') {
             this.controleKmService.buscarKmMaximoASerInformado(this.form.get('dataHoraChegada').value, this.form.get('veiculo').get('key').value)
@@ -224,6 +182,7 @@ export class ControleKmNovoComponent implements OnInit {
 
     // TODO: VERIFICAR A PESQUISA POR PLACA E FROTA
     carregarVeiculos() {
+        this.msgs = null;
         this.veiculoService.findAll({'rows': 100, 'first': 0, 'sortOrder': 1, 'sortField': 'frota'}, null)
             .then(veiculoList => {
                 this.veiculoList = veiculoList.content.map(p => ({label: p.frota + ' - ' + p.placa, value: p.key}));
@@ -235,6 +194,7 @@ export class ControleKmNovoComponent implements OnInit {
 
     // TODO: VERIFICAR A PESQUISA POR NOME
     carregarItinerarios() {
+        this.msgs = null;
         this.itinerarioService.findAll({'rows': 100, 'first': 0, 'sortOrder': 1, 'sortField': 'nome'}, null)
             .then(veiculoList => {
                 this.itinerarioList = veiculoList.content.map(p => ({label: p.nome, value: p.key}));
@@ -246,6 +206,7 @@ export class ControleKmNovoComponent implements OnInit {
 
     // TODO: BUSCAR SOMENTE OS MOTORISTAS E COLABORADORES
     carregarMotoristas() {
+        this.msgs = null;
         this.pessoaService.findAll({'rows': 100, 'first': 0, 'sortOrder': 1, 'sortField': 'nome'}, null)
             .then(veiculoList => {
                 this.pessoaList = veiculoList.content.map(p => ({label: p.nome, value: p.key}));
@@ -256,6 +217,8 @@ export class ControleKmNovoComponent implements OnInit {
     }
 
     save(formValidacao: FormGroupDirective) {
+        this.msgs = null;
+
         if (this.form.invalid) {
             // this.toasty.add({severity: 'warn', detail: this.traduzir['validacao']['form_invalido']});
             this.setMensagensAlerta(this.traduzir['validacao']['form_invalido']);
@@ -267,8 +230,8 @@ export class ControleKmNovoComponent implements OnInit {
             this.controleKmService.update(this.form.value)
                 .then(
                     response => {
-                        // this.toasty.add({severity: 'success', detail: this.traduzir['controleKm']['acoes']['atualizar_sucesso']});
-                        this.setMensagensSucesso(this.traduzir['controleKm']['acoes']['atualizar_sucesso']);
+                        this.toasty.add({severity: 'success', detail: this.traduzir['controleKm']['acoes']['atualizar_sucesso']});
+                        // this.setMensagensSucesso(this.traduzir['controleKm']['acoes']['atualizar_sucesso']);
                         this.setMostrarTelaCarregando(false);
 
                         this.resetarFormulario(formValidacao);
@@ -281,8 +244,8 @@ export class ControleKmNovoComponent implements OnInit {
             this.controleKmService.save(this.form.value)
                 .then(
                     response => {
-                        // this.toasty.add({severity: 'success', detail: this.traduzir['controleKm']['acoes']['adicionar_sucesso']});
-                        this.setMensagensSucesso(this.traduzir['controleKm']['acoes']['adicionar_sucesso']);
+                        this.toasty.add({severity: 'success', detail: this.traduzir['controleKm']['acoes']['adicionar_sucesso']});
+                        // this.setMensagensSucesso(this.traduzir['controleKm']['acoes']['adicionar_sucesso']);
                         this.setMostrarTelaCarregando(false);
 
                         this.resetarFormulario(formValidacao);
@@ -301,11 +264,15 @@ export class ControleKmNovoComponent implements OnInit {
     resetarFormulario(formValidacao: FormGroupDirective) {
         this.kmChegadaMaximo = '';
         this.kmSaidaMinimo = '';
-        // this.msgs = null;
 
         this.configForm();
 
         this.form.reset();
         formValidacao.resetForm();
+
+        setTimeout(() => {
+            this.msgs = null;
+            this.toasty.clear();
+        }, 3000);
     }
 }

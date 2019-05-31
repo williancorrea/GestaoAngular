@@ -11,7 +11,7 @@
                     'app.controleKm.acoes.adicionar') | translate}}</h1>
             </div>
 
-            <p-messages [(value)]="msgs"></p-messages>
+            <p-messages [(value)]="msgs" ></p-messages>
 
             <form #f="ngForm" novalidate (submit)="save(f)" autocomplete="off" [formGroup]="form">
 
