@@ -49,6 +49,12 @@
                             <app-message [form]="f" [control]="form.get('odometroInicial')"></app-message>
                         </div>
 
+                        <div class="ui-sm-12 ui-g-12 ui-fluid">
+                            <p-checkbox id="chkInativo" [formControl]="form.controls['inativo']"
+                                        binary="true"
+                                        label="{{'app.veiculo.campos.inativo' | translate}}"></p-checkbox>
+                        </div>
+
                     </div>
                     <div class="ui-sm-12 ui-g-12">
                         <button pButton type="button"

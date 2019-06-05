@@ -168,7 +168,8 @@
             "campos": {
                 "placa": "Placa",
                 "frota": "Frota",
-                "odometroInicial": "Odômetro Inicial"
+                "odometroInicial": "Odômetro Inicial",
+                "inativo": "Inativo"
             },
             "rotulos": {
                 "selecione-um-estado-civil": "Selecione um veículo"

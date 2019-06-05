@@ -177,6 +177,9 @@ export class ControleKmService {
     private formatarDados(obj) {
         delete obj['key'];
         delete obj['controle'];
+
+        delete obj['veiculo']['nome_placa'];
+
         obj['dataHoraSaida'] = moment(obj['dataHoraSaida'], 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm:ss').toString();
         obj['dataHoraChegada'] = moment(obj['dataHoraChegada'], 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm:ss').toString();
         return obj;

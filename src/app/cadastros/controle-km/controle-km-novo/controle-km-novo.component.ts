@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Title} from '@angular/platform-browser';
@@ -13,6 +13,8 @@ import {TranslateService} from '@ngx-translate/core';
 import {MessageService} from 'primeng/api';
 
 import * as moment from 'moment';
+import {environment} from '../../../../environments/environment';
+import {AutoComplete} from 'primeng/primeng';
 
 @Component({
     selector: 'app-controle-km-novo',
@@ -21,9 +23,10 @@ import * as moment from 'moment';
 })
 export class ControleKmNovoComponent implements OnInit {
 
+    env: any;
     loading: boolean;
 
-    veiculoList: any;
+    veiculoList: any[];
     itinerarioList: any;
     pessoaList: any;
 
@@ -34,6 +37,8 @@ export class ControleKmNovoComponent implements OnInit {
     form: FormGroup;
     traduzir: any;
     msgs: any;
+
+    @ViewChild('cmbVeiculo') private cmbVeiculo: AutoComplete;
 
     constructor(private router: Router,
                 private activatedRoute: ActivatedRoute,
@@ -50,6 +55,7 @@ export class ControleKmNovoComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.env = environment;
         this.msgs = [];
         this.configForm();
         this.setMostrarTelaCarregando(true);
@@ -59,7 +65,6 @@ export class ControleKmNovoComponent implements OnInit {
 
             this.configForm();
 
-            this.carregarVeiculos();
             this.carregarItinerarios();
             this.carregarMotoristas();
 
@@ -71,6 +76,7 @@ export class ControleKmNovoComponent implements OnInit {
                     .then(response => {
                         this.form.patchValue(response);
                         this.setMostrarTelaCarregando(false);
+                        this.setFocusCmbVeiculo();
                     })
                     .catch(error => {
                         this.setMensagensErro(this.manipuladorErros.handle(error));
@@ -80,16 +86,22 @@ export class ControleKmNovoComponent implements OnInit {
             } else {
                 this.title.setTitle(s['acoes']['adicionar']);
                 this.setMostrarTelaCarregando(false);
+                this.setFocusCmbVeiculo();
             }
         });
     }
 
-    // SALVAR OU  EDITAR DADOS
+    setFocusCmbVeiculo() {
+        setTimeout(() => {
+            this.cmbVeiculo.focusInput();
+        }, 1000);
+    }
+
+
     setMensagensErro(msg) {
         this.msgs = [{severity: 'error', summary: '', detail: msg}];
     }
 
-    // SALVAR OU  EDITAR DADOS
     setMensagensAlerta(msg) {
         this.msgs = [{severity: 'warn', summary: '', detail: msg}];
     }
@@ -98,13 +110,9 @@ export class ControleKmNovoComponent implements OnInit {
         this.msgs = [{severity: 'success', summary: '', detail: msg}];
     }
 
-    /**
-     * Apresenta ou esconde a tela de carregando
-     */
     setMostrarTelaCarregando(carregando) {
         this.loading = carregando;
     }
-
 
     configForm() {
         this.form = this.formBuild.group({
@@ -112,9 +120,7 @@ export class ControleKmNovoComponent implements OnInit {
             pessoa: this.formBuild.group({
                 key: [null, Validators.required]
             }),
-            veiculo: this.formBuild.group({
-                key: [null, Validators.required]
-            }),
+            veiculo: [null, Validators.required],
             itinerario: this.formBuild.group({
                 key: [null, Validators.required]
             }),
@@ -155,8 +161,8 @@ export class ControleKmNovoComponent implements OnInit {
     carregarKmSaidaMinimo() {
         this.msgs = null;
         this.kmSaidaMinimo = '';
-        if (moment(this.form.get('dataHoraSaida').value, 'DD/MM/YYYY HH:mm').isValid() && this.form.get('veiculo').get('key').status === 'VALID') {
-            this.controleKmService.buscarKmMinimoASerInformado(this.form.get('dataHoraSaida').value, this.form.get('veiculo').get('key').value)
+        if (moment(this.form.get('dataHoraSaida').value, 'DD/MM/YYYY HH:mm').isValid() && this.form.get('veiculo').status === 'VALID') {
+            this.controleKmService.buscarKmMinimoASerInformado(this.form.get('dataHoraSaida').value, this.form.get('veiculo').value['key'])
                 .then(response => {
                     this.kmSaidaMinimo = Number(response) > 0 ? response : '';
                 })
@@ -169,8 +175,8 @@ export class ControleKmNovoComponent implements OnInit {
     carregarKmChegadaMaximo() {
         this.msgs = null;
         this.kmChegadaMaximo = '';
-        if (moment(this.form.get('dataHoraChegada').value, 'DD/MM/YYYY HH:mm').isValid() && this.form.get('veiculo').get('key').status === 'VALID') {
-            this.controleKmService.buscarKmMaximoASerInformado(this.form.get('dataHoraChegada').value, this.form.get('veiculo').get('key').value)
+        if (moment(this.form.get('dataHoraChegada').value, 'DD/MM/YYYY HH:mm').isValid() && this.form.get('veiculo').status === 'VALID') {
+            this.controleKmService.buscarKmMaximoASerInformado(this.form.get('dataHoraChegada').value, this.form.get('veiculo').value['key'])
                 .then(response => {
                     this.kmChegadaMaximo = Number(response) > 0 ? response : '';
                 })
@@ -180,16 +186,15 @@ export class ControleKmNovoComponent implements OnInit {
         }
     }
 
-    // TODO: VERIFICAR A PESQUISA POR PLACA E FROTA
-    carregarVeiculos() {
-        this.msgs = null;
-        this.veiculoService.findAll({'rows': 100, 'first': 0, 'sortOrder': 1, 'sortField': 'frota'}, null)
-            .then(veiculoList => {
-                this.veiculoList = veiculoList.content.map(p => ({label: p.frota + ' - ' + p.placa, value: p.key}));
-            })
-            .catch(error => {
-                this.setMensagensErro(this.manipuladorErros.handle(error));
-            });
+    filtraVeiculo(event) {
+        this.veiculoService.findAllCmb(event.query).then(lista => {
+            this.veiculoList = lista.map(p => ({
+                nome_placa: p.frota + ' - ' + p.placa,
+                key: p.key
+            }));
+        }).catch(error => {
+            this.setMensagensErro(this.manipuladorErros.handle(error));
+        });
     }
 
     // TODO: VERIFICAR A PESQUISA POR NOME
@@ -269,10 +274,11 @@ export class ControleKmNovoComponent implements OnInit {
 
         this.form.reset();
         formValidacao.resetForm();
+        this.setFocusCmbVeiculo();
 
         setTimeout(() => {
             this.msgs = null;
             this.toasty.clear();
-        }, 3000);
+        }, 2500);
     }
 }

@@ -11,7 +11,7 @@
                     'app.controleKm.acoes.adicionar') | translate}}</h1>
             </div>
 
-            <p-messages [(value)]="msgs" ></p-messages>
+            <p-messages [(value)]="msgs"></p-messages>
 
             <form #f="ngForm" novalidate (submit)="save(f)" autocomplete="off" [formGroup]="form">
 
@@ -23,17 +23,25 @@
                            formControlName="key">
 
                     <!-- VEICULO -->
-                    <div class="ui-sm-4 ui-g-4 ui-fluid" formGroupName="veiculo">
+                    <div class="ui-sm-4 ui-g-4 ui-fluid">
                         <label class="required">{{'app.veiculo.titulo'| translate}}</label>
-                        <p-dropdown emptyFilterMessage="{{'app.acoes.nenhum-registro-encontrado' | translate }}"
-                                    [options]="veiculoList"
-                                    formControlName="key"
-                                    [showClear]="true"
-                                    [filter]="true" [autoWidth]="false"
-                                    placeholder="{{'app.acoes.selecione2' | translate}}"
-                                    (onBlur)="carregarKmSaidaMinimo(); carregarKmChegadaMaximo();">
-                        </p-dropdown>
-                        <app-message [form]="f" [control]="form.get('veiculo').get('key')"></app-message>
+                        <p-autoComplete #cmbVeiculo [suggestions]="veiculoList"
+                                        (completeMethod)="filtraVeiculo($event)"
+                                        [dropdown]="true"
+                                        formControlName="veiculo"
+                                        field="nome_placa"
+                                        [size]="30"
+                                        [minLength]="env.comboBox.minCaracterParaPesquisa"
+                                        [forceSelection]="true"
+                                        emptyMessage="{{ 'app.acoes.nenhum-registro-encontrado' | translate}}"
+                                        placeholder="{{'app.acoes.selecione2' | translate}}">
+
+                            <ng-template let-item pTemplate="item">
+                                {{item['nome_placa']}}
+                            </ng-template>
+
+                        </p-autoComplete>
+                        <app-message [form]="f" [control]="form.get('veiculo')"></app-message>
                     </div>
 
                     <!-- MOTORISTA -->

@@ -1,20 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {TableModule} from 'primeng/table';
-import {
-    ButtonModule,
-    CheckboxModule,
-    DataTableModule,
-    DropdownModule,
-    InputMaskModule,
-    InputTextareaModule,
-    InputTextModule,
-    MessageModule,
-    PanelModule,
-    ProgressBarModule,
-    SharedModule,
-    TooltipModule
-} from 'primeng/primeng';
+import {ButtonModule, CheckboxModule, DataTableModule, InputMaskModule, InputTextModule, MessageModule, PanelModule, ProgressBarModule, SharedModule, TooltipModule} from 'primeng/primeng';
 import {CoreModule} from '../../../core/core.module';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {TransportSharedModule} from '../../../transport-shared/transport-share.module';

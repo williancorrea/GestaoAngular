@@ -3,7 +3,20 @@ import {CommonModule} from '@angular/common';
 import {ControleKmPesquisaComponent} from './controle-km-pesquisa/controle-km-pesquisa.component';
 import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
-import {CalendarModule, DataTableModule, DialogModule, DropdownModule, InputMaskModule, InputTextareaModule, InputTextModule, KeyFilterModule, MessagesModule, ProgressBarModule, TooltipModule} from 'primeng/primeng';
+import {
+    AutoCompleteModule,
+    CalendarModule,
+    DataTableModule,
+    DialogModule,
+    DropdownModule,
+    InputMaskModule,
+    InputTextareaModule,
+    InputTextModule,
+    KeyFilterModule,
+    MessagesModule,
+    ProgressBarModule,
+    TooltipModule
+} from 'primeng/primeng';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {SharedModule} from 'primeng/shared';
@@ -44,7 +57,8 @@ import {ControleKmNovoComponent} from './controle-km-novo/controle-km-novo.compo
         CalendarModule,
         KeyFilterModule,
         InputMaskModule,
-        DialogModule
+        DialogModule,
+        AutoCompleteModule
     ],
     declarations: [ControleKmPesquisaComponent, ControleKmNovoComponent],
     providers: [

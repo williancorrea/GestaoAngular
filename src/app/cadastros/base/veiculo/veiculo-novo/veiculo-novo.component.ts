@@ -73,6 +73,7 @@ export class VeiculoNovoComponent extends BaseFormComponent implements OnInit {
                 ]
             ],
             odometroInicial: [null],
+            inativo: [false]
         });
     }
 
