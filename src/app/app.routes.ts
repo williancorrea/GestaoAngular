@@ -36,6 +36,7 @@ import {UnidadeMedidaPesquisaComponent} from './cadastros/base/unidade-medida/un
 import {PersonSearchComponent} from './cadastros/base/person/person-search/person-search.component';
 import {PersonNewComponent} from './cadastros/base/person/person-new/person-new.component';
 import {ControleKmNovoComponent} from './cadastros/controle-km/controle-km-novo/controle-km-novo.component';
+import {FretamentoEventualNovoComponent} from './cadastros/fretameto/fretamento-eventual-novo/fretamento-eventual-novo.component';
 
 export const routes: Routes = [
     {path: 'sample', component: SampleDemoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_DESENVOLVIMENTO']}},
@@ -107,6 +108,8 @@ export const routes: Routes = [
     {path: 'cadastros/base/pessoas/novo', component: PersonNewComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_SAVE_PERSON']}},
     {path: 'cadastros/base/pessoas/:key', component: PersonNewComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_UPDATE_PERSON']}},
 
+
+    {path: 'fretamento/eventual/novo', component: FretamentoEventualNovoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_CMB-PADRAO']}},
 
     // {path: 'centroDeCusto', component: CentroDeCustoPesquisarComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_LISTAR_CENTRO-DE-CUSTO']}},
     // {path: 'centroDeCusto/novo', component: CentroDeCustoNovoComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_SALVAR_CENTRO-DE-CUSTO']}},

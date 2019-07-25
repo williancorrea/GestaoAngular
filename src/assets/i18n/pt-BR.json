@@ -316,6 +316,24 @@
                 "excluir": "Pessoa removida com sucesso!",
                 "atualizar": "Pessoa atualizada com sucesso."
             }
+        },
+        "fretamento": {
+            "campos": {
+                "motorista": "Motorista"
+            },
+            "rotulos": {
+                "selecione-um-estado-civil": "Selecione um fretamento"
+            },
+            "titulo": "Fretamento",
+            "lista": "Lista de Fretamentos",
+            "link-pagina-eventual": "/fretamento/eventual/novo",
+            "acoes": {
+                "adicionar": "Adicionar novo fretamento",
+                "editar": "Editar fretamento",
+                "deletar_sucesso": "Fretamento removido com sucesso!",
+                "adicionar_sucesso": "Fretamento adicionado com sucesso.",
+                "atualizar_sucesso": "Fretamento atualizado com sucesso."
+            }
         }
     }
 }

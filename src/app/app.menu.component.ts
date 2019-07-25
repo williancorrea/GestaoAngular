@@ -48,6 +48,7 @@ export class AppMenuComponent implements OnInit {
                     ]
                 },
                 {label:  m['controleKm']['titulo'], icon: 'fa fa-fw fa-map-signs', routerLink: [m['controleKm']['link-pagina']], visible: this.auth.hasPermission('ROLE_LISTAR_CONTROLE-KM')},
+                {label:  m['fretamento']['titulo'], icon: 'fa fa-fw fa-map-signs', routerLink: [m['fretamento']['link-pagina']], visible: this.auth.hasPermission('ROLE_LISTAR_CONTROLE-KM')},
                 {label:  m['permissoes-de-acesso']['titulo'], icon: 'fa fa-fw fa-map-signs', routerLink: [m['permissoes-de-acesso']['link-pagina']], visible: this.auth.hasPermission('ROLE_ALTERAR_PERMISSOES_ACESSO')},
                 {
                     label: 'Themes', icon: 'fa fa-fw fa-paint-brush', badge: '5',
