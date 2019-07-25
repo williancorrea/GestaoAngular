@@ -190,6 +190,10 @@
                         <th *ngFor="let col of columns" [hidden]="col.hidden" [class]="col.class">
                             {{col.header}}
                         </th>
+
+                        <th class="datatable-coluna_km_nao_informado">
+                            {{'app.controleKm.campos.kmNaoInformado2'| translate}}
+                        </th>
                     </tr>
                 </ng-template>
 
@@ -221,6 +225,10 @@
 
                         <td *ngFor="let col of columns" [hidden]="col.hidden" [class]="col.class">
                             {{rowData[col.field]}}
+                        </td>
+
+                        <td style="text-align: center" [ngClass]=" rowData['kmNaoInformado'] > 0 ? 'datatable-coluna_km_nao_informado_cor' : ''">
+                            {{rowData['kmNaoInformado']}}
                         </td>
                     </tr>
                 </ng-template>

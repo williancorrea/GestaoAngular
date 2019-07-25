@@ -107,13 +107,13 @@ export class ControleKmPesquisaComponent implements OnInit {
                     class: 'datatable-coluna_total',
                     sort: false
                 },
-                {
-                    field: 'kmNaoInformado',
-                    header: this.traduzir['controleKm']['campos']['kmNaoInformado2'],
-                    hidden: false,
-                    class: 'datatable-coluna_km_nao_informado',
-                    sort: false
-                }
+                // {
+                //     field: 'kmNaoInformado',
+                //     header: this.traduzir['controleKm']['campos']['kmNaoInformado2'],
+                //     hidden: false,
+                //     class: 'datatable-coluna_km_nao_informado',
+                //     sort: false
+                // }
                 // {field: 'veiculo.placa', header: s['campos']['veiculo'], hidden: false, class: ''}
                 // {field: 'codigo', header: s['campos']['codigo'], hidden: false, class: 'datatable-collum-field-name'},
                 // {field: 'pessoa', header: s['campos']['motorista'], hidden: false, class: ''},

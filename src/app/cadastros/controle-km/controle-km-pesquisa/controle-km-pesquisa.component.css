@@ -32,6 +32,10 @@
    text-align: center !important;
 }
 
+.datatable-coluna_km_nao_informado_cor{
+    background-color: #f44336
+}
+
 .datatable-coluna_veiculo{
    width: 150px;
 }
